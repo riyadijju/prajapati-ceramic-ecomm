@@ -89,7 +89,7 @@ nav {
 }
 
 .link a {
-  font-weight: 500;
+  font-weight: normal;
   color: var(--text-dark);
 }
 
@@ -129,8 +129,8 @@ nav {
 .nav__icons span a:hover {
   color: var(--primary-color);
 }
-
-.header__container {
+/* HEADER */
+/* .header__container {
   min-height: 650px;
   background-color: var(--primary-color-light);
   border-bottom-left-radius: 1rem;
@@ -175,7 +175,91 @@ nav {
   bottom: -5rem;
   transform: translateX(-50%);
   max-width: 500px;
+} */
+.header__container {
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0; /* No padding on the container */
+  margin: 0; /* No margin to make it fit the screen */
+  position: relative; /* For absolute positioning of the image */
 }
+
+.header__content {
+  max-width: 600px; /* Limit text box width */
+  background-color: #4b2c20; /* Brown background for the text */
+  padding: 2rem; /* Padding for the text box */
+  border-radius: 1rem;
+  color: white;
+  position: relative; /* Keep the text above the image */
+  z-index: 1; /* Ensure text stays above the image */
+}
+
+.header__content h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.header__content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-family: var(--header-font);
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.header__content .btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-weight: 600;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+}
+
+.header__content .btn:hover {
+  background-color: var(--primary-color-dark);
+  transition: 0.3s ease-in-out;
+}
+
+/* Image inside the header__container */
+.header__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  background-image: url('your-image-url.jpg'); /* Set your image here */
+  background-size: cover; /* Make the image cover the container */
+  background-position: center; /* Center the image */
+  z-index: 0; /* Ensure the image stays behind the text */
+}
+
+/* Mobile and tablet adjustments */
+@media (max-width: 900px) {
+  .header__container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header__content {
+    max-width: 100%; /* Remove width restriction for mobile */
+    padding: 1.5rem; /* Adjust padding for smaller screens */
+  }
+
+  .header__image {
+    margin-top: 1rem;
+  }
+}
+
+
+/* ------ */
+/* --------------------------------------------
+----------------------------------------
+---------------------------- */
 
 .categories__grid {
   max-width: var(--max-width-900);
