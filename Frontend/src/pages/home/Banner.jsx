@@ -5,7 +5,7 @@ import bannerImg from "../../assets/PC-main.png";
 
 const Banner = () => {
   return (
-    <div className='section__container header__container'>
+    <div className='header__container'>
       <div className='header__content z-30'>
         <h4>Handmade in Nepal</h4>
         <h1>Explore the Artistic 
