@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 :root {
   --primary-color: #ed3849;
   --primary-color-dark: #d23141;
@@ -79,6 +80,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: "Poppins";
 }
 
 .nav__links {
@@ -160,44 +162,51 @@ nav {
 
 /* Text Content */
 .header__content {
-  max-width: 500px;
+  max-width: 590px;
   background-color: #683A3A; /* Brown background for the text */
   padding: 4rem;
+  padding-top: 12rem;
   border-radius: -1.5rem;
   color: white;
   z-index: 2;
-  margin-left: 5%; /* Adjust to position correctly */
+  margin-left: 13%; /* Adjust to position correctly */
   height: 772px;
 }
 
 .header__content h4 {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 300;
+  text-align: center;
   margin-bottom: 1rem;
   color: white;
 }
 
 .header__content h1 {
-  font-size: 3rem;
-  font-family: Roboto;
-  font-weight: 800;
+  font-size: 33px;
+  font-family: 'Roboto';
+  font-weight: 172px;
   margin-bottom: 2rem;
   line-height: 1.2;
+  text-align: center;
+  letter-spacing: 4%;
 }
 
 .header__content .btn {
-  background-color: #ffffff; /* Match your button color */
-  color: #683A3A;
-  font-weight: 600;
-  padding: 0.8rem 1.5rem;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 0.3rem;
-  cursor: pointer;
+  background-color: #ffffff;
+    color: #683A3A;
+    font-weight: 430;
+    padding: 0.8rem 11rem;
+    text-transform: uppercase;
+    border: aquamarine;
+    display: flex;
+    align-items: baseline;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 .header__content .btn:hover {
-  background-color: #c9302c;
+  background-color: #375F5D;
+  color: #ffffff;
   transition: 0.3s ease-in-out;
 }
 
