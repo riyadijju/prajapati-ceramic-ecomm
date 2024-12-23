@@ -73,7 +73,6 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-/* Navbar Styling */
 nav {
   max-width: var(--max-width-1200);
   margin: auto;
@@ -102,14 +101,19 @@ nav {
 }
 
 .nav__logo a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+  display: flex; /* Ensure the logo aligns properly within the navbar */
+  align-items: center; /* Vertically align the logo with navbar items */
+  text-decoration: none; /* Remove underline if applied */
 }
 
 .nav__logo img {
-  width: 150px;
-  height: auto;
+  width: 150px; /* Set the desired width for the logo */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+
+.nav__logo a span {
+  color: var(--primary-color);
 }
 
 .nav__icons {
@@ -130,11 +134,12 @@ nav {
 }
 
 .navbar {
+  /* position: fixed; */
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--nav-height);
-  background-color: #fff;
+  height: 80px; /* Adjust this height based on your navbar */
+  background-color: #fff; /* White background */
   z-index: 100;
   display: flex;
   align-items: center;
@@ -143,60 +148,79 @@ nav {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Hamburger Menu */
-.nav__toggle {
-  display: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--text-dark);
+/* Header Container */
+.header__container {
+  /* Offset by navbar height */
+  width: 100vw; /* Full viewport width */
+  height: calc(100vh - 80px); /* Full viewport height minus navbar */
+  /* display: flex; */
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .nav__links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: var(--nav-height);
-    left: 0;
-    width: 100%;
-    background-color: var(--white);
-    padding: 2rem 0;
-    z-index: 99;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+/* Text Content */
+.header__content {
+  max-width: 590px;
+  background-color: #683A3A; /* Brown background for the text */
+  padding: 4rem;
+  padding-top: 12rem;
+  border-radius: -1.5rem;
+  color: white;
+  z-index: 2;
+  margin-left: 13%; /* Adjust to position correctly */
+  height: 772px;
+}
 
-  .nav__links.active {
+.header__content h4 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.header__content h1 {
+  font-size: 33px;
+  font-family: 'Roboto';
+  font-weight: 172px;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 4%;
+}
+
+.header__content .btn {
+  background-color: #ffffff;
+    color: #683A3A;
+    font-weight: 430;
+    padding: 1rem 11rem;
+    text-transform: uppercase;
+    border: aquamarine;
     display: flex;
-  }
-
-  .nav__toggle {
-    display: block;
-  }
+    align-items: baseline;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .nav__links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: var(--nav-height);
-    left: 0;
-    width: 100%;
-    background-color: var(--white);
-    padding: 2rem 0;
-    z-index: 99;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav__links.active {
-    display: flex;
-  }
-
-  .nav__toggle {
-    display: block;
-  }
+.header__content .btn:hover {
+  background-color: #375F5D;
+  color: #ffffff;
+  transition: 0.3s ease-in-out;
 }
 
+/* Image Styling */
+.header__image {
+  position: absolute; /* Confined within header container */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../assets/PC-main.png') no-repeat center center;
+  background-size: cover; /* Ensures the image fully covers the container */
+  z-index: -1; /* Behind content */
+}
 
 
 /* Header Container */
@@ -211,12 +235,15 @@ nav {
 
 /* Text and Image Content */
 .header__content {
-  max-width: 600px;
+  max-width: 590px;
   background-color: #683A3A;
   padding: 2rem;
-  border-radius: 0.5rem;
+  padding-top: 12rem;
+  border-radius: 0;
   color: white;
+  margin-left: 12%;
   text-align: center;
+  height: 800px;
 }
 
 .header__content h4 {
