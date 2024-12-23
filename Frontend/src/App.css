@@ -272,8 +272,8 @@ nav {
   color: #683A3A;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.75rem 8rem;
-  border-radius: 0.5rem;
+  padding: 0.75rem 9rem;
+  border-radius: 0;
   margin-top: 1rem;
   transition: background-color 0.3s ease-in-out;
 }
