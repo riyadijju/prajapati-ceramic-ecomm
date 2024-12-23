@@ -235,9 +235,9 @@ nav {
 
 /* Text and Image Content */
 .header__content {
-  max-width: 590px;
+  max-width: 500px;
   background-color: #683A3A;
-  padding: 2rem;
+  padding: 4rem;
   padding-top: 10rem;
   border-radius: 0;
   color: white;
@@ -272,7 +272,7 @@ nav {
   color: #683A3A;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 8rem;
   border-radius: 0.5rem;
   margin-top: 1rem;
   transition: background-color 0.3s ease-in-out;
