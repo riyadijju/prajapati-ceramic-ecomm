@@ -235,15 +235,15 @@ nav {
 
 /* Text and Image Content */
 .header__content {
-  max-width: 500px;
+  max-width: 690px;
   background-color: #683A3A;
-  padding: 4rem;
+  padding: 2rem;
   padding-top: 10rem;
   border-radius: 0;
   color: white;
   margin-left: -39%;
   text-align: center;
-  height: 800px;
+  height: 970px;
 }
 
 .header__content h4 {
