@@ -12,21 +12,27 @@ const Categories = () => {
         {name: 'HOLIDAY', path: 'holiday', image: category3},
         {name: 'DINNERWARE', path: 'dinnerware', image: category4}
     ]
-  return (
-    <>
-    <div className='product__grid'>
+  return <div className='size-[400px] w-[80%] absolute bottom-[-100px] left-1/2 -translate-x-1/2 bg-white z-20 flex items-center gap-8 px-8'>
+    
         {
             categories.map((category) => (
-                <Link to = { `/categories/${category.path}`}>
-                    <img src={category.image} alt={category.name} />
+                <Link className='flex-1' to={`/categories/${category.path}`}>
+                    <img className='size-full object-cover object-center' src={category.image} alt={category.name} />
                     <h4>{category.name}</h4>
                 </Link>
             ))
         }
-    </div>
     
-    </>
-  )
+  </div>
+
+    
+
+  
+    
+    
+    
+    
+  
 }
 
 export default Categories
