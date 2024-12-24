@@ -1,8 +1,8 @@
 import React from 'react'
 import category1 from "../../assets/category-1.png"
-import category2 from "../../assets/category-2.jpg"
-import category3 from "../../assets/category-3.jpg"
-import category4 from "../../assets/category-4.jpg"
+import category2 from "../../assets/category-2.png"
+import category3 from "../../assets/category-3.png"
+import category4 from "../../assets/category-4.png"
 import { Link } from 'react-router-dom'
 
 const Categories = () => {
