@@ -90,14 +90,14 @@ nav {
 }
 
 .nav__logo a {
-  display: flex; /* Ensure the logo aligns properly within the navbar */
-  align-items: center; /* Vertically align the logo with navbar items */
-  text-decoration: none; /* Remove underline if applied */
+  display: flex; 
+  align-items: center; 
+  text-decoration: none; 
 }
 
 .nav__logo img {
-  width: 150px; /* Set the desired width for the logo */
-  height: auto; /* Maintain the aspect ratio */
+  width: 150px; 
+  height: auto; 
 }
 
 
@@ -244,7 +244,7 @@ nav {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-} */
+}
 
 .categories__card {
   text-align: center;
