@@ -237,7 +237,7 @@ nav {
 
 /* ------------------------C A T E G O R I E S----------------------------- */
 
-/* .categories__grid {
+.categories__grid {
   max-width: var(--max-width-900);
   margin: auto;
   margin-top: 4rem;
@@ -250,21 +250,21 @@ nav {
   text-align: center;
 }
 
-/* .categories__card img {
+.categories__card img {
   max-width: 100px;
   margin: auto;
   margin-bottom: 1rem;
   border: 5px solid var(--white);
   border-radius: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-} */
+}
 
-/* .categories__card h4 {
+.categories__card h4 {
   font-size: 1.2rem;
   font-weight: 600;
   font-family: var(--header-font);
   color: var(--text-dark);
-} */
+} 
 
 .hero__container {
   display: grid;
