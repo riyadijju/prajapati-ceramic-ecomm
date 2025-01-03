@@ -12,7 +12,7 @@ const Categories = () => {
         {name: 'HOLIDAY', path: 'holiday', image: category3},
         {name: 'DINNERWARE', path: 'dinnerware', image: category4}
     ]
-  return <div className='size-[400px] w-[80%] absolute bottom-[-20px] left-1/2 -translate-x-1/2 bg-white z-20 flex items-center gap-8 px-[4.5rem] rounded-tl-[40px] rounded-tr-[40px]'>
+  return <div className='size-[400px] w-[80%] bottom-[-20px] left-1/2 -translate-x-1/2 absolute bg-white z-20 flex items-center gap-8 px-[4.5rem] rounded-tl-[40px] rounded-tr-[40px]'>
     
         {
             categories.map((category) => (
