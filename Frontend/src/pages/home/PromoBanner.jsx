@@ -7,17 +7,17 @@ const PromoBanner = () => {
         <div className='banner__card'>
            <span> <i className="ri-truck-line"></i></span>
            <h4>Free Deliver</h4>
-           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt, dolor amet libero nihil officiis provident earum voluptates cumque? Cumque nostrum repellendus soluta commodi.</p>
+           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt</p>
         </div>    
         <div className='banner__card'>
            <span> <i class="ri-money-dollar-circle-line"></i></span>
-           <h4>Free Deliver</h4>
-           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt, dolor amet libero nihil officiis provident earum voluptates cumque? Cumque nostrum repellendus soluta commodi.</p>
+           <h4>100% Money Back Guarantee</h4>
+           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt</p>
         </div>   
         <div className='banner__card'>
-           <span> <i className="ri-truck-line"></i></span>
-           <h4>Free Deliver</h4>
-           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt, dolor amet libero nihil officiis provident earum voluptates cumque? Cumque nostrum repellendus soluta commodi.</p>
+           <span> <i class="ri-customer-service-2-line"></i></span>
+           <h4>Strong Customar Support</h4>
+           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt</p>
         </div>   
     </section>
   )
