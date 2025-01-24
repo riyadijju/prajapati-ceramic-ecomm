@@ -4,6 +4,7 @@ import Categories from './Categories';
 import HeroSection from './HeroSection';
 import PromoBanner from './PromoBanner';
 import Blogs from '../blogs/Blogs';
+// import TrendingProducts from '../shop/TrendingProducts';
 
 const Home = () => {
   return (
@@ -13,8 +14,10 @@ const Home = () => {
       <Categories/>
     </div>
       <HeroSection/>
-      <PromoBanner/>
+      {/* <TrendingProducts/> */}
+      
       <Blogs/>
+      <PromoBanner/>
     </>
   );
 };
