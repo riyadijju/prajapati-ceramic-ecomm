@@ -40,9 +40,9 @@ const Footer = () => {
                     <h4>USEFUL LINK</h4>
                     <a href="/">Help</a>
                     <a href="/">Track your order</a>
-                    <a href="/">Men</a>
-                    <a href="/">Women</a>
-                    <a href="/">Dresses</a>
+                    <a href="/">Holiday</a>
+                    <a href="/">Tableware</a>
+                    <a href="/">Dinnerware</a>
                 </div>
                 <div className='footer__col'>
                     <h4>INSTAGRAM</h4>

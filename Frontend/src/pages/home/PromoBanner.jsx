@@ -15,7 +15,7 @@ const PromoBanner = () => {
            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt</p>
         </div>   
         <div className='banner__card'>
-           <span> <i class="ri-customer-service-2-line"></i></span>
+           <span> <i className="ri-customer-service-2-line"></i></span>
            <h4>Strong Customar Support</h4>
            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt</p>
         </div>   

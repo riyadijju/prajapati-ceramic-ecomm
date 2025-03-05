@@ -16,7 +16,7 @@ const Categories = () => {
     
         {
             categories.map((category) => (
-                <Link className='flex-1' to={`/categories/${category.path}`}>
+                <Link key={category.name} to={`/categories/${category.path}`}>
                     <img className='size-full object-cover object-center' src={category.image} alt={category.name} />
                     <h4>{category.name}</h4>
                 </Link>

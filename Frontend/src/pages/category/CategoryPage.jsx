@@ -17,7 +17,7 @@ const CategoryPage = () => {
     <> 
     <section className='section__container bg-primary-light'>
             <h2 className='section__header capitalize'>{categoryName}</h2>
-            <p className='section__subheader'>Browse a diverse range of categories, from chic dresses to versatile accessories. Elevate your style today!</p>
+            <p className='section__subheader'>Browse a diverse range of ceramics, from tableware to versatile home decors. Elevate your space today!</p>
     </section>
     </>
     

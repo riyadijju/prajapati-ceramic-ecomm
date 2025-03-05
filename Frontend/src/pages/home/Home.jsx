@@ -4,7 +4,7 @@ import Categories from './Categories';
 import HeroSection from './HeroSection';
 import PromoBanner from './PromoBanner';
 import Blogs from '../blogs/Blogs';
-// import TrendingProducts from '../shop/TrendingProducts';
+import TrendingProducts from '../shop/TrendingProducts';
 
 const Home = () => {
   return (
@@ -14,8 +14,8 @@ const Home = () => {
       <Categories/>
     </div>
       <HeroSection/>
-      {/* <TrendingProducts/> */}
       <PromoBanner/>
+      <TrendingProducts/>
       <Blogs/>
       
     </>
