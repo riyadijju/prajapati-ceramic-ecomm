@@ -18,7 +18,10 @@ const TrendingProducts = () => {
                 Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Products.
             </p>
             
-            <ProductCards products = {products}/>
+            {/* products card */}
+            <div className='mt-12'>
+            <ProductCards products={products.slice(0, visibleProducts)}/>
+            </div>
     </section>
   )
 }
