@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import RatingStars from '../../components/RatingStars'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../redux/features/cart/cartSlice'
 
 const ProductCards = ({products}) => {
-    console.log(products)
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+      dispatch(addToCart(product))
+  }
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
        {
