@@ -1,12 +1,11 @@
 import React from 'react'
 
-import instaImg1 from "../assets/instagram-1.jpg"
-import instaImg2 from "../assets/instagram-2.jpg"
-import instaImg3 from "../assets/instagram-3.jpg"
-import instaImg4 from "../assets/instagram-4.jpg"
-import instaImg5 from "../assets/instagram-5.jpg"
-import instaImg6 from "../assets/instagram-6.jpg"
-
+import instaImg1 from "../assets/instagram-1.png"
+import instaImg2 from "../assets/instagram-2.png"
+import instaImg3 from "../assets/instagram-3.png"
+import instaImg4 from "../assets/instagram-4.png"
+import instaImg5 from "../assets/instagram-5.png"
+import instaImg6 from "../assets/instagram-6.png"
 const Footer = () => {
     return (
         <>
