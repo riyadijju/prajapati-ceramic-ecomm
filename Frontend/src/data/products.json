@@ -2,7 +2,7 @@
     {
       "id": 1,
       "name": "Ceramic Titles",
-      "category": "accessories",
+      "category": "tableware",
       "description": "Stylish leather handbag with ample storage space.",
       "price": 79.99,
       "oldPrice": 99.99,
@@ -14,7 +14,7 @@
     {
       "id": 2,
       "name": "Chapacho Set",
-      "category": "dress",
+      "category": "tableware",
       "description": "Elegant evening gown for special occasions.",
       "price": 149.99,
       "oldPrice": 199.99,
@@ -24,7 +24,7 @@
     {
       "id": 3,
       "name": "Gong Set",
-      "category": "jewellery",
+      "category": "homedecor",
       "description": "Exquisite gold necklace with intricate design.",
       "price": 199.99,
       "image": "https://plus.unsplash.com/premium_photo-1682552758040-ec7f1dc79f3e?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -34,7 +34,7 @@
     {
       "id": 4,
       "name": "Nagarkot Pot",
-      "category": "cosmetics",
+      "category": "homedecor",
       "description": "Long-lasting matte lipstick in various shades.",
       "price": 19.99,
       "image": "https://plus.unsplash.com/premium_photo-1682542226584-e776098d5ea9?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -44,7 +44,7 @@
     {
       "id": 5,
       "name": "Thimi Set",
-      "category": "accessories",
+      "category": "holiday",
       "description": "Luxurious silk scarf with vibrant colors.",
       "price": 29.99,
       "oldPrice": 39.99,
@@ -54,7 +54,7 @@
     {
       "id": 6,
       "name": "Bode Set",
-      "category": "dress",
+      "category": "holiday",
       "description": "Chic cocktail dress for parties and events.",
       "price": 89.99,
       "image": "https://plus.unsplash.com/premium_photo-1701106236292-e4a692ff36da?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -64,7 +64,7 @@
     {
       "id": 7,
       "name": "Beige Vase",
-      "category": "jewellery",
+      "category": "holiday",
       "description": "Sparkling diamond earrings that add elegance to any outfit.",
       "price": 299.99,
       "oldPrice": 349.99,
@@ -75,7 +75,7 @@
     {
       "id": 8,
       "name": "Taha Nani Vase",
-      "category": "cosmetics",
+      "category": "holiday",
       "description": "High-coverage foundation for a flawless finish.",
       "price": 39.99,
       "image": "https://images.unsplash.com/photo-1631125915510-8ffed5a0d054?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -85,7 +85,7 @@
     {
       "id": 9,
       "name": "Owl Vase",
-      "category": "accessories",
+      "category": "dinnerware",
       "description": "Trendy sunglasses with UV protection.",
       "price": 49.99,
       "image": "https://images.unsplash.com/photo-1631125914614-bd1d02e6cfef?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -95,7 +95,7 @@
     {
       "id": 10,
       "name": "Budh Vase Set",
-      "category": "dress",
+      "category": "dinnerware",
       "description": "Comfortable maxi dress for casual outings.",
       "price": 59.99,
       "oldPrice": 79.99,
