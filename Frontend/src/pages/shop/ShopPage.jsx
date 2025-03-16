@@ -66,7 +66,7 @@ const ShopPage = () => {
     <>
             <section className='section__container bg-primary-light'>
                 <h2 className='section__header capitalize'>Shop Page</h2>
-                <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Women's Fashion Products.</p>
+                <p className='section__subheader'>Browse a diverse range of ceramics, from tableware to versatile home decors. Elevate your space today!</p>
             </section>
 
             <section className='section__container'>
