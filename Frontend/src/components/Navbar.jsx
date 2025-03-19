@@ -7,8 +7,6 @@ const Navbar = () => {
       const products = useSelector((state) => state.cart.products);    
       console.log(products)
     
-
-
   return (
     <header className='fixed-nav-bar w-nav'>  
       <nav className='max-w-screen-2xl mx-auto px-4 flex items-center'>
