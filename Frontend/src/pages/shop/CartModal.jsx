@@ -1,7 +1,21 @@
 import React from 'react'
 import OrderSummary from './OrderSummary'
+import { useDispatch } from 'react-redux'
+import { removeFromCart, updateQuantity } from '../../redux/features/cart/cartSlice';
 
 const CartModal = ( { products, isOpen, onClose } ) => {
+    const dispatch = useDispatch();
+
+    const handleQuantity = (type, id) => {
+        const payload = { type, id }
+        dispatch(updateQuantity(payload))
+    }
+
+    const handleRemove = (e, id) => {
+        e.preventDefault()
+        dispatch(removeFromCart({id}))
+    }
+
   return (
     <div className={`fixed z-[1000] inset-0 bg-black bg-opacity-80 transition-opacity ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       style={{ transition: 'opacity 300ms' }}
@@ -30,22 +44,22 @@ const CartModal = ( { products, isOpen, onClose } ) => {
                                         <img src={item.image} alt="" className='size-12 object-cover mr-4' />
                                         <div>
                                                 <h5 className='text-lg font-medium'>{item.name}</h5>
-                                                <p className='text-gray-600 text-sm'>${Number(item.price).toFixed(2)}</p>
+                                                <p className='text-gray-600 text-sm'>Rs. {Number(item.price).toFixed(2)}</p>
                                             </div>
 
                                             <div className='flex flex-row md:justify-start justify-end items-center mt-2'>
                                             <button
-                                                    // onClick={() => handleQuantity('decrement', item._id)}
+                                                    onClick={() => handleQuantity('decrement', item._id)}
                                                     className='size-6 flex items-center justify-center px-1.5 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white ml-8'
                                                 >-</button>
                                                 <span className='px-2 text-center mx-1'>{item.quantity}</span>
                                                 <button
-                                                    // onClick={() => handleQuantity('increment', item._id)}
+                                                    onClick={() => handleQuantity('increment', item._id)}
                                                     className='size-6 flex items-center justify-center px-1.5 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white'
                                                 >+</button>
                                                 <div className='ml-5'>
                                                     <button
-                                                    // onClick={(e) => handleRemove(e, item._id)}
+                                                    onClick={(e) => handleRemove(e, item._id)}
                                                         className='text-red-500 hover:text-red-800 mr-4'
                                                     >Remove</button>
                                                 </div>

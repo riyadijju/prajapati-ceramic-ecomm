@@ -1,6 +1,6 @@
 [
     {
-      "id": 1,
+      "_id": 1,
       "name": "Ceramic Titles",
       "category": "tableware",
       "description": "Stylish leather handbag with ample storage space.",
@@ -12,7 +12,7 @@
       "author":"admin"
     },
     {
-      "id": 2,
+      "_id": 2,
       "name": "Chapacho Set",
       "category": "tableware",
       "description": "Elegant evening gown for special occasions.",
@@ -22,7 +22,7 @@
       "rating": 4.0
     },
     {
-      "id": 3,
+      "_id": 3,
       "name": "Gong Set",
       "category": "homedecor",
       "description": "Exquisite gold necklace with intricate design.",
@@ -32,7 +32,7 @@
       "rating": 4.7
     },
     {
-      "id": 4,
+      "_id": 4,
       "name": "Nagarkot Pot",
       "category": "homedecor",
       "description": "Long-lasting matte lipstick in various shades.",
@@ -42,7 +42,7 @@
       "rating": 4.2
     },
     {
-      "id": 5,
+      "_id": 5,
       "name": "Thimi Set",
       "category": "holiday",
       "description": "Luxurious silk scarf with vibrant colors.",
@@ -52,7 +52,7 @@
       "rating": 4.3
     },
     {
-      "id": 6,
+      "_id": 6,
       "name": "Bode Set",
       "category": "holiday",
       "description": "Chic cocktail dress for parties and events.",
@@ -62,7 +62,7 @@
       "rating": 4.4
     },
     {
-      "id": 7,
+      "_id": 7,
       "name": "Beige Vase",
       "category": "holiday",
       "description": "Sparkling diamond earrings that add elegance to any outfit.",
@@ -73,7 +73,7 @@
       "rating": 4.8
     },
     {
-      "id": 8,
+      "_id": 8,
       "name": "Taha Nani Vase",
       "category": "holiday",
       "description": "High-coverage foundation for a flawless finish.",
@@ -83,7 +83,7 @@
       "rating": 4.1
     },
     {
-      "id": 9,
+      "_id": 9,
       "name": "Owl Vase",
       "category": "dinnerware",
       "description": "Trendy sunglasses with UV protection.",
@@ -93,7 +93,7 @@
       "rating": 4.6
     },
     {
-      "id": 10,
+      "_id": 10,
       "name": "Budh Vase Set",
       "category": "dinnerware",
       "description": "Comfortable maxi dress for casual outings.",
