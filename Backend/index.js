@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const app = express()
 const port = process.env.PORT || 5000;
 
+//admin
+// YY1QsdPcPSMa29Tb
+
 main().catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/test');
+    await mongoose.connect('mongodb+srv://admin:YY1QsdPcPSMa29Tb@prajapati-ceramic.jnkgn.mongodb.net/?retryWrites=true&w=majority&appName=prajapati-ceramic');
 }
 
 app.get('/', (req, res) => {
