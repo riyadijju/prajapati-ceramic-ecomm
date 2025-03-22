@@ -1,11 +1,13 @@
 //admin
 // YY1QsdPcPSMa29Tb
 
-const express = require('express')
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
 const cors = require('cors')
-const app = express()
+const app = express();
 require('dotenv').config()
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
 const port = process.env.PORT || 5000;
 
 // middleware setup
@@ -19,19 +21,18 @@ app.use(cors({
     credentials: true
 }))
 
-main().
-then(() => 
-    console.log("Mongodb is successful."))
-.catch(err => console.log(err));
+main()
+  .then(() => console.log("mongodb is successfully connected."))
+  .catch((err) => console.log(err));
 
 async function main() {
     await mongoose.connect(process.env.DB_URL);
-
-    app.get('/', (req, res) => {
-        res.send('Prajapati Ceramic')
-      })
+  
+    app.get("/", (req, res) => {
+      res.send("Prajapati E-commerce Server is running....!");
+    });
 }
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-})
+});
