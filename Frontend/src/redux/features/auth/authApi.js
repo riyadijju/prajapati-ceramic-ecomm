@@ -16,6 +16,7 @@ const authApi = createApi({
         body: newUser,
       }),
     }),
+
     loginUser: builder.mutation({
       query: (credentials) => ({
         url: "/login",
@@ -23,45 +24,50 @@ const authApi = createApi({
         body: credentials,
       }),
     }),
-    // logoutUser: builder.mutation({
-    //   query: () => ({
-    //     url: "/logout",
-    //     method: "POST",
-    //   }),
-    // }),
-    // getUser: builder.query({
-    //   query: () => ({
-    //     url: "/users",
-    //     method: "GET",
-    //   }),
-    //   refetchOnMount: true,
-    //   invalidatesTags: ["User"],
-    // }),
-    // deleteUser: builder.mutation({
-    //     query: (userId) => ({
-    //         url: `/users/${userId}`,
-    //         method: "DELETE",
-    //     }),
-    //     invalidatesTags: ["User"],
-    // }),
-    // updateUerRole: builder.mutation({
-    //     query: ({userId, role}) => ({
-    //         url: `/users/${userId}`,
-    //         method: "PUT",
-    //         body: {role}
-    //       }),
-    //       refetchOnMount: true,
-    //       invalidatesTags: ["User"],
-    // }),
-    // editProfile: builder.mutation({
-    //     query: (profileData) => ({
-    //         url: `/edit-profile`,
-    //         method: "PATCH",
-    //         body: profileData
-    //       }),
-    // })
+
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+    }),
+
+    getUser: builder.query({
+      query: () => ({
+        url: "/users",
+        method: "GET",
+      }),
+      refetchOnMount: true,
+      invalidatesTags: ["User"],
+    }),
+
+    deleteUser: builder.mutation({
+        query: (userId) => ({
+            url: `/users/${userId}`,
+            method: "DELETE",
+        }),
+        invalidatesTags: ["User"],
+    }),
+
+    updateUerRole: builder.mutation({
+        query: ({userId, role}) => ({
+            url: `/users/${userId}`,
+            method: "PUT",
+            body: {role}
+          }),
+          refetchOnMount: true,
+          invalidatesTags: ["User"],
+    }),
+
+    editProfile: builder.mutation({
+        query: (profileData) => ({
+            url: `/edit-profile`,
+            method: "PATCH",
+            body: profileData
+          }),
+    })
   }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation } = authApi;
+export const { useRegisterUserMutation, useLoginUserMutation, useLogoutUserMutation, useGetUserQuery, useDeleteUserMutation, useUpdateUerRoleMutation, useEditProfileMutation } = authApi;
 export default authApi;
