@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("./user.model");
 const generateToken = require("../middleware/generateToken");
+// const verifyToken = require("../middleware/verifyToken");
 const router = express.Router();
 
 // Register endpoint
@@ -59,5 +60,17 @@ router.post("/login", async (req, res) => {
 
 
 })
+
+// get all users
+router.get("/users", async (req, res) => {
+  res.send({message: "Protected"})
+  // try {
+  //   const users = await User.find({}, "id email role").sort({ createdAt: -1 });
+  //   res.status(200).send(users);
+  // } catch (error) {
+  //   console.error("Error fetching users", error);
+  //   res.status(500).send({ message: "Error fetching user" });
+  // }
+});
 
 module.exports = router;
