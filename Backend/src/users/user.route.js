@@ -119,28 +119,28 @@ router.patch("/edit-profile", async (req, res) => {
     const user = await User.findById(userId);
     console.log(user)
 
-    // if (!user) {
-    //   return res.status(400).send({ message: "User not found" });
-    // }
-    // // update profile
-    // if (username !== undefined) user.username = username;
-    // if (profileImage !== undefined) user.profileImage = profileImage;
-    // if (bio !== undefined) user.bio = bio;
-    // if (profession !== undefined) user.profession = profession;
+    if (!user) {
+      return res.status(400).send({ message: "User not found" });
+    }
+    // update profile
+    if (username !== undefined) user.username = username;
+    if (profileImage !== undefined) user.profileImage = profileImage;
+    if (bio !== undefined) user.bio = bio;
+    if (profession !== undefined) user.profession = profession;
 
-    // await user.save();
-    // res.status(200).send({
-    //   message: "Profile updated successfully",
-    //   user: {
-    //     _id: user._id,
-    //     username: user.username,
-    //     email: user.email,
-    //     profileImage: user.profileImage,
-    //     bio: user.bio,
-    //     profession: user.profession,
-    //     role: user.role,
-    //   },
-    // });
+    await user.save();
+    res.status(200).send({
+      message: "Profile updated successfully",
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        profileImage: user.profileImage,
+        bio: user.bio,
+        profession: user.profession,
+        role: user.role,
+      },
+    });
   } catch (error) {
     console.error("Error updating user profile", error);
     res.status(500).send({ message: "Error updating user profile" });
