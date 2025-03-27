@@ -1,7 +1,7 @@
 const express = require("express");
 const Products = require("./products.model");
 const Reviews = require("../reviews/reviews.model");
-// const verifyToken = require("../middleware/verifyToken");
+const verifyToken = require("../middleware/verifyToken");
 // const verifyAdmin = require("../middleware/verifyAdmin");
 const router = express.Router();
 
@@ -101,8 +101,91 @@ router.get("/:id", async (req, res) => {
       console.error("Error fetching the product", error);
       res.status(500).send({ message: "Failed to fetch the product" });
     }
+});
+
+// update a product
+router.patch("/update-product/:id",verifyToken, async (req, res) => {
+    try {
+      const productId = req.params.id;
+      const updatedProduct = await Products.findByIdAndUpdate(
+        productId,
+        { ...req.body },
+        { new: true }
+      );
+  
+      if (!updatedProduct) {
+        return res.status(404).send({ message: "Product not found" });
+      }
+  
+      res.status(200).send({
+        message: "Product updated successfully",
+        product: updatedProduct,
+      });
+    } catch (error) {
+      console.error("Error updating the product", error);
+      res.status(500).send({ message: "Failed to update the product" });
+    }
   });
 
+// delete a product
+
+router.delete("/:id", async (req, res) => {
+    try {
+      const productId = req.params.id;
+      const deletedProduct = await Products.findByIdAndDelete(productId);
+  
+      if (!deletedProduct) {
+        return res.status(404).send({ message: "Product not found" });
+      }
+  
+      // delete reviews related to the product
+      await Reviews.deleteMany({ productId: productId });
+  
+      res.status(200).send({
+        message: "Product deleted successfully",
+      });
+    } catch (error) {
+      console.error("Error deleting the product", error);
+      res.status(500).send({ message: "Failed to delete the product" });
+    }
+});
+
+// get related products
+router.get("/related/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      if (!id) {
+        return res.status(400).send({ message: "Product ID is required" });
+      }
+      const product = await Products.findById(id);
+      if (!product) {
+        return res.status(404).send({ message: "Product not found" });
+      }
+  
+      const titleRegex = new RegExp(
+        product.name
+          .split(" ")
+          .filter((word) => word.length > 1)
+          .join("|"),
+        "i"
+      );
+  
+      const relatedProducts = await Products.find({
+        _id: { $ne: id }, // Exclude the current product
+        $or: [
+          { name: { $regex: titleRegex } }, // Match similar names
+          { category: product.category }, // Match the same category
+        ],
+      });
+  
+      res.status(200).send(relatedProducts);
+  
+    } catch (error) {
+      console.error("Error fetching the related products", error);
+      res.status(500).send({ message: "Failed to fetch related products" });
+    }
+  });
 
 
 module.exports = router;
