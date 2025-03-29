@@ -56,7 +56,7 @@ const productsApi = createApi({
           url: `update-product/${id}`,
           method: "PATCH",
           body: rest,
-          credentials: "include",
+          credentials: "include"
         }),
         invalidatesTags: ["Products"],
       }),
@@ -71,3 +71,6 @@ const productsApi = createApi({
       }),
     }),
   });
+
+export const {useFetchAllProductsQuery, useFetchProductByIdQuery, useAddProductMutation, useUpdateProductMutation, useDeleteProductMutation, useFetchRelatedProductsQuery} = productsApi;
+export default productsApi;
