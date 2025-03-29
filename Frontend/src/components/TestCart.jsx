@@ -10,20 +10,20 @@ const TestCart = () => {
     dispatch(addToCart({ _id: id, name, price })); // Dispatch the addToCart action
   };
 
-  return (
-    <div>
-      <h2>Redux Cart Test</h2>
-      <button onClick={() => handleAddToCart("1", "Item 1", 100)}>
-        Add Item 1
-      </button>
-      <button onClick={() => handleAddToCart("2", "Item 2", 150)}>
-        Add Item 2
-      </button>
+  // return (
+    // <div>
+    //   {/* <h2>Redux Cart Test</h2> */}
+    //   <button onClick={() => handleAddToCart("1", "Item 1", 100)}>
+    //     {/* Add Item 1 */}
+    //   </button>
+    //   <button onClick={() => handleAddToCart("2", "Item 2", 150)}>
+    //     {/* Add Item 2 */}
+    //   </button>
 
-      <h3>Cart Items:</h3>
-      <pre>{JSON.stringify(cart, null, 2)}</pre>
-    </div>
-  );
+    //   {/* <h3>Cart Items:</h3> */}
+    //   <pre>{JSON.stringify(cart, null, 2)}</pre>
+    // </div>
+  // );
 };
 
 export default TestCart;
