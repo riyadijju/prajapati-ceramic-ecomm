@@ -9,18 +9,31 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
+import UserDMain from "../pages/dashboard/user/dashboard/UserDMain";
+import ErrorPage from "../pages/ErrorPage";
+import PaymentSuccess from "../components/PaymentSuccess";
+// import UserOrders from "../pages/dashboard/user/UserOrders";
+// import OrderDetails from "../pages/dashboard/user/OrderDetails";
+// import UserPayments from "../pages/dashboard/user/UserPayments";
+// import UserReviews from "../pages/dashboard/user/UserReviews";
+// import UserProfile from "../pages/dashboard/user/UserProfile";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
+    errorElement: <ErrorPage />,
     children: [
       
       { path: "/", element: <Home /> },
       { path: "/categories/:categoryName", element: <CategoryPage/> },
       { path: "/search", element: <Search/> },
       { path: "/shop", element: <ShopPage/>},
-      { path: "/shop/:id", element: <SingleProduct /> }
+      { path: "/shop/:id", element: <SingleProduct /> },
+      {
+        path: "/success",
+        element: <PaymentSuccess/>
+      },
     ]
   },
   {
@@ -37,11 +50,11 @@ const router = createBrowserRouter([
     element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     children: [
         // user routes
-        { path: '', element: <div>User</div>},
-        { path: 'orders', element: <div>yaya</div> },
-        { path: 'payments', element: <div>Admin</div> },
-        { path: 'profile', element: <div>Admin</div> },
-        { path: 'reviews', element: <div>Admin</div> },
+        { path: '', element: <UserDMain/>},
+        { path: 'orders', element: <div>blah</div> },
+        { path: 'payments', element: <div>blah</div>},
+        { path: 'profile', element: <div>blah</div> },
+        { path: 'reviews', element: <div>blah</div> },
 
 
         // admin routes (only accessible by admin) Todo: private routes with role field
