@@ -21,6 +21,7 @@ const PaymentSuccess = () => {
             .catch((err) => console.error("Error confirming payment", err))
         }
     }, [])
+    console.log(order)
  
     if(!order) {return <div>Loading...</div>}
 
@@ -81,6 +82,7 @@ const PaymentSuccess = () => {
         </ol>
         
     </section>
+    
   )
 }
 
