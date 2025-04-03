@@ -10,10 +10,9 @@ import Register from "../components/Register";
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import UserDMain from "../pages/dashboard/user/dashboard/UserDMain";
-import ErrorPage from "../pages/ErrorPage";
 import PaymentSuccess from "../components/PaymentSuccess";
-// import UserOrders from "../pages/dashboard/user/UserOrders";
-// import OrderDetails from "../pages/dashboard/user/OrderDetails";
+import UserOrders from "../pages/dashboard/user/UserOrders";
+import OrderDetails from "../pages/dashboard/user/OrderDetails";
 // import UserPayments from "../pages/dashboard/user/UserPayments";
 // import UserReviews from "../pages/dashboard/user/UserReviews";
 // import UserProfile from "../pages/dashboard/user/UserProfile";
@@ -22,7 +21,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
-    errorElement: <ErrorPage />,
     children: [
       
       { path: "/", element: <Home /> },
@@ -34,6 +32,10 @@ const router = createBrowserRouter([
         path: "/success",
         element: <PaymentSuccess/>
       },
+      {
+        path: "/orders/:orderId",
+        element: <OrderDetails/>
+    }
     ]
   },
   {
@@ -51,7 +53,7 @@ const router = createBrowserRouter([
     children: [
         // user routes
         { path: '', element: <UserDMain/>},
-        { path: 'orders', element: <div>blah</div> },
+        { path: 'orders', element: <UserOrders/> },
         { path: 'payments', element: <div>blah</div>},
         { path: 'profile', element: <div>blah</div> },
         { path: 'reviews', element: <div>blah</div> },
