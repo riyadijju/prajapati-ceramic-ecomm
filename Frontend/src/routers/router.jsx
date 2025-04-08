@@ -13,9 +13,11 @@ import UserDMain from "../pages/dashboard/user/dashboard/UserDMain";
 import PaymentSuccess from "../components/PaymentSuccess";
 import UserOrders from "../pages/dashboard/user/UserOrders";
 import OrderDetails from "../pages/dashboard/user/OrderDetails";
-// import UserPayments from "../pages/dashboard/user/UserPayments";
-// import UserReviews from "../pages/dashboard/user/UserReviews";
-// import UserProfile from "../pages/dashboard/user/UserProfile";
+import UserPayments from "../pages/dashboard/user/UserPayments";
+import UserReviews from "../pages/dashboard/user/UserReviews";
+import UserProfile from "../pages/dashboard/user/UserProfile";
+import AdminDMain from "../pages/dashboard/admin/dashboard/AdminDMain";
+// import AddProduct from "../pages/dashboard/admin/addProduct/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/orders/:orderId",
         element: <OrderDetails/>
-    }
+      }
     ]
   },
   {
@@ -54,20 +56,20 @@ const router = createBrowserRouter([
         // user routes
         { path: '', element: <UserDMain/>},
         { path: 'orders', element: <UserOrders/> },
-        { path: 'payments', element: <div>blah</div>},
-        { path: 'profile', element: <div>blah</div> },
-        { path: 'reviews', element: <div>blah</div> },
+        { path: 'payments', element: <UserPayments/> },
+        { path: 'reviews', element: <UserReviews/> },
+        { path: 'profile', element: <UserProfile/> },
 
 
         // admin routes (only accessible by admin) Todo: private routes with role field
         {
             path: "admin",
-            element: <PrivateRoute role="admin"><div>Admin</div></PrivateRoute>
+            element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute>
         },
         {
             path: "add-product",
 
-            element: <PrivateRoute role="admin"><div>Admin Add</div></PrivateRoute>
+            element: <PrivateRoute role="admin"><div>ADD Product</div></PrivateRoute>
         },
         {
             path: "manage-products",

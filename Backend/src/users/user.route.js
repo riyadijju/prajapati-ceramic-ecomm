@@ -7,17 +7,56 @@ const router = express.Router();
 // Register endpoint
 router.post("/register", async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, confirm } = req.body;
+
+    // Check for empty fields
+    if (!username || !email || !password || !confirm) {
+      return res.status(400).send({ 
+        message: "All fields are required",
+        errorType: "EMPTY_FIELDS"
+      });
+    }
+
+    // Check if passwords match
+    if (password !== confirm) {
+      return res.status(400).send({ 
+        message: "Passwords do not match",
+        errorType: "PASSWORD_MISMATCH" 
+      });
+    }
+
+    // Password strength validation
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(400).send({
+        message: "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
+        errorType: "WEAK_PASSWORD"
+      });
+    }
+
+    // Check if email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).send({ 
+        message: "Email already registered",
+        errorType: "EMAIL_EXISTS" 
+      });
+    }
+
+    // Create new user
     const user = new User({ email, username, password });
     await user.save();
+    
     res.status(201).send({ message: "User registered successfully!" });
     
   } catch (error) {
     console.error("Error registering user", error);
-    res.status(500).send({ message: "Error registering user" });
+    res.status(500).send({ 
+      message: "Error registering user",
+      error: error.message 
+    });
   }
 });
-
 // / login user endpoint
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;

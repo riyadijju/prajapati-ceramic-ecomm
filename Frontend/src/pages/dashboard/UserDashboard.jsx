@@ -36,7 +36,7 @@ const UserDashboard = () => {
             <Link to="/">
             <img src="/prajapati logo.png" alt="Prajapati Ceramic Logo" className="w-24 h-auto" />
             </Link>                    
-            <p className='text-xs italic'>User dashboard</p>
+            {/* <p className='text-xs italic'>User dashboard</p> */}
                 </div>
                 <hr className='mt-5' />
                 <ul className='space-y-5 pt-5'>
@@ -61,7 +61,7 @@ const UserDashboard = () => {
                 <hr  className='mb-3'/>
                 <button 
                 onClick={handleLogout}
-                className='text-white bg-primary font-medium px-5 py-1 rounded-sm'>Logout</button>
+                className='text-white bg-green-900 font-medium px-5 py-1 rounded-sm'>Logout</button>
             </div>
         </div>
     )
