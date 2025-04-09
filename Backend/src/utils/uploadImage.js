@@ -12,6 +12,13 @@ cloudinary.config({
   api_secret: api_secret,
 });
 
+
+// cloudinary.config({
+//   cloud_name: 'dn2gccqlw',
+//   api_key: '723175676372248',
+//   api_secret: 'oENnjmF-Jb9xHjK-u66PS9cQb50',
+// });
+
 const opts = {
   overwrite: true,
   invalidate: true,

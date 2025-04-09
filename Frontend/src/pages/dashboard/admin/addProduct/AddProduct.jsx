@@ -3,7 +3,7 @@ import {useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
 import UploadImage from './UploadImage';
-// import { useAddProductMutation } from '../../../../redux/features/products/productsApi';
+import { useAddProductMutation } from '../../../../redux/features/products/productsApi';
 import { useNavigate } from 'react-router-dom';
 
 const categories = [
@@ -37,7 +37,7 @@ const AddProduct = () => {
     });
     const [image, setImage] = useState('');
 
-    // const [AddProduct, {isLoading, error}] = useAddProductMutation()
+    const [AddProduct, {isLoading, error}] = useAddProductMutation()
   
 
     const handleChange = (e) => {
@@ -81,7 +81,7 @@ const AddProduct = () => {
                 <TextInput
                     label="Product Name"
                     name="name"
-                    placeholder="Ex: Diamond Earrings"
+                    placeholder="Ex: Chapacho Vase A12"
                     value={product.name}
                     onChange={handleChange}
                 />
@@ -103,7 +103,7 @@ const AddProduct = () => {
                     label="Price"
                     name="price"
                     type="number"
-                    placeholder="50"
+                    placeholder="2590"
                     value={product.price}
                     onChange={handleChange}
                 />
