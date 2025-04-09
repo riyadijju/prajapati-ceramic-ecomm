@@ -22,6 +22,9 @@ app.use(cors({
     credentials: true
 }))
 
+// image upload 
+const uploadImage = require("./src/utils/uploadImage")
+
 // all routes
 const authRoutes = require('./src/users/user.route');
 const productRoutes =  require('./src/products/products.route');
@@ -41,11 +44,16 @@ main()
 
 async function main() {
     await mongoose.connect(process.env.DB_URL);
-  
     app.get("/", (req, res) => {
       res.send("Prajapati E-commerce Server is running....!");
     });
 }
+
+app.post("/uploadImage", (req, res) => {
+  uploadImage(req.body.image)
+    .then((url) => res.send(url))
+    .catch((err) => res.status(500).send(err));
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -1,5 +1,10 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import {useSelector } from 'react-redux';
+import TextInput from './TextInput';
+import SelectInput from './SelectInput';
+import UploadImage from './UploadImage';
+// import { useAddProductMutation } from '../../../../redux/features/products/productsApi';
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
     { label: 'Select Category', value: '' },
@@ -32,7 +37,7 @@ const AddProduct = () => {
     });
     const [image, setImage] = useState('');
 
-    const [AddProduct, {isLoading, error}] = useAddProductMutation()
+    // const [AddProduct, {isLoading, error}] = useAddProductMutation()
   
 
     const handleChange = (e) => {
@@ -69,12 +74,69 @@ const AddProduct = () => {
         }
     }
 
-  return (
-    <div className="container mx-auto mt-8">
+    return (
+        <div className="container mx-auto mt-8">
             <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
-            <form onSubmit={handleSubmit} className="space-y-4"></form>
-    </div>
-  )
-}
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <TextInput
+                    label="Product Name"
+                    name="name"
+                    placeholder="Ex: Diamond Earrings"
+                    value={product.name}
+                    onChange={handleChange}
+                />
+                <SelectInput
+                    label="Category"
+                    name="category"
+                    value={product.category}
+                    onChange={handleChange}
+                    options={categories}
+                />
+                <SelectInput
+                    label="Color"
+                    name="color"
+                    value={product.color}
+                    onChange={handleChange}
+                    options={colors}
+                />
+                <TextInput
+                    label="Price"
+                    name="price"
+                    type="number"
+                    placeholder="50"
+                    value={product.price}
+                    onChange={handleChange}
+                />
+   
+                <UploadImage
+                name="image"
+                id="image"
+                value={e => setImage(e.target.value)}
+                placeholder='Image'
+                setImage={setImage}
+                />
+                <div>
+                <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
+                <textarea name="description" id="description"
+                className='add-product-InputCSS'
+                value={product.description}
+                placeholder='Write a product description'
+                onChange={handleChange}
+                ></textarea>
+                </div>
 
-export default AddProduct
+                <div>
+                    <button type='submit'
+                    className='add-product-btn'
+                   
+                    >Add Product</button>
+                </div>
+
+            </form>
+
+           
+        </div>
+    );
+};
+
+export default AddProduct;
