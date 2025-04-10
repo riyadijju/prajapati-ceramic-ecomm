@@ -15,21 +15,49 @@ const cartSlice = createSlice({
   reducers: {
     
     addToCart: (state, action) => {
-      const isExist = state.products.find(
-        (product) => product._id === action.payload._id
+      const { _id, variant } = action.payload;
+      
+      // Find if the exact product (including variant) already exists in cart
+      const existingItem = state.products.find(item => 
+        item._id === _id && 
+        (
+          (!item.variant && !variant) || 
+          (item.variant && variant && 
+           Object.keys(item.variant).every(key => 
+             item.variant[key] === variant[key]
+           ))
+        )
       );
-
-      if (!isExist) {
-        state.products.push({ ...action.payload, quantity: 1 });
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
       } else {
-        console.log("Items already added");
+        state.products.push({ ...action.payload, quantity: 1 });
       }
-
+    
+      // Update calculated values (from your original code)
       state.selectedItems = setSelectedItems(state);
       state.totalPrice = setTotalPrice(state);
       state.tax = setTax(state);
       state.grandTotal = setGrandTotal(state);
     },
+
+    // addToCart: (state, action) => {
+    //   const isExist = state.products.find(
+    //     (product) => product._id === action.payload._id
+    //   );
+
+    //   if (!isExist) {
+    //     state.products.push({ ...action.payload, quantity: 1 });
+    //   } else {
+    //     console.log("Items already added");
+    //   }
+
+    //   state.selectedItems = setSelectedItems(state);
+    //   state.totalPrice = setTotalPrice(state);
+    //   state.tax = setTax(state);
+    //   state.grandTotal = setGrandTotal(state);
+    // },
 
     updateQuantity: (state, action) => {
       const products = state.products.map((product) => {

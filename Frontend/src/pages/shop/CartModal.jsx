@@ -42,6 +42,7 @@ const CartModal = ( { products, isOpen, onClose } ) => {
                                         <div className='flex items-center'>
                                         <span className='mr-4 px-1 bg-primary text-white rounded-full'> 0{index +1 } </span>
                                         <img src={item.image} alt="" className='size-12 object-cover mr-4' />
+                                    
                                         <div>
                                                 <h5 className='text-lg font-medium'>{item.name}</h5>
                                                 <p className='text-gray-600 text-sm'>Rs. {Number(item.price).toFixed(2)}</p>
