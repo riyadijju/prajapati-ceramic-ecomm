@@ -29,17 +29,26 @@ router.post("/register", async (req, res) => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(password)) {
       return res.status(400).send({
-        message: "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
+        message: "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character",
         errorType: "WEAK_PASSWORD"
       });
     }
 
     // Check if email already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const existingEmailUser = await User.findOne({ email });
+    if (existingEmailUser) {
       return res.status(409).send({ 
         message: "Email already registered",
         errorType: "EMAIL_EXISTS" 
+      });
+    }
+
+    // Check if username already exists
+    const existingUsernameUser = await User.findOne({ username });
+    if (existingUsernameUser) {
+      return res.status(409).send({ 
+        message: "Username already exists, please choose another one.",
+        errorType: "USERNAME_EXISTS"
       });
     }
 
@@ -57,6 +66,7 @@ router.post("/register", async (req, res) => {
     });
   }
 });
+
 // / login user endpoint
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;

@@ -1,106 +1,164 @@
 [
-    {
-      "_id": 1,
-      "name": "Ceramic Titles",
-      "category": "tableware",
-      "description": "Stylish leather handbag with ample storage space.",
-      "price": 1279.99,
-      "oldPrice": 1599.99,
-      "image": "https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "black",
-      "rating": 4.5,
-      "author":"admin"
-    },
+  {
+    "_id": "67f9e53de0b7235b6981dde6",
+    "name": "Deep Blue Floral Vase",
+    "category": "homedecor",
+    "description": "When several Nepali artists travelled to Costa Rica, they were struck by the beautiful drape and bright blue color of these blossoms, inspiring this hand-sculpted vessel. The skyflower is widely cultivated by Central and South American gardeners for its floral clusters that bloom to attract butterflies and hummingbirds year round.",
+    "price": 1800,
+    "oldPrice": 2000,
+    "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "variants": [
+      {
+        "name": "Terracotta Red",
+        "color": "#AB3E16",
+        "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1800,
+        "stock": 10
+      },
+      {
+        "name": "Earthy Brown",
+        "color": "#8B5A2B",
+        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1900,
+        "stock": 5
+      },
+      {
+        "name": "Ash White",
+        "color": "#F3F3F3",
+        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "stock": 8
+      }
+    ],
+    "rating": 4.5,
+    "author": "admin"
+  }
+  ,
     {
       "_id": 2,
-      "name": "Chapacho Set",
+      "name": "Ceramic Titles 2",
       "category": "tableware",
-      "description": "Elegant evening gown for special occasions.",
-      "price": 1149.99,
-      "oldPrice": 1599.99,
-      "image": "https://plus.unsplash.com/premium_photo-1682542226222-d104741d7d03?q=80&w=3434&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "rating": 4.0
+      "description": "Stylish leather handbag with ample storage space.",
+      "price": 1800, 
+      "oldPrice": 2009,
+      "mainImage": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "variants": [
+    {
+      "name": "Terracotta Red",
+      "color": "#AB3E16",
+      "image": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1800, 
+      "stock": 10
+    },
+    {
+      "name": "Earthy Brown",
+      "color": "#8B5A2B",
+      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1900,
+      "stock": 5
+    },
+    {
+      "name": "Ash White",
+      "color": "#F3F3F3",
+      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "stock": 8
+    }
+   ],
+    "author": "67e41cc64135e251f6cb566b"
     },
     {
       "_id": 3,
-      "name": "Gong Set",
-      "category": "homedecor",
-      "description": "Exquisite gold necklace with intricate design.",
-      "price": 2199.99,
-      "image": "https://plus.unsplash.com/premium_photo-1682552758040-ec7f1dc79f3e?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "gold",
-      "rating": 4.7
+      "name": "Ceramic Titles",
+      "category": "tableware",
+      "description": "Stylish leather handbag with ample storage space.",
+      "price": 1800, 
+      "oldPrice": 2000,
+      "mainImage": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "variants": [
+    {
+      "name": "Terracotta Red",
+      "color": "#AB3E16",
+      "image": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1800, 
+      "stock": 10
+    },
+    {
+      "name": "Earthy Brown",
+      "color": "#8B5A2B",
+      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1900,
+      "stock": 5
+    },
+    {
+      "name": "Ash White",
+      "color": "#F3F3F3",
+      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "stock": 8
+    }
+   ],
+    "author": "67e41cc64135e251f6cb566b"
     },
     {
       "_id": 4,
-      "name": "Nagarkot Pot",
-      "category": "homedecor",
-      "description": "Long-lasting matte lipstick in various shades.",
-      "price": 2600,
-      "image": "https://plus.unsplash.com/premium_photo-1682542226584-e776098d5ea9?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "red",
-      "rating": 4.2
+      "name": "Ceramic Titles",
+      "category": "tableware",
+      "description": "Stylish leather handbag with ample storage space.",
+      "price": 1800, 
+      "oldPrice": 2000,
+      "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "variants": [
+    {
+      "name": "Terracotta Red",
+      "color": "#AB3E16",
+      "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1800, 
+      "stock": 10
+    },
+    {
+      "name": "Earthy Brown",
+      "color": "#8B5A2B",
+      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1900,
+      "stock": 5
+    },
+    {
+      "name": "Ash White",
+      "color": "#F3F3F3",
+      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "stock": 8
+    }
+   ],
+    "author": "67e41cc64135e251f6cb566b"
     },
     {
       "_id": 5,
-      "name": "Thimi Set",
-      "category": "holiday",
-      "description": "Luxurious silk scarf with vibrant colors.",
-      "price": 2229.99,
-      "oldPrice": 2639.99,
-      "image": "https://plus.unsplash.com/premium_photo-1701170256296-2d325b7ac8e7?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "rating": 4.3
+      "name": "Ceramic Titles",
+      "category": "tableware",
+      "description": "Stylish leather handbag with ample storage space.",
+      "price": 1800, 
+      "oldPrice": 2000,
+      "mainImage": "https://images.unsplash.com/photo-1670843840695-be4ce9626145?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "variants": [
+    {
+      "name": "Terracotta Red",
+      "color": "#AB3E16",
+      "mainImage": "https://images.unsplash.com/photo-1670843840695-be4ce9626145?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1800, 
+      "stock": 10
     },
     {
-      "_id": 6,
-      "name": "Bode Set",
-      "category": "holiday",
-      "description": "Chic cocktail dress for parties and events.",
-      "price": 3489.99,
-      "image": "https://plus.unsplash.com/premium_photo-1701106236292-e4a692ff36da?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "black",
-      "rating": 4.4
+      "name": "Earthy Brown",
+      "color": "#8B5A2B",
+      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "price": 1900,
+      "stock": 5
     },
     {
-      "_id": 7,
-      "name": "Beige Vase",
-      "category": "holiday",
-      "description": "Sparkling diamond earrings that add elegance to any outfit.",
-      "price": 5299.99,
-      "oldPrice": 349.99,
-      "image": "https://plus.unsplash.com/premium_photo-1701106237957-e02fb0c39cf0?q=80&w=3382&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "silver",
-      "rating": 4.8
-    },
-    {
-      "_id": 8,
-      "name": "Taha Nani Vase",
-      "category": "holiday",
-      "description": "High-coverage foundation for a flawless finish.",
-      "price": 5539.99,
-      "image": "https://images.unsplash.com/photo-1631125915510-8ffed5a0d054?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "beige",
-      "rating": 4.1
-    },
-    {
-      "_id": 9,
-      "name": "Owl Vase",
-      "category": "dinnerware",
-      "description": "Trendy sunglasses with UV protection.",
-      "price": 3349.99,
-      "image": "https://images.unsplash.com/photo-1631125914614-bd1d02e6cfef?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "black",
-      "rating": 4.6
-    },
-    {
-      "_id": 10,
-      "name": "Budh Vase Set",
-      "category": "dinnerware",
-      "description": "Comfortable maxi dress for casual outings.",
-      "price": 2259.99,
-      "oldPrice": 2379.99,
-      "image": "https://images.unsplash.com/photo-1631125915902-d8abe9225ff2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "color": "green",
-      "rating": 4.2
+      "name": "Ash White",
+      "color": "#F3F3F3",
+      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "stock": 8
     }
-  ]
+   ],
+    "author": "67e41cc64135e251f6cb566b"
+    }
+]

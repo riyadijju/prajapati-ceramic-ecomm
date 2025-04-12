@@ -5,83 +5,78 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getBaseUrl } from '../../utils/baseURL';
 
 const OrderSummary = () => {
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.auth)
+  const products = useSelector((store) => store.cart.products);
+  const { selectedItems, totalPrice, tax, taxRate, grandTotal } = useSelector((store) => store.cart);
 
-    const dispatch = useDispatch()
-    const {user} = useSelector(state => state.auth)
-
-    const products = useSelector((store) => store.cart.products);
-    // console.log(products)
-    const { selectedItems, totalPrice, tax, taxRate, grandTotal } = useSelector((store) => store.cart);
-
-    const handleClearCart = () => {
-      dispatch(clearCart())
+  const handleClearCart = () => {
+    dispatch(clearCart())
   }
 
-  // payment integration
-  const makePayment = async (e) => {
-    const stripe =  await loadStripe(import.meta.env.VITE_STRIPE_PK);
+  const makePayment = async () => {
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
     const body = {
-      products: products,
+      products,
       userId: user?._id
-  }
+    }
 
-  const headers = {
-        "Content-Type": "application/json"
-  }
-
-  const response = await fetch(`${getBaseUrl()}/api/orders/create-checkout-session`, {
+    const response = await fetch(`${getBaseUrl()}/api/orders/create-checkout-session`, {
       method: "POST",
-      headers: headers,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
-  })
+    })
 
-  
-  const session =  await response.json()
-  console.log("session: ", session);
-
-  const result =  stripe.redirectToCheckout({
-      sessionId: session.id
-  })
-  console.log("Result:",  result)
-  if(result.error) {
-      console.log("Error:", result.error)
+    const session = await response.json()
+    const result = stripe.redirectToCheckout({ sessionId: session.id })
+    if (result.error) console.log("Error:", result.error)
   }
-}
 
+  return (
+    <div className="bg-white border border-gray-200 mt-8 rounded-md shadow-md max-w-md mx-auto text-sm">
+      <div className="p-6 text-gray-700">
+        <h2 className="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">Order Summary</h2>
 
-  
-    return (
-    <div className='bg-primary-light mt-5 rounded text-base'>
-      <div className='px-6 py-4 space-y-5'>
-      <h2 className='text-xl text-text-dark'>Order Summary</h2>
-      <p className='text-text-dark mt-2'>SelectedItems: {selectedItems}</p>
-      <p>Total Price: Rs. {totalPrice.toFixed(2)}</p>
-      <p>Tax ({taxRate * 100}%): Rs. {tax.toFixed(2)}</p>
-      <h3 className='font-bold'>GrandTotal: Rs. {grandTotal.toFixed(2)}</h3>
+        <table className="w-full text-left border-separate border-spacing-y-2">
+          <tbody>
+            <tr>
+              <td className="font-medium">Selected Items</td>
+              <td className="text-right">{selectedItems}</td>
+            </tr>
+            <tr>
+              <td className="font-medium">Total Price</td>
+              <td className="text-right">Rs. {totalPrice.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td className="font-medium">Tax ({(taxRate * 100).toFixed(0)}%)</td>
+              <td className="text-right">Rs. {tax.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td colSpan="2"><hr className="my-2 border-gray-300" /></td>
+            </tr>
+            <tr>
+              <td className="font-semibold text-base">Grand Total</td>
+              <td className="text-right font-semibold text-base">Rs. {grandTotal.toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </table>
 
-      <div className='px-4 mb-6'>
-                    <button 
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleClearCart();
-                    }}
-                        className='bg-red-500 px-3 py-1.5 text-white  mt-2 rounded-md flex justify-between items-center mb-4'>
-                        <span className='mr-2'>Clear cart</span> 
-                        <i className="ri-delete-bin-7-line"></i>
-                    </button>
-                    
-                    <button 
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        makePayment();
-                    }}
-                    className='bg-green-600 px-3 py-1.5 text-white 
-                     mt-2 rounded-md flex justify-between items-center'><span className='mr-2'
-                     >Proceed Checkout</span><i className="ri-bank-card-line"></i></button>
-                </div>
+        <div className="flex flex-col gap-3 mt-6">
+          <button
+            onClick={handleClearCart}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-md transition font-medium"
+          >
+            Clear Cart
+          </button>
 
+          <button
+            onClick={makePayment}
+            className="bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-md transition font-medium"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
       </div>
-                
     </div>
   )
 }

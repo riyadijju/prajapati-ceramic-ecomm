@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import ProductCards from './ProductCards';
 import ShopFiltering from './ShopFiltering';
 import { useFetchAllProductsQuery } from '../../redux/features/products/productsApi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const filters = {
     categories: ['all', 'tableware', 'homedecor', 'holiday', 'dinnerware'],
-    colors: ['all', 'black', 'red', 'gold', 'blue', 'silver', 'beige', 'green'],
+    artists: ['all', 'Maya Prajapati', 'Purna Prajapati', 'Tej K. Prajapati'], // example names
     priceRanges: [
         { label: 'Under Rs. 500', min: 0, max: 500 },
         { label: 'Rs. 500 - Rs. 1500', min: 500, max: 1500 },
@@ -17,24 +18,25 @@ const filters = {
 const ShopPage = () => {
     const [filtersState, setFiltersState] = useState({
         category: 'all',
-        color: 'all',
+        artist: 'all',
         priceRange: ''
     });
 
     const [currentPage, setCurrentPage] = useState(1);
     const [ProductsPerPage] = useState(8);
 
-    const { category, color, priceRange } = filtersState;
+    const { category, artist, priceRange } = filtersState;
     const [minPrice, maxPrice] = priceRange.split('-').map(Number);
 
     const { data: { products = [], totalPages, totalProducts } = {}, error, isLoading } = useFetchAllProductsQuery({
         category: category !== 'all' ? category : '',
-        color: color !== 'all' ? color : '',
+        artist: artist !== 'all' ? artist : '',
         minPrice: isNaN(minPrice) ? '' : minPrice,
         maxPrice: isNaN(maxPrice) ? '' : maxPrice,
         page: currentPage,
         limit: ProductsPerPage,
     });
+    
 
     // Transform products data to ensure consistent image structure
     const transformedProducts = products.map(product => ({
@@ -47,11 +49,12 @@ const ShopPage = () => {
     const clearFilters = () => {
         setFiltersState({
             category: 'all',
-            color: 'all',
+            artist: 'all',
             priceRange: ''
         });
-        setCurrentPage(1); // Reset to first page when clearing filters
+        setCurrentPage(1);
     }
+    
 
     // handle page change
     const handlePageChange = (pageNumber) => {
@@ -69,10 +72,10 @@ const ShopPage = () => {
 
     return (
         <>
-            <section className='section__container bg-primary-light'>
+            {/* <section className='section__container bg-primary-light'>
                 <h2 className='section__header capitalize'>Shop Page</h2>
                 <p className='section__subheader'>Browse a diverse range of ceramics, from tableware to versatile home decors. Elevate your space today!</p>
-            </section>
+            </section> */}
 
             <section className='section__container'>
                 <div className='flex flex-col md:flex-row md:gap-12 gap-8'>
@@ -95,38 +98,42 @@ const ShopPage = () => {
 
                         {/* pagination controls */}
                         {totalPages > 1 && (
-                            <div className='mt-6 flex justify-center flex-wrap gap-2'>
-                                <button 
-                                    disabled={currentPage === 1}
-                                    onClick={() => handlePageChange(currentPage - 1)}
-                                    className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-                                >
-                                    Previous
-                                </button>
+  <div className="mt-10 flex justify-center items-center gap-2 flex-wrap font-montserrat">
+    <button
+      disabled={currentPage === 1}
+      onClick={() => handlePageChange(currentPage - 1)}
+      className="flex items-center gap-1 px-4 py-2 bg-[#e8d8cd] text-[#5e3b2d] rounded-2xl shadow-md hover:bg-[#d8c4b8] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+    >
+      <ChevronLeft className="w-4 h-4" />
+      <span className="text-sm">Prev</span>
+    </button>
 
-                                {[...Array(totalPages)].map((_, index) => (
-                                    <button 
-                                        key={index}
-                                        onClick={() => handlePageChange(index + 1)}
-                                        className={`px-4 py-2 ${
-                                            currentPage === index + 1 
-                                                ? 'bg-primary text-white' 
-                                                : 'bg-gray-300 text-gray-700'
-                                        } rounded-md`}
-                                    >
-                                        {index + 1}
-                                    </button>
-                                ))}
+    {[...Array(totalPages)].map((_, index) => (
+      <button
+        key={index}
+        onClick={() => handlePageChange(index + 1)}
+        className={`w-10 h-10 rounded-full font-semibold transition-all duration-200 shadow-md border 
+          ${
+            currentPage === index + 1
+              ? 'bg-[#9b4d4d] text-white border-[#8a3f3f] shadow-lg scale-105'
+              : 'bg-[#f9f3f0] text-[#5e3b2d] hover:bg-[#e2cfc3] border-[#e0d0c3]'
+          }`}
+      >
+        {index + 1}
+      </button>
+    ))}
 
-                                <button 
-                                    disabled={currentPage === totalPages}
-                                    onClick={() => handlePageChange(currentPage + 1)}
-                                    className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-                                >
-                                    Next
-                                </button>
-                            </div>
-                        )}
+    <button
+      disabled={currentPage === totalPages}
+      onClick={() => handlePageChange(currentPage + 1)}
+      className="flex items-center gap-1 px-4 py-2 bg-[#e8d8cd] text-[#5e3b2d] rounded-2xl shadow-md hover:bg-[#d8c4b8] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+    >
+      <span className="text-sm">Next</span>
+      <ChevronRight className="w-4 h-4" />
+    </button>
+  </div>
+)}
+
                     </div>
                 </div>
             </section>

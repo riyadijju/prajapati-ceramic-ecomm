@@ -1,66 +1,88 @@
-import React from 'react'
+import React from 'react';
 
-const ShopFiltering = ({filters, filtersState, setFiltersState, clearFilters}) => {
+
+const ShopFiltering = ({ filters, filtersState, setFiltersState, clearFilters }) => {
+  const SquareRadio = ({ name, value, checked, onChange, label }) => (
+    <label className='flex items-center gap-2 cursor-pointer group'>
+      <input
+        type='radio'
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={onChange}
+        className='hidden peer'
+      />
+      <div className='w-4 h-4 rounded-sm border border-[#8D6E63] peer-checked:bg-[#8D6E63] peer-checked:border-[#5C4033] transition-all duration-200 flex items-center justify-center'>
+        <div className='w-2 h-2 bg-white rounded-sm peer-checked:block hidden'></div>
+      </div>
+      <span className='text-sm text-[#5C4033] capitalize group-hover:text-[#3E2723]'>{label}</span>
+    </label>
+  );
+
   return (
-    <div className='space-y-5 flex-shrink-0'>
-        <h3>Filters</h3>
+    <div className='w-full sm:max-w-[200px] p-4 sm:p-5 -ml-4  bg-[#F5F0EB] shadow-md space-y-5 border border-[#D6CCC2]'>
+      <h3 className='text-xl font-semibold text-[#5C4033]'>Filters</h3>
 
-        {/* categories */}
-        <div className='flex flex-col space-y-2'>
-            <h4 className='font-medium text-lg'>Category</h4>
-            <hr />
-            {
-                filters.categories.map((category) => (
-                    <label key={category} className='capitalize cursor-pointer'>
-                        <input type="radio" name="category" id="category" value={category} 
-                        checked={filtersState.category === category}
-                        onChange={(e) => setFiltersState({...filtersState, category: e.target.value})}
-                        />
-                        <span className='ml-1'>{category}</span>
-                    </label>
-                ))
-            }
+      {/* Categories */}
+      <div className='space-y-2'>
+        <h4 className='font-medium text-base text-[#8D6E63]'>Category</h4>
+        <div className='space-y-1'>
+          {filters.categories.map((category) => (
+            <SquareRadio
+              key={category}
+              name='category'
+              value={category}
+              label={category}
+              checked={filtersState.category === category}
+              onChange={(e) => setFiltersState({ ...filtersState, category: e.target.value })}
+            />
+          ))}
         </div>
+      </div>
 
-        {/* colors */}
-        <div className='flex flex-col space-y-2'>
-            <h4 className='font-medium text-lg'>Color</h4>
-            <hr />
-            {
-                filters.colors.map((color) => (
-                    <label key={color} className='capitalize cursor-pointer'>
-                        <input type="radio" name="color" id="color" value={color} 
-                        checked={filtersState.color === color}
-                        onChange={(e) => setFiltersState({...filtersState, color: e.target.value})}
-                        />
-                        <span className='ml-1'>{color}</span>
-                    </label>
-                ))
-            }
+       {/* Artists */}
+       <div className='space-y-2'>
+        <h4 className='font-medium text-base text-[#8D6E63]'>Artist</h4>
+        <div className='space-y-1'>
+          {filters.artists.map((artist) => (
+            <SquareRadio
+              key={artist}
+              name='artist'
+              value={artist}
+              label={artist}
+              checked={filtersState.artist === artist}
+              onChange={(e) => setFiltersState({ ...filtersState, artist: e.target.value })}
+            />
+          ))}
         </div>
+      </div>
 
-        {/* pricing */}
-        <div className='flex flex-col space-y-2'>
-            <h4 className='font-medium text-lg'>Price Range</h4>
-            <hr />
-            {
-                filters.priceRanges.map((range) => (
-                    <label key={range.label} className='capitalize cursor-pointer'>
-                        <input type="radio" name="priceRange" id="priceRange" 
-                        value={`${range.min}-${range.max}`} 
-                        checked={filtersState.priceRange === `${range.min}-${range.max}`}
-                        onChange={(e) => setFiltersState({...filtersState, priceRange: e.target.value})}
-                        />
-                        <span className='ml-1'>{range.label}</span>
-                    </label>
-                ))
-            }
+      {/* Price Ranges */}
+      <div className='space-y-2'>
+        <h4 className='font-medium text-base text-[#8D6E63]'>Price Range</h4>
+        <div className='space-y-1'>
+          {filters.priceRanges.map((range) => (
+            <SquareRadio
+              key={range.label}
+              name='priceRange'
+              value={`${range.min}-${range.max}`}
+              label={range.label}
+              checked={filtersState.priceRange === `${range.min}-${range.max}`}
+              onChange={(e) => setFiltersState({ ...filtersState, priceRange: e.target.value })}
+            />
+          ))}
         </div>
-        
-        {/* clear filters */}
-        <button onClick={clearFilters} className='bg-black py-1 px-4 text-white rounded'>Clear All Filters</button>
+      </div>
+
+      {/* Clear Filters Button */}
+      <button
+        onClick={clearFilters}
+        className='w-full bg-[#7a4b3c] hover:bg-[#d38837] text-white py-2 px-3 rounded-lg text-sm font-medium shadow-sm transition-all'
+      >
+        Clear Filters
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default ShopFiltering
+export default ShopFiltering;
