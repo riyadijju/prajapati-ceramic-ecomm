@@ -13,29 +13,30 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    
     addToCart: (state, action) => {
       const { _id, variant } = action.payload;
-      
+
       // Find if the exact product (including variant) already exists in cart
       const existingItem = state.products.find(item => 
         item._id === _id && 
         (
           (!item.variant && !variant) || 
           (item.variant && variant && 
-           Object.keys(item.variant).every(key => 
-             item.variant[key] === variant[key]
-           ))
+           item.variant._id === variant._id
+          )
         )
       );
-      
+
+      // If item exists, increment quantity, otherwise add new item
       if (existingItem) {
-        existingItem.quantity += 1;
+        if (existingItem.quantity < existingItem.variant.stock) {
+          existingItem.quantity += 1;
+        }
       } else {
         state.products.push({ ...action.payload, quantity: 1 });
       }
-    
-      // Update calculated values (from your original code)
+
+      // Update calculated values
       state.selectedItems = setSelectedItems(state);
       state.totalPrice = setTotalPrice(state);
       state.tax = setTax(state);
@@ -43,19 +44,23 @@ const cartSlice = createSlice({
     },
 
     updateQuantity: (state, action) => {
-      const products = state.products.map((product) => {
-        if(product._id === action.payload.id) {
-          if(action.payload.type === 'increment'){
-            product.quantity += 1;
-          } else if(action.payload.type === 'decrement'){
-            if(product.quantity > 1) {
-              product.quantity -= 1
-            }
-          }
+      const { type, id, variantId } = action.payload;
+
+      // Find the product with the correct id and variant
+      const existingItem = state.products.find(product => 
+        product._id === id && 
+        product.variant?._id === variantId
+      );
+
+      if (existingItem) {
+        if (type === 'increment' && existingItem.quantity < existingItem.variant.stock) {
+          existingItem.quantity += 1;
+        } else if (type === 'decrement' && existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
         }
-        return product;
-      });
-      
+      }
+
+      // Update calculated values
       state.selectedItems = setSelectedItems(state);
       state.totalPrice = setTotalPrice(state);
       state.tax = setTax(state);
@@ -63,7 +68,12 @@ const cartSlice = createSlice({
     },
 
     removeFromCart: (state, action) => {
-      state.products = state.products.filter((product) => product._id !== action.payload.id);
+      const { id, variantId } = action.payload;
+      state.products = state.products.filter(product =>
+        !(product._id === id && product.variant?._id === variantId)
+      );
+
+      // Update calculated values
       state.selectedItems = setSelectedItems(state);
       state.totalPrice = setTotalPrice(state);
       state.tax = setTax(state);
@@ -76,8 +86,7 @@ const cartSlice = createSlice({
       state.totalPrice = 0;
       state.tax = 0;
       state.grandTotal = 0;
-    }
- 
+    },
   },
 });
 
@@ -86,11 +95,11 @@ export const setSelectedItems = (state) =>
   state.products.reduce((total, product) => total + product.quantity, 0);
 
 export const setTotalPrice = (state) =>
-  state.products.reduce((total, product) => total + product.quantity * product.price, 0);
+  state.products.reduce((total, product) => total + product.quantity * (product.variant?.price || product.price), 0);
 
 export const setTax = (state) => setTotalPrice(state) * state.taxRate;
 
 export const setGrandTotal = (state) => setTotalPrice(state) + setTax(state);
 
-export const { addToCart, updateQuantity, removeFromCart, clearCart} = cartSlice.actions;
+export const { addToCart, updateQuantity, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ShopFiltering = ({ filters, filtersState, setFiltersState, clearFilters }) => {
   const SquareRadio = ({ name, value, checked, onChange, label }) => (
     <label className='flex items-center gap-2 cursor-pointer group'>
@@ -35,23 +34,6 @@ const ShopFiltering = ({ filters, filtersState, setFiltersState, clearFilters })
               label={category}
               checked={filtersState.category === category}
               onChange={(e) => setFiltersState({ ...filtersState, category: e.target.value })}
-            />
-          ))}
-        </div>
-      </div>
-
-       {/* Artists */}
-       <div className='space-y-2'>
-        <h4 className='font-medium text-base text-[#8D6E63]'>Artist</h4>
-        <div className='space-y-1'>
-          {filters.artists.map((artist) => (
-            <SquareRadio
-              key={artist}
-              name='artist'
-              value={artist}
-              label={artist}
-              checked={filtersState.artist === artist}
-              onChange={(e) => setFiltersState({ ...filtersState, artist: e.target.value })}
             />
           ))}
         </div>

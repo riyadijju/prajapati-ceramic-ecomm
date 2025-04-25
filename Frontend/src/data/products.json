@@ -3,9 +3,8 @@
     "_id": "67f9e53de0b7235b6981dde6",
     "name": "Deep Blue Floral Vase",
     "category": "homedecor",
-    "description": "When several Nepali artists travelled to Costa Rica, they were struck by the beautiful drape and bright blue color of these blossoms, inspiring this hand-sculpted vessel. The skyflower is widely cultivated by Central and South American gardeners for its floral clusters that bloom to attract butterflies and hummingbirds year round.",
+    "description": "When several Nepali artists travelled to Costa Rica, they were struck by the beautiful drape and bright blue color of these blossoms, inspiring this hand-sculpted vessel. The skyflower is widely cultivated by Central and South American gardeners for its floral clusters that bloom to attract butterflies and hummingbirds year-round.",
     "price": 1800,
-    "oldPrice": 2000,
     "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "variants": [
       {
@@ -31,238 +30,101 @@
     ],
     "rating": 4.5,
     "author": "admin"
-  }
-  ,
-    {
-      "_id": 2,
-      "name": "Tulanani H. Vase",
-      "category": "tableware",
-      "description": "Stylish leather handbag with ample storage space.",
-      "price": 1800, 
-      "oldPrice": 2009,
-      "mainImage": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "variants": [
-    {
-      "name": "Terracotta Red",
-      "color": "#AB3E16",
-      "image": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1800, 
-      "stock": 10
-    },
-    {
-      "name": "Earthy Brown",
-      "color": "#8B5A2B",
-      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1900,
-      "stock": 5
-    },
-    {
-      "name": "Ash White",
-      "color": "#F3F3F3",
-      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "stock": 8
-    }
-   ],
+  },
+  {
+    "_id": "67e41cc64135e251f6cb566b",
+    "name": "Tulanani H. Vase",
+    "category": "tableware",
+    "description": "Stylish ceramic vase that brings elegance to any table setting.",
+    "price": 1800,
+    "mainImage": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "variants": [
+      {
+        "name": "Terracotta Red",
+        "color": "#AB3E16",
+        "image": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1800,
+        "stock": 10
+      },
+      {
+        "name": "Earthy Brown",
+        "color": "#8B5A2B",
+        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1900,
+        "stock": 5
+      },
+      {
+        "name": "Ash White",
+        "color": "#F3F3F3",
+        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "stock": 8
+      }
+    ],
     "rating": 4.5,
     "author": "67e41cc64135e251f6cb566b"
-    },
-    {
-      "_id": 3,
-      "name": "Floral Deep Blue",
-      "category": "tableware",
-      "description": "Stylish leather handbag with ample storage space.",
-      "price": 1800, 
-      "oldPrice": 2000,
-      "mainImage": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "variants": [
-    {
-      "name": "Terracotta Red",
-      "color": "#AB3E16",
-      "image": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1800, 
-      "stock": 10
-    },
-    {
-      "name": "Earthy Brown",
-      "color": "#8B5A2B",
-      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1900,
-      "stock": 5
-    },
-    {
-      "name": "Ash White",
-      "color": "#F3F3F3",
-      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "stock": 8
-    }
-   ],
-   "rating": 3.5,
-
+  },
+  {
+    "_id": "67f9e53de0b7235b6981dde7",
+    "name": "Floral Deep Blue",
+    "category": "tableware",
+    "description": "Elegant deep blue ceramic design that adds beauty to your table.",
+    "price": 1800,
+    "mainImage": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "variants": [
+      {
+        "name": "Terracotta Red",
+        "color": "#AB3E16",
+        "image": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1800,
+        "stock": 10
+      },
+      {
+        "name": "Earthy Brown",
+        "color": "#8B5A2B",
+        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1900,
+        "stock": 5
+      },
+      {
+        "name": "Ash White",
+        "color": "#F3F3F3",
+        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "stock": 8
+      }
+    ],
+    "rating": 3.5,
     "author": "67e41cc64135e251f6cb566b"
-    },
-    {
-      "_id": 4,
-      "name": "Ceramic Plate",
-      "category": "tableware",
-      "description": "Stylish leather handbag with ample storage space.",
-      "price": 1800, 
-      "oldPrice": 2000,
-      "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "variants": [
-    {
-      "name": "Terracotta Red",
-      "color": "#AB3E16",
-      "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1800, 
-      "stock": 10
-    },
-    {
-      "name": "Earthy Brown",
-      "color": "#8B5A2B",
-      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1900,
-      "stock": 5
-    },
-    {
-      "name": "Ash White",
-      "color": "#F3F3F3",
-      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "stock": 8
-    }
-   ],
-    "author": "67e41cc64135e251f6cb566b"
-    },
-    {
-      "_id": 5,
-      "name": "Ceramic Titles",
-      "category": "tableware",
-      "description": "Stylish leather handbag with ample storage space.",
-      "price": 1800, 
-      "oldPrice": 2000,
-      "mainImage": "https://images.unsplash.com/photo-1670843840695-be4ce9626145?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "variants": [
-    {
-      "name": "Terracotta Red",
-      "color": "#AB3E16",
-      "mainImage": "https://images.unsplash.com/photo-1670843840695-be4ce9626145?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1800, 
-      "stock": 10
-    },
-    {
-      "name": "Earthy Brown",
-      "color": "#8B5A2B",
-      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1900,
-      "stock": 5
-    },
-    {
-      "name": "Ash White",
-      "color": "#F3F3F3",
-      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "stock": 8
-    }
-   ],
-    "author": "67e41cc64135e251f6cb566b"
-    },
-    {
-      "_id": "67f9e53de0b7235b6981dde6",
-      "name": "Sage Green",
-      "category": "homedecor",
-      "description": "When several Nepali artists travelled to Costa Rica, they were struck by the beautiful drape and bright blue color of these blossoms, inspiring this hand-sculpted vessel. The skyflower is widely cultivated by Central and South American gardeners for its floral clusters that bloom to attract butterflies and hummingbirds year round.",
-      "price": 1800,
-      "oldPrice": 2000,
-      "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "variants": [
-        {
-          "name": "Terracotta Red",
-          "color": "#AB3E16",
-          "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "price": 1800,
-          "stock": 10
-        },
-        {
-          "name": "Earthy Brown",
-          "color": "#8B5A2B",
-          "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "price": 1900,
-          "stock": 5
-        },
-        {
-          "name": "Ash White",
-          "color": "#F3F3F3",
-          "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "stock": 8
-        }
-      ],
-      "rating": 4.5,
-      "author": "admin"
-    },
-    {
-      "_id": "67f9e53de0b7235b6981dde6",
-      "name": "Deep Blue Ceramic",
-      "category": "homedecor",
-      "description": "When several Nepali artists travelled to Costa Rica, they were struck by the beautiful drape and bright blue color of these blossoms, inspiring this hand-sculpted vessel. The skyflower is widely cultivated by Central and South American gardeners for its floral clusters that bloom to attract butterflies and hummingbirds year round.",
-      "price": 1800,
-      "oldPrice": 2000,
-      "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "variants": [
-        {
-          "name": "Terracotta Red",
-          "color": "#AB3E16",
-          "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "price": 1800,
-          "stock": 10
-        },
-        {
-          "name": "Earthy Brown",
-          "color": "#8B5A2B",
-          "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "price": 1900,
-          "stock": 5
-        },
-        {
-          "name": "Ash White",
-          "color": "#F3F3F3",
-          "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "stock": 8
-        }
-      ],
-      "rating": 4.5,
-      "author": "admin"
-      
-    },
-    {
-      "_id": 4,
-      "name": "Ceramic Plate",
-      "category": "tableware",
-      "description": "Stylish leather handbag with ample storage space.",
-      "price": 1800, 
-      "oldPrice": 2000,
-      "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "variants": [
-    {
-      "name": "Terracotta Red",
-      "color": "#AB3E16",
-      "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1800, 
-      "stock": 10
-    },
-    {
-      "name": "Earthy Brown",
-      "color": "#8B5A2B",
-      "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "price": 1900,
-      "stock": 5
-    },
-    {
-      "name": "Ash White",
-      "color": "#F3F3F3",
-      "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "stock": 8
-    }
-   ],
-   "rating": 2,
-    "author": "67e41cc64135e251f6cb566b"
-    }
-
+  },
+  {
+    "_id": "67f9e53de0b7235b6981dde8",
+    "name": "Ceramic Plate",
+    "category": "tableware",
+    "description": "Handmade ceramic plate with unique patterns.",
+    "price": 1800,
+    "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "variants": [
+      {
+        "name": "Terracotta Red",
+        "color": "#AB3E16",
+        "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1800,
+        "stock": 10
+      },
+      {
+        "name": "Earthy Brown",
+        "color": "#8B5A2B",
+        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "price": 1900,
+        "stock": 5
+      },
+      {
+        "name": "Ash White",
+        "color": "#F3F3F3",
+        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "stock": 8
+      }
+    ],
+    "rating": 4.5,
+    "author": "admin"
+  }
 ]

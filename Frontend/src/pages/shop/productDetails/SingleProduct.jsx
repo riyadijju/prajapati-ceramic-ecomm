@@ -178,9 +178,7 @@ const SingleProduct = () => {
             <p className="text-2xl text-[#8B5E3C] font-bold">
               Rs. {variants[selectedVariant]?.price || singleProduct?.price}
             </p>
-            {singleProduct?.oldPrice && (
-              <s className="ml-3 text-gray-400">Rs. {singleProduct?.oldPrice}</s>
-            )}
+
           </div>
 
           {/* Updated description rendering with line breaks */}

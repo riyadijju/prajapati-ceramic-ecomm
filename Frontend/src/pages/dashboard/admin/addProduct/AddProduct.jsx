@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
 import UploadImage from './UploadImage';
@@ -31,48 +31,90 @@ const AddProduct = () => {
     const [product, setProduct] = useState({
         name: '',
         category: '',
-        color: '',
+        description: '',
         price: '',
-        description: ''
+        image: '', // Main product image
+        variants: [{ name: '', color: '', image: '', price: '', stock: '' }]
     });
-    const [image, setImage] = useState('');
 
-    const [AddProduct, {isLoading, error}] = useAddProductMutation()
-  
+    const [AddProduct, { isLoading, error }] = useAddProductMutation();
+    const navigate = useNavigate();
 
+    // Handle changes to main product fields
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProduct({
             ...product,
             [name]: value
         });
-
-
     };
 
-    const navigate = useNavigate()
+    // Handle changes to variant fields
+    const handleVariantChange = (index, e) => {
+        const { name, value } = e.target;
+        const updatedVariants = [...product.variants];
+        updatedVariants[index] = { ...updatedVariants[index], [name]: value };
+        setProduct({ ...product, variants: updatedVariants });
+    };
 
-    const handleSubmit = async(e) => {
+    // Add a new variant to the product
+    const addVariant = () => {
+        setProduct({
+            ...product,
+            variants: [...product.variants, { name: '', color: '', image: '', price: '', stock: '' }]
+        });
+    };
+
+    // Handle submission of the product
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(!product.name || !product.category || !product.price || !product.description || !product.color) {
+
+        // Log product state for debugging
+        console.log('Product state before submission:', product);
+
+        // Validate main product fields
+        if (!product.name || !product.category || !product.price || !product.description || !product.image) {
             alert('Please fill all the required fields');
             return;
         }
 
+        // Validate variant fields
+        for (let i = 0; i < product.variants.length; i++) {
+            const variant = product.variants[i];
+            if (!variant.name || !variant.color || !variant.image || !variant.price || !variant.stock) {
+                alert(`Please fill all the required fields for variant ${i + 1}`);
+                return;
+            }
+        }
+
         try {
-            await AddProduct({...product, image, author: user?._id}).unwrap();
+            await AddProduct({ ...product, author: user?._id }).unwrap();
             alert('Product added successfully');
-            setProduct({ name: '',
+            setProduct({
+                name: '',
                 category: '',
-                color: '',
+                description: '',
                 price: '',
-                description: ''})
-                setImage('');
-                navigate("/shop")
+                image: '',
+                variants: [{ name: '', color: '', image: '', price: '', stock: '' }]
+            });
+            navigate("/shop");
         } catch (error) {
             console.log("Failed to submit product", error);
         }
-    }
+    };
+
+    // Handle image changes for main product
+    const handleImageChange = (image) => {
+        setProduct({ ...product, image });
+    };
+
+    // Handle image changes for variant
+    const handleVariantImageChange = (index, image) => {
+        const updatedVariants = [...product.variants];
+        updatedVariants[index] = { ...updatedVariants[index], image };
+        setProduct({ ...product, variants: updatedVariants });
+    };
 
     return (
         <div className="container mx-auto mt-8">
@@ -92,13 +134,6 @@ const AddProduct = () => {
                     onChange={handleChange}
                     options={categories}
                 />
-                <SelectInput
-                    label="Color"
-                    name="color"
-                    value={product.color}
-                    onChange={handleChange}
-                    options={colors}
-                />
                 <TextInput
                     label="Price"
                     name="price"
@@ -107,34 +142,80 @@ const AddProduct = () => {
                     value={product.price}
                     onChange={handleChange}
                 />
-   
                 <UploadImage
-                name="image"
-                id="image"
-                value={e => setImage(e.target.value)}
-                placeholder='Image'
-                setImage={setImage}
+                    name="image"
+                    value={product.image}
+                    onImageChange={handleImageChange}
+                    placeholder="Main Image"
                 />
                 <div>
-                <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
-                <textarea name="description" id="description"
-                className='add-product-InputCSS'
-                value={product.description}
-                placeholder='Write a product description'
-                onChange={handleChange}
-                ></textarea>
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea
+                        name="description"
+                        id="description"
+                        className="add-product-InputCSS"
+                        value={product.description}
+                        placeholder="Write a product description"
+                        onChange={handleChange}
+                    ></textarea>
                 </div>
+
+                {/* Variants Section */}
+                <h3 className="text-xl font-semibold mt-6">Variants</h3>
+                {product.variants.map((variant, index) => (
+                    <div key={index} className="space-y-4">
+                        <TextInput
+                            label="Variant Name"
+                            name="name"
+                            value={variant.name}
+                            onChange={(e) => handleVariantChange(index, e)}
+                        />
+                        <SelectInput
+                            label="Color"
+                            name="color"
+                            value={variant.color}
+                            onChange={(e) => handleVariantChange(index, e)}
+                            options={colors}
+                        />
+                        <UploadImage
+                            name="image"
+                            value={variant.image}
+                            onImageChange={(image) => handleVariantImageChange(index, image)}
+                            placeholder="Variant Image"
+                        />
+                        <TextInput
+                            label="Price"
+                            name="price"
+                            type="number"
+                            value={variant.price}
+                            onChange={(e) => handleVariantChange(index, e)}
+                        />
+                        <TextInput
+                            label="Stock"
+                            name="stock"
+                            type="number"
+                            value={variant.stock}
+                            onChange={(e) => handleVariantChange(index, e)}
+                        />
+                    </div>
+                ))}
+                <button
+                    type="button"
+                    onClick={addVariant}
+                    className="text-sm text-[#8B5E3C] hover:underline"
+                >
+                    + Add New Variant
+                </button>
 
                 <div>
-                    <button type='submit'
-                    className='add-product-btn'
-                   
-                    >Add Product</button>
+                    <button
+                        type="submit"
+                        className="add-product-btn"
+                    >
+                        Add Product
+                    </button>
                 </div>
-
             </form>
-
-           
         </div>
     );
 };
