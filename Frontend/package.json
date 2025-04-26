@@ -23,6 +23,7 @@
     "react-medium-image-zoom": "^5.2.14",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.0.2",
+    "react-toastify": "^11.0.5",
     "remixicon": "^4.6.0"
   },
   "devDependencies": {

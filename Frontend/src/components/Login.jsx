@@ -5,6 +5,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useLoginUserMutation } from '../redux/features/auth/authApi';
 import { setUser } from '../redux/features/auth/authSlice';
 import bgCeramic from '../assets/bgCeramic.png';
+import { toast } from 'react-toastify'; // Import the toast notification
 
 const Login = () => {
   const [message, setMessage] = useState('');
@@ -24,10 +25,11 @@ const Login = () => {
       const response = await loginUser(data).unwrap();
       const { user } = response;
       dispatch(setUser({ user }));
-      alert("Login successful");
+      toast.success("Login successful!"); // Display success toast
       navigate("/");
     } catch (error) {
       setMessage("Please provide a valid email and password");
+      toast.error("Login failed. Please try again."); // Display error toast
     }
   };
 
@@ -61,7 +63,6 @@ const Login = () => {
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
-          {/* [Keep all your existing form elements] */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-[#4e2929]/80 mb-1 font-sans">
               Email Address

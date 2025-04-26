@@ -81,9 +81,9 @@ const Register = () => {
     const [showConfirm, setShowConfirm] = useState(false);
     const [errors, setErrors] = useState({});
     const [registerUser, { isLoading }] = useRegisterUserMutation();
+    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
-    // Validate form fields
     const validateForm = () => {
         const newErrors = {};
         
@@ -122,8 +122,7 @@ const Register = () => {
 
         try {
             await registerUser(data).unwrap();
-            alert("Registration successful!");
-            navigate('/login');
+            setShowModal(true);
         } catch (error) {
             if (error?.data?.errorType === "EMAIL_EXISTS") {
                 setMessage(
@@ -142,13 +141,17 @@ const Register = () => {
         }
     };
 
-    // Clear error when user starts typing
     const handleInputChange = (setter, field) => (e) => {
         setter(e.target.value);
         if (errors[field]) {
             setErrors(prev => ({ ...prev, [field]: '' }));
         }
         if (message) setMessage('');
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
+        navigate('/login');
     };
 
     return (
@@ -161,16 +164,11 @@ const Register = () => {
                 backgroundAttachment: 'fixed',
             }}
         >
-            {/* Darker overlay for better contrast */}
             <div className="absolute inset-0 bg-[#683a3a]/70"></div>
-            
-            {/* Blur overlays */}
             <div className="absolute top-0 w-full h-32 bg-gradient-to-b from-[#4e2929]/80 to-transparent" />
             <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#4e2929]/80 to-transparent" />
 
-            {/* Form Box - Ceramic-themed styling */}
             <div className="relative w-full max-w-md z-10 bg-[#f8f1e5] text-[#4e2929] shadow-2xl p-8 sm:p-10 rounded-xl border-2 border-[#a78a7a]/30">
-                {/* Enhanced Welcome heading */}
                 <div className="text-center mb-8">
                     <h2 className="text-4xl font-normal text-[#4e2929] font-serif tracking-tight mb-2">
                         Create Account
@@ -181,134 +179,135 @@ const Register = () => {
                 </div>
 
                 <form onSubmit={handleRegister} className="space-y-6">
+                    {/* Username */}
                     <div>
-                        <label htmlFor="username" className="block text-sm font-medium text-[#4e2929]/80 mb-1 font-sans">
+                        <label htmlFor="username" className="block text-sm font-medium mb-1 font-sans">
                             Username
                         </label>
                         <input
                             type="text"
                             id="username"
-                            name="username"
                             value={username}
                             onChange={handleInputChange(setUsername, 'username')}
                             placeholder="Choose a username"
                             required
-                            className={`w-full bg-white/90 text-[#4e2929] placeholder-[#a78a7a]/70 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#d4a017]/50 border ${errors.username ? 'border-red-500' : 'border-[#a78a7a]/30'} transition-all duration-200 font-sans`}
+                            className={`w-full bg-white/90 text-[#4e2929] rounded-lg px-5 py-3 focus:outline-none border ${errors.username ? 'border-red-500' : 'border-[#a78a7a]/30'}`}
                         />
-                        {errors.username && (
-                            <p className="mt-1 text-sm text-red-600">{errors.username}</p>
-                        )}
+                        {errors.username && <p className="mt-1 text-sm text-red-600">{errors.username}</p>}
                     </div>
 
+                    {/* Email */}
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-[#4e2929]/80 mb-1 font-sans">
+                        <label htmlFor="email" className="block text-sm font-medium mb-1 font-sans">
                             Email Address
                         </label>
                         <input
                             type="email"
                             id="email"
-                            name="email"
                             value={email}
                             onChange={handleInputChange(setEmail, 'email')}
                             placeholder="your@email.com"
                             required
-                            className={`w-full bg-white/90 text-[#4e2929] placeholder-[#a78a7a]/70 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#d4a017]/50 border ${errors.email ? 'border-red-500' : 'border-[#a78a7a]/30'} transition-all duration-200 font-sans`}
+                            className={`w-full bg-white/90 text-[#4e2929] rounded-lg px-5 py-3 focus:outline-none border ${errors.email ? 'border-red-500' : 'border-[#a78a7a]/30'}`}
                         />
-                        {errors.email && (
-                            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-                        )}
+                        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
                     </div>
 
+                    {/* Password */}
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-[#4e2929]/80 mb-1 font-sans">
+                        <label htmlFor="password" className="block text-sm font-medium mb-1 font-sans">
                             Password
                         </label>
                         <div className="relative">
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 id="password"
-                                name="password"
                                 value={password}
                                 onChange={handleInputChange(setPassword, 'password')}
                                 placeholder="••••••••"
                                 required
-                                className={`w-full bg-white/90 text-[#4e2929] placeholder-[#a78a7a]/70 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#d4a017]/50 border ${errors.password ? 'border-red-500' : 'border-[#a78a7a]/30'} transition-all duration-200 font-sans`}
+                                className={`w-full bg-white/90 text-[#4e2929] rounded-lg px-5 py-3 focus:outline-none border ${errors.password ? 'border-red-500' : 'border-[#a78a7a]/30'}`}
                             />
                             <div
-                                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer text-[#a78a7a] hover:text-[#4e2929] transition-colors"
+                                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                             </div>
                         </div>
-                        {errors.password && (
-                            <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-                        )}
-                        {password && !errors.password && (
-                            <PasswordStrengthMeter password={password} />
-                        )}
+                        {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password}</p>}
+                        {password && !errors.password && <PasswordStrengthMeter password={password} />}
                     </div>
 
+                    {/* Confirm Password */}
                     <div>
-                        <label htmlFor="confirm" className="block text-sm font-medium text-[#4e2929]/80 mb-1 font-sans">
+                        <label htmlFor="confirm" className="block text-sm font-medium mb-1 font-sans">
                             Confirm Password
                         </label>
                         <div className="relative">
                             <input
                                 type={showConfirm ? 'text' : 'password'}
                                 id="confirm"
-                                name="confirm"
                                 value={confirm}
                                 onChange={handleInputChange(setConfirm, 'confirm')}
                                 placeholder="••••••••"
                                 required
-                                className={`w-full bg-white/90 text-[#4e2929] placeholder-[#a78a7a]/70 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#d4a017]/50 border ${errors.confirm ? 'border-red-500' : 'border-[#a78a7a]/30'} transition-all duration-200 font-sans`}
+                                className={`w-full bg-white/90 text-[#4e2929] rounded-lg px-5 py-3 focus:outline-none border ${errors.confirm ? 'border-red-500' : 'border-[#a78a7a]/30'}`}
                             />
                             <div
-                                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer text-[#a78a7a] hover:text-[#4e2929] transition-colors"
+                                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
                                 onClick={() => setShowConfirm(!showConfirm)}
                             >
                                 {showConfirm ? <EyeOff size={20} /> : <Eye size={20} />}
                             </div>
                         </div>
-                        {errors.confirm && (
-                            <p className="mt-1 text-sm text-red-600">{errors.confirm}</p>
-                        )}
+                        {errors.confirm && <p className="mt-1 text-sm text-red-600">{errors.confirm}</p>}
                     </div>
 
+                    {/* Error Message */}
                     {message && (
-                        <p className="text-red-600 text-sm font-medium bg-red-50 px-3 py-2 rounded-lg font-sans">
+                        <p className="text-red-600 text-sm bg-red-50 px-3 py-2 rounded-lg">
                             {message}
                         </p>
                     )}
 
+                    {/* Submit */}
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-[#d4a017] hover:bg-[#b78a14] transition-all text-[#4e2929] font-semibold py-3 rounded-lg shadow-md hover:shadow-lg focus:ring-2 focus:ring-[#d4a017]/50 focus:ring-offset-2 transform hover:-translate-y-0.5 duration-200 font-sans"
+                        className="w-full bg-[#d4a017] hover:bg-[#b78a14] transition-all text-[#4e2929] font-semibold py-3 rounded-lg"
                     >
-                        {isLoading ? (
-                            <span className="flex items-center justify-center">
-                                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#4e2929]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Registering...
-                            </span>
-                        ) : 'Register'}
+                        {isLoading ? "Registering..." : "Register"}
                     </button>
                 </form>
 
-                <p className="mt-8 text-center text-sm text-[#4e2929]/80 font-sans">
+                <p className="mt-8 text-center text-sm">
                     Already have an account?{' '}
-                    <Link 
-                        to="/login" 
-                        className="font-medium text-[#d4a017] hover:text-[#b78a14] underline underline-offset-4 transition-colors"
-                    >
+                    <Link to="/login" className="font-medium text-[#d4a017] hover:text-[#b78a14] underline">
                         Login here
                     </Link>
                 </p>
             </div>
+
+            {/* Success Modal */}
+            {showModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-[#f8f1e5] p-8 rounded-xl shadow-xl border-2 border-[#a78a7a]/30 w-80 text-center">
+                        <h2 className="text-2xl font-bold text-[#4e2929] mb-2">
+                            Registration Successful!
+                        </h2>
+                        <p className="text-[#4e2929] mb-6">
+                            Great job! Your account has been created. Click OK to login.
+                        </p>
+                        <button 
+                            onClick={handleModalClose}
+                            className="bg-[#d4a017] hover:bg-[#b78a14] text-[#4e2929] font-semibold py-2 px-4 rounded-md"
+                        >
+                            OK
+                        </button>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
