@@ -49,11 +49,18 @@ const Navbar = () => {
       await logoutUser().unwrap();
       dispatch(logout());
       dispatch(clearCart());
-      toast.success('Logged out successfully!');
+      toast.success('Logout successful');
       navigate('/');
     } catch (error) {
-      console.error("Logout failed", error);
-      toast.error('Logout failed. Please try again.');
+      console.error('Logout error:', error);
+
+      if (error?.data?.message === 'You must be logged in!') {
+        dispatch(logout());
+        navigate('/login');
+        toast.info('Session expired, please login again.');
+      } else {
+        toast.error('Logout failed. Please try again.');
+      }
     } finally {
       setIsConfirmLogoutOpen(false);
     }

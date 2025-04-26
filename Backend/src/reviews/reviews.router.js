@@ -1,3 +1,5 @@
+const Orders = require("../orders/orders.model"); // Adjust path as needed
+
 const express = require("express");
 const Reviews = require("./reviews.model");
 const Products = require("../products/products.model");

@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RatingStars from '../../components/RatingStars';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/features/cart/cartSlice';
 
 const ProductCards = ({ products }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth); // Import user from Redux state
 
-  // State for controlling the popup visibility
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupProductName, setPopupProductName] = useState('');
 
   const handleAddToCart = (product) => {
-    // Determine which image to use (variant image or main image)
+    if (user?.role !== 'user') return; // 🚫 Prevent admins from adding to cart
+
     const selectedImage = product.variants?.[0]?.image || product.mainImage;
 
-    // Create the cart item with proper image references
     const cartItem = {
       ...product,
       image: selectedImage,
@@ -25,14 +25,11 @@ const ProductCards = ({ products }) => {
       price: product.variants?.[0]?.price || product.price
     };
 
-    // Dispatch the addToCart action
     dispatch(addToCart(cartItem));
 
-    // Show the "Item Added to Cart" popup
     setPopupProductName(product.name);
     setPopupVisible(true);
 
-    // Hide the popup after 2 seconds
     setTimeout(() => setPopupVisible(false), 2000);
   };
 
@@ -54,18 +51,21 @@ const ProductCards = ({ products }) => {
                   }}
                 />
               </Link>
-              <div className='absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleAddToCart(product);
-                  }}
-                  className='p-2 bg-gradient-to-r from-[#9b4d4d] to-[#c16a6a] text-white rounded-full shadow-md hover:opacity-80 transition-all duration-300'
-                  aria-label={`Add ${product.name} to cart`}
-                >
-                  <i className="ri-shopping-cart-2-line"></i>
-                </button>
-              </div>
+
+              {user?.role === 'user' && (
+                <div className='absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToCart(product);
+                    }}
+                    className='p-2 bg-gradient-to-r from-[#9b4d4d] to-[#c16a6a] text-white rounded-full shadow-md hover:opacity-80 transition-all duration-300'
+                    aria-label={`Add ${product.name} to cart`}
+                  >
+                    <i className="ri-shopping-cart-2-line"></i>
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className='product__card__content p-4'>
@@ -87,7 +87,7 @@ const ProductCards = ({ products }) => {
       {popupVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-xs opacity-100 transition-opacity duration-300">
-            <p className="text-lg font-semibold justify-center text-indigo-600">Item Added to Cart</p>
+            <p className="text-lg font-semibold text-indigo-600 text-center">Item Added to Cart</p>
             <p className="text-gray-500 text-center mt-2">{popupProductName}</p>
           </div>
         </div>
