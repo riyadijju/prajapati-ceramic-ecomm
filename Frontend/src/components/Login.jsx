@@ -8,7 +8,7 @@ import bgCeramic from '../assets/bgCeramic.png';
 import { toast } from 'react-toastify'; // Import the toast notification
 
 const Login = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');  // For error message
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -19,17 +19,29 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Clear any existing error message before submitting
+    setMessage('');
+
     const data = { email, password };
 
     try {
+      // Attempt login
       const response = await loginUser(data).unwrap();
       const { user } = response;
+      
+      // Dispatch user data to Redux
       dispatch(setUser({ user }));
-      toast.success("Login successful!"); // Display success toast
+      
+      // Show success toast only if login is successful
+      toast.success("Login successful!");
+      
+      // Redirect to the homepage after successful login
       navigate("/");
+
     } catch (error) {
+      // Show the error message inside the form
       setMessage("Please provide a valid email and password");
-      toast.error("Login failed. Please try again."); // Display error toast
     }
   };
 
@@ -46,13 +58,8 @@ const Login = () => {
       {/* Darker overlay for better contrast */}
       <div className="absolute inset-0 bg-[#683a3a]/70"></div>
       
-      {/* Blur overlays */}
-      <div className="absolute top-0 w-full h-32 bg-gradient-to-b from-[#4e2929]/80 to-transparent" />
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#4e2929]/80 to-transparent" />
-
-      {/* Form Box - Ceramic-themed styling */}
+      {/* Form Box */}
       <div className="relative w-full max-w-md z-10 bg-[#f8f1e5] text-[#4e2929] shadow-2xl p-8 sm:p-10 rounded-xl border-2 border-[#a78a7a]/30">
-        {/* Enhanced Welcome Back heading with ceramic styling */}
         <div className="text-center mb-8">
           <h2 className="text-4xl font-normal text-[#4e2929] font-serif tracking-tight mb-2">
             Welcome Back
@@ -103,6 +110,7 @@ const Login = () => {
             </div>
           </div>
 
+          {/* Show error message only inside the form */}
           {message && (
             <p className="text-red-600 text-sm font-medium bg-red-50 px-3 py-2 rounded-lg font-sans">
               {message}

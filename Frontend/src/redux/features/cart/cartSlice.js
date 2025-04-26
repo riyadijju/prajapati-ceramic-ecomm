@@ -16,18 +16,14 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       const { _id, variant } = action.payload;
 
-      // Find if the exact product (including variant) already exists in cart
       const existingItem = state.products.find(item => 
         item._id === _id && 
         (
           (!item.variant && !variant) || 
-          (item.variant && variant && 
-           item.variant._id === variant._id
-          )
+          (item.variant && variant && item.variant._id === variant._id)
         )
       );
 
-      // If item exists, increment quantity, otherwise add new item
       if (existingItem) {
         if (existingItem.quantity < existingItem.variant.stock) {
           existingItem.quantity += 1;
@@ -36,7 +32,6 @@ const cartSlice = createSlice({
         state.products.push({ ...action.payload, quantity: 1 });
       }
 
-      // Update calculated values
       state.selectedItems = setSelectedItems(state);
       state.totalPrice = setTotalPrice(state);
       state.tax = setTax(state);
@@ -46,10 +41,8 @@ const cartSlice = createSlice({
     updateQuantity: (state, action) => {
       const { type, id, variantId } = action.payload;
 
-      // Find the product with the correct id and variant
       const existingItem = state.products.find(product => 
-        product._id === id && 
-        product.variant?._id === variantId
+        product._id === id && product.variant?._id === variantId
       );
 
       if (existingItem) {
@@ -60,7 +53,6 @@ const cartSlice = createSlice({
         }
       }
 
-      // Update calculated values
       state.selectedItems = setSelectedItems(state);
       state.totalPrice = setTotalPrice(state);
       state.tax = setTax(state);
@@ -69,11 +61,11 @@ const cartSlice = createSlice({
 
     removeFromCart: (state, action) => {
       const { id, variantId } = action.payload;
+
       state.products = state.products.filter(product =>
         !(product._id === id && product.variant?._id === variantId)
       );
 
-      // Update calculated values
       state.selectedItems = setSelectedItems(state);
       state.totalPrice = setTotalPrice(state);
       state.tax = setTax(state);
