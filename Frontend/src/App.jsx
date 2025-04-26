@@ -3,8 +3,8 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import TestCart from './components/TestCart';
-import { ToastContainer } from 'react-toastify'; // Import the ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Import the Toastify CSS for styling
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
       {/* Add the ToastContainer here to render toast notifications */}
       <ToastContainer 
         position="top-right" 
-        autoClose={5000} 
+        autoClose={2000} 
         hideProgressBar={false} 
         newestOnTop={false} 
         closeOnClick 
