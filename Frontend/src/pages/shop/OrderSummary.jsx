@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearCart } from '../../redux/features/cart/cartSlice';
 import { loadStripe } from "@stripe/stripe-js";
 import { getBaseUrl } from '../../utils/baseURL';
+import { useNavigate } from 'react-router-dom'; // <-- import this!
 
 const OrderSummary = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate(); // <-- initialize
+
   const { user } = useSelector(state => state.auth)
   const products = useSelector((store) => store.cart.products);
   const { selectedItems, totalPrice, tax, taxRate, grandTotal } = useSelector((store) => store.cart);
@@ -15,10 +18,15 @@ const OrderSummary = () => {
   }
 
   const makePayment = async () => {
+    if (!user) {
+      navigate('/login'); // <-- if not logged in, send them to login page
+      return;
+    }
+
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
     const body = {
       products,
-      userId: user?._id
+      userId: user._id
     }
 
     const response = await fetch(`${getBaseUrl()}/api/orders/create-checkout-session`, {

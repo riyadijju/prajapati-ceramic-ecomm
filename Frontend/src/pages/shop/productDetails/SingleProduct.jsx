@@ -224,22 +224,23 @@ const SingleProduct = () => {
                 </div>
 
                 {/* Add to Cart Button based on user role */}
-                {user?.role === 'user' ? (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToCart(singleProduct);
-                    }}
-                    className="w-full py-3 bg-gradient-to-r from-[#8B5E3C] to-[#D1B28C] hover:bg-[#D1B28C] text-white rounded-md transition-colors duration-300 flex items-center justify-center gap-2"
-                  >
-                    <i className="ri-shopping-cart-2-line" />
-                    Add to Cart
-                  </button>
-                ) : (
-                  <div className="text-center text-red-500 font-medium py-3">
-                    Admins are not allowed to add products to cart.
-                  </div>
-                )}
+                {!user || user.role === 'user' ? (
+  <button
+    onClick={(e) => {
+      e.stopPropagation();
+      handleAddToCart(singleProduct);
+    }}
+    className="w-full py-3 bg-gradient-to-r from-[#8B5E3C] to-[#D1B28C] hover:bg-[#D1B28C] text-white rounded-md transition-colors duration-300 flex items-center justify-center gap-2"
+  >
+    <i className="ri-shopping-cart-2-line" />
+    Add to Cart
+  </button>
+) : (
+  <div className="text-center text- [#8B5E3C] font-medium py-3">
+    Admins are not allowed to add products to cart.
+  </div>
+)}
+
               </div>
             </div>
           </div>
