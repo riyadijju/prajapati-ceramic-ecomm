@@ -19,26 +19,42 @@ const OrderSummary = () => {
 
   const makePayment = async () => {
     if (!user) {
-      navigate('/login'); // <-- if not logged in, send them to login page
+      navigate('/login'); // if not logged in, send them to login page
       return;
     }
-
+  
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
+    
+    // Check if the user has all necessary fields for billingAddress
+    const billingAddress = {
+      fullName: user.fullName,
+      address: user.address,
+      city: user.city,
+      state: user.state,
+      postalCode: user.postalCode,
+      country: user.country,
+      phone: user.phone,
+    };
+  
     const body = {
       products,
+      billingAddress, // Add billingAddress to the body
+      email: user.email,
       userId: user._id
-    }
-
+    };
+  
+    // Send request to create checkout session
     const response = await fetch(`${getBaseUrl()}/api/orders/create-checkout-session`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
-    })
-
-    const session = await response.json()
-    const result = stripe.redirectToCheckout({ sessionId: session.id })
-    if (result.error) console.log("Error:", result.error)
-  }
+    });
+  
+    const session = await response.json();
+    const result = await stripe.redirectToCheckout({ sessionId: session.id });
+    if (result.error) console.log("Error:", result.error);
+  };
+  
 
   return (
     <div className="bg-white border border-gray-200 mt-8 rounded-md shadow-md max-w-md mx-auto text-sm">
