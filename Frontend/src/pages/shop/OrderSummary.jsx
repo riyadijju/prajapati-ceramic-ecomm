@@ -1,60 +1,60 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearCart } from '../../redux/features/cart/cartSlice';
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from '@stripe/stripe-js';
 import { getBaseUrl } from '../../utils/baseURL';
-import { useNavigate } from 'react-router-dom'; // <-- import this!
+import { useNavigate } from 'react-router-dom';
 
 const OrderSummary = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate(); // <-- initialize
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { user } = useSelector(state => state.auth)
+  const { user } = useSelector((state) => state.auth);
   const products = useSelector((store) => store.cart.products);
   const { selectedItems, totalPrice, tax, taxRate, grandTotal } = useSelector((store) => store.cart);
 
   const handleClearCart = () => {
-    dispatch(clearCart())
-  }
+    dispatch(clearCart());
+  };
 
   const makePayment = async () => {
     if (!user) {
-      navigate('/login'); // if not logged in, send them to login page
+      // Send state for redirect
+      navigate('/login', { state: { from: 'cart' } });
       return;
     }
-  
+
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
-    
-    // Check if the user has all necessary fields for billingAddress
-    const billingAddress = {
-      fullName: user.fullName,
-      address: user.address,
-      city: user.city,
-      state: user.state,
-      postalCode: user.postalCode,
-      country: user.country,
-      phone: user.phone,
-    };
-  
+
     const body = {
-      products,
-      billingAddress, // Add billingAddress to the body
-      email: user.email,
-      userId: user._id
+      products: products,
+      userId: user._id,
     };
-  
-    // Send request to create checkout session
-    const response = await fetch(`${getBaseUrl()}/api/orders/create-checkout-session`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
-  
-    const session = await response.json();
-    const result = await stripe.redirectToCheckout({ sessionId: session.id });
-    if (result.error) console.log("Error:", result.error);
+
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+
+    try {
+      const response = await fetch(`${getBaseUrl()}/api/orders/create-checkout-session`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+      });
+
+      const session = await response.json();
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.log('Error:', result.error);
+      }
+    } catch (error) {
+      console.error('Payment Error:', error);
+    }
   };
-  
 
   return (
     <div className="bg-white border border-gray-200 mt-8 rounded-md shadow-md max-w-md mx-auto text-sm">
@@ -76,7 +76,9 @@ const OrderSummary = () => {
               <td className="text-right">Rs. {tax.toFixed(2)}</td>
             </tr>
             <tr>
-              <td colSpan="2"><hr className="my-2 border-gray-300" /></td>
+              <td colSpan="2">
+                <hr className="my-2 border-gray-300" />
+              </td>
             </tr>
             <tr>
               <td className="font-semibold text-base">Grand Total</td>
@@ -102,7 +104,7 @@ const OrderSummary = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderSummary
+export default OrderSummary;

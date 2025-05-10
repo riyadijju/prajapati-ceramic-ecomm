@@ -69,9 +69,6 @@ const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Log product state for debugging
-        console.log('Product state before submission:', product);
-
         // Validate main product fields
         if (!product.name || !product.category || !product.price || !product.description || !product.image) {
             alert('Please fill all the required fields');
@@ -88,6 +85,7 @@ const AddProduct = () => {
         }
 
         try {
+            console.log(product)
             await AddProduct({ ...product, author: user?._id }).unwrap();
             alert('Product added successfully');
             setProduct({

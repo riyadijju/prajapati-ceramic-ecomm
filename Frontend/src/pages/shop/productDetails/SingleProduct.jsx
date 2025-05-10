@@ -17,11 +17,14 @@ const SingleProduct = () => {
   const [zoomSize, setZoomSize] = useState(150);
   const imgRef = useRef(null);
 
+  console.log(data)
+  
+
   const singleProduct = data?.product || {};
   const productReviews = data?.reviews || [];
-  const variants = singleProduct?.variants || [];
+  const variants = data?.product?.variants || [];
 
-  const media = [singleProduct?.mainImage, ...variants.map(v => v.image)].filter(Boolean);
+  const media = [data?.product?.mainImage, ...variants.map(v => v.image)].filter(Boolean);
 
   useEffect(() => {
     if (imgRef.current) {
@@ -62,10 +65,12 @@ const SingleProduct = () => {
     setZoomPosition(prev => ({ ...prev, show: false }));
   };
 
+  const variant  = data?.product?.variants[selectedVariant]
+
   if (isLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">Error loading product details.</div>;
 
-  return (
+  return(
     <>
       <section className="relative py-8 border-b border-[#D1B28C] bg-[#F5F2E1] overflow-hidden">
         <img
@@ -86,11 +91,10 @@ const SingleProduct = () => {
               Shop
             </Link>
             <i className="ri-arrow-right-s-line text-[#D1B28C]" />
-            <span className="font-medium">{singleProduct.name}</span>
+            <span className="font-medium">{data.product?.name}</span>
           </div>
         </div>
       </section>
-
       <section className="section__container mt-8">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8">
@@ -105,8 +109,8 @@ const SingleProduct = () => {
                   <div className="aspect-square w-full h-[500px] overflow-hidden">
                     <img
                       ref={imgRef}
-                      src={variants[selectedVariant]?.image || singleProduct?.mainImage}
-                      alt={singleProduct?.name}
+                      src={variants[selectedVariant]?.image || data.product?.mainImage}
+                      alt={data.product?.name}
                       className="w-full h-full object-cover"
                       onLoad={(e) => {
                         setZoomPosition(prev => ({
@@ -132,7 +136,7 @@ const SingleProduct = () => {
                       <div
                         className="absolute left-[calc(100%+16px)] top-0 w-[400px] h-[500px] bg-white border border-gray-200 shadow-xl overflow-hidden z-50"
                         style={{
-                          backgroundImage: `url(${variants[selectedVariant]?.image || singleProduct?.mainImage})`,
+                          backgroundImage: `url(${variants[selectedVariant]?.image})`,
                           backgroundSize: `${zoomPosition.imgWidth}px ${zoomPosition.imgHeight}px`,
                           backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
                         }}
@@ -169,16 +173,16 @@ const SingleProduct = () => {
             {/* Product Info */}
             <div className="lg:w-1/2 w-full">
               <div className="bg-white p-6 rounded-lg shadow-md h-full">
-                <h3 className="text-3xl font-bold mb-4 text-[#5D4F3B]">{singleProduct?.name}</h3>
+                <h3 className="text-3xl font-bold mb-4 text-[#5D4F3B]">{variant.name}</h3>
 
                 <div className="flex items-center mb-6">
                   <p className="text-2xl text-[#8B5E3C] font-bold">
-                    Rs. {variants[selectedVariant]?.price || singleProduct?.price}
+                    Rs. {variant.price}
                   </p>
                 </div>
 
                 <div className="text-gray-600 mb-6 leading-relaxed space-y-3">
-                  {singleProduct?.description?.split('<br>').map((paragraph, index) => (
+                  {data.product?.description?.split('<br>').map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                   ))}
                 </div>
@@ -186,7 +190,7 @@ const SingleProduct = () => {
                 <div className="space-y-3 mb-8">
                   <div className="flex">
                     <span className="w-32 font-medium text-[#5D4F3B]">Category:</span>
-                    <span className="text-gray-600">{singleProduct?.category}</span>
+                    <span className="text-gray-600">{data.product?.category}</span>
                   </div>
 
                   {variants.length > 0 && (
@@ -213,13 +217,13 @@ const SingleProduct = () => {
 
                   <div className="flex">
                     <span className="w-32 font-medium text-[#5D4F3B]">Stock:</span>
-                    <span className="text-gray-600">{variants[selectedVariant]?.stock ?? 0}</span>
+                    <span className="text-gray-600">{variant.stock}</span>
                   </div>
 
                   <div className="flex items-center">
                     <span className="w-32 font-medium text-[#5D4F3B]">Rating:</span>
-                    <RatingStars rating={singleProduct?.rating} />
-                    <span className="ml-2 text-gray-600">({singleProduct?.rating}/5)</span>
+                    <RatingStars rating={data.product?.rating} />
+                    <span className="ml-2 text-gray-600">({data.product?.rating}/5)</span>
                   </div>
                 </div>
 
@@ -228,7 +232,7 @@ const SingleProduct = () => {
   <button
     onClick={(e) => {
       e.stopPropagation();
-      handleAddToCart(singleProduct);
+      handleAddToCart(data.product);
     }}
     className="w-full py-3 bg-gradient-to-r from-[#8B5E3C] to-[#D1B28C] hover:bg-[#D1B28C] text-white rounded-md transition-colors duration-300 flex items-center justify-center gap-2"
   >
@@ -254,7 +258,7 @@ const SingleProduct = () => {
         </div>
       </section>
     </>
-  );
+  )  
 };
 
 export default SingleProduct;

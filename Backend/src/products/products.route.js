@@ -13,8 +13,8 @@ const validateVariants = (variants, basePrice) => {
     name: variant.name || 'Unnamed Variant',
     color: variant.color || '#000000',
     image: variant.image || '',
-    price: typeof variant.price === 'number' ? variant.price : basePrice,
-    stock: typeof variant.stock === 'number' ? variant.stock : 0
+    price:  Number(variant.price) ,
+    stock: Number(variant.stock),
   }));
 };
 
@@ -23,6 +23,13 @@ router.post("/create-product", async (req, res) => {
   try {
     const { variants, price, ...productData } = req.body;
     const validatedVariants = validateVariants(variants, price);
+
+    console.log('productData')
+    console.log(productData)
+    console.log('price')
+    console.log(price)
+    console.log('variants')
+    console.log(variants)
 
     const mainImage = req.body.mainImage || req.body.image;
     const newProduct = new Products({
@@ -41,7 +48,7 @@ router.post("/create-product", async (req, res) => {
       savedProduct.rating = totalRating / reviews.length;
       await savedProduct.save();
     }
-
+    console.log(savedProduct)
     res.status(201).send(savedProduct);
   } catch (error) {
     console.error("Error creating product:", error);
@@ -92,9 +99,12 @@ router.get("/", async (req, res) => {
 // GET - Single product with variants
 router.get("/:id", async (req, res) => {
   try {
+    
     const productId = req.params.id;
     const product = await Products.findById(productId)
       .populate("author", "email username");
+
+      console.log(product)
 
     if (!product) {
       return res.status(404).send({ message: "Product not found" });
@@ -191,6 +201,7 @@ router.delete("/:id", verifyToken, verifyAdmin, async (req, res) => {
 // GET - Related products
 router.get("/related/:id", async (req, res) => {
   try {
+    
     const product = await Products.findById(req.params.id);
     if (!product) {
       return res.status(404).send({ message: "Product not found" });

@@ -1,46 +1,44 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useLoginUserMutation } from '../redux/features/auth/authApi';
 import { setUser } from '../redux/features/auth/authSlice';
 import bgCeramic from '../assets/bgCeramic.png';
-import { toast } from 'react-toastify'; // Import the toast notification
+import { toast } from 'react-toastify';
 
 const Login = () => {
-  const [message, setMessage] = useState('');  // For error message
+  const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
-  const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || '/'; // Get the path to redirect to
+
+  const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
+  const { user } = useSelector(state => state.auth);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // Clear any existing error message before submitting
     setMessage('');
-
     const data = { email, password };
 
     try {
-      // Attempt login
       const response = await loginUser(data).unwrap();
       const { user } = response;
-      
-      // Dispatch user data to Redux
       dispatch(setUser({ user }));
-      
-      // Show success toast only if login is successful
       toast.success("Login successful!");
-      
-      // Redirect to the homepage after successful login
-      navigate("/");
 
+      // Redirect back to where user came from
+      if (from === 'cart') {
+        navigate(-1); // Go back to CartModal
+      } else {
+        navigate(from); // Fallback to any specified route
+      }
     } catch (error) {
-      // Show the error message inside the form
       setMessage("Please provide a valid email and password");
     }
   };
@@ -55,10 +53,8 @@ const Login = () => {
         backgroundAttachment: 'fixed',
       }}
     >
-      {/* Darker overlay for better contrast */}
       <div className="absolute inset-0 bg-[#683a3a]/70"></div>
-      
-      {/* Form Box */}
+
       <div className="relative w-full max-w-md z-10 bg-[#f8f1e5] text-[#4e2929] shadow-2xl p-8 sm:p-10 rounded-xl border-2 border-[#a78a7a]/30">
         <div className="text-center mb-8">
           <h2 className="text-4xl font-normal text-[#4e2929] font-serif tracking-tight mb-2">
@@ -110,7 +106,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Show error message only inside the form */}
           {message && (
             <p className="text-red-600 text-sm font-medium bg-red-50 px-3 py-2 rounded-lg font-sans">
               {message}

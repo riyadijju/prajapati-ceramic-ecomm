@@ -18,7 +18,7 @@ const authSlice = createSlice({
     reducers: {
         setUser : (state, action) => {
             state.user = action.payload.user;
-            localStorage.setItem('user', JSON.stringify( state.user))
+            localStorage.setItem('user', JSON.stringify(state.user))
         },
         logout : (state) => {
             state.user = null;

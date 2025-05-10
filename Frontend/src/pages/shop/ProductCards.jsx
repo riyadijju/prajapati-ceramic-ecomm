@@ -37,7 +37,6 @@ const ProductCards = ({ products }) => {
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
       {products.map((product) => {
         const displayImage = product.variants?.[0]?.image || product.mainImage || '/images/fallback-product.jpg';
-
         return (
           <div key={product._id} className='product__card group transform transition-all hover:scale-105 border border-gray-100 overflow-hidden bg-white'>
             <div className='relative'>

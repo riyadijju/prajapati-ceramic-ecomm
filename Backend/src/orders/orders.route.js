@@ -7,47 +7,29 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // create checkout session
 router.post("/create-checkout-session", async (req, res) => {
-  const { products, billingAddress } = req.body;
+  const { products } = req.body;
 
   try {
-    // Prepare line items for Stripe
     const lineItems = products.map((product) => ({
       price_data: {
         currency: "usd",
         product_data: {
-          name: product.variant ? `${product.name} - ${product.variant.name}` : product.name,
-          images: [product.variant?.image || product.image],
+          name: product.name,
+          images: [product.image],
         },
-        unit_amount: Math.round((product.variant?.price || product.price) * 100),
+        unit_amount: Math.round(product.price * 100),
       },
       quantity: product.quantity,
     }));
 
-    // Create the checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
       success_url: "http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "http://localhost:5173/cancel",
-      // Pass billing address info here for Stripe
-      shipping_address_collection: {
-        allowed_countries: ["US", "CA", "IN", "NP", "NZ"], // Adjust the allowed countries as needed
-      },
-      shipping_address: {
-        address: {
-          line1: billingAddress.address,
-          city: billingAddress.city,
-          state: billingAddress.state,
-          postal_code: billingAddress.postalCode,
-          country: billingAddress.country,
-        },
-        name: billingAddress.fullName,
-        phone: billingAddress.phone,
-      },
     });
 
-    // Send back the session ID
     res.json({ id: session.id });
   } catch (error) {
     console.error("Error creating checkout session:", error);
@@ -55,37 +37,45 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// confirm payment
+//  confirm payment
+
 router.post("/confirm-payment", async (req, res) => {
-  const { session_id, billingAddress, products, email } = req.body;
+  const { session_id } = req.body;
+  // console.log(session_id);
 
   try {
-    // Retrieve the session from Stripe using the session_id
     const session = await stripe.checkout.sessions.retrieve(session_id, {
       expand: ["line_items", "payment_intent"],
     });
 
     const paymentIntentId = session.payment_intent.id;
 
-    // Check if order already exists in database
     let order = await Order.findOne({ orderId: paymentIntentId });
 
     if (!order) {
-      const amount = session.amount_total / 100; // Convert cents to dollars
+      const lineItems = session.line_items.data.map((item) => ({
+        productId: item.price.product,
+        quantity: item.quantity,
+      }));
 
-      // Create new order in the database
+      const amount = session.amount_total / 100;
+
       order = new Order({
         orderId: paymentIntentId,
-        products: products,
+        products: lineItems,
         amount: amount,
-        email: email,
-        billingAddress: billingAddress,
+        email: session.customer_details.email,
         status:
           session.payment_intent.status === "succeeded" ? "pending" : "failed",
       });
-
-      await order.save();
+    } else {
+      order.status =
+        session.payment_intent.status === "succeeded" ? "pending" : "failed";
     }
+
+    // Save the order to MongoDB
+    await order.save();
+    //   console.log('Order saved to MongoDB', order);
 
     res.json({ order });
   } catch (error) {
@@ -166,14 +156,15 @@ router.patch("/update-order-status/:id", async (req, res) => {
       }
     );
 
-    if (!updatedOrder) {
+    if(!updatedOrder) {
       return res.status(404).send({ message: "Order not found" });
     }
 
     res.status(200).json({
       message: "Order status updated successfully",
-      order: updatedOrder,
-    });
+      order: updatedOrder
+    })
+
   } catch (error) {
     console.error("Error updating order status", error);
     res.status(500).send({ message: "Failed to update order status" });
@@ -181,7 +172,7 @@ router.patch("/update-order-status/:id", async (req, res) => {
 });
 
 // delete order
-router.delete("/delete-order/:id", async (req, res) => {
+router.delete('/delete-order/:id', async( req, res) => {
   const { id } = req.params;
 
   try {
@@ -191,12 +182,13 @@ router.delete("/delete-order/:id", async (req, res) => {
     }
     res.status(200).json({
       message: "Order deleted successfully",
-      order: deletedOrder,
-    });
+      order: deletedOrder
+    })
+    
   } catch (error) {
     console.error("Error deleting order", error);
     res.status(500).send({ message: "Failed to delete order" });
   }
-});
+} )
 
 module.exports = router;
