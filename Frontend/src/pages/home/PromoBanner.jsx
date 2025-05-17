@@ -19,6 +19,7 @@ const PromoBanner = () => {
            <h4>Strong Customer Support</h4>
            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, eveniet facilis quo eum quam fugiat incidunt</p>
         </div>   
+        
     </section>
   )
 }
