@@ -4,28 +4,33 @@
       "title": "Mastering the Art of Pottery",
       "subtitle": "Timeless Elegance",
       "date": "12th August 2022",
-      "imageUrl": "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?q=80&w=3369&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "imageUrl": "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?q=80&w=3369&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "link": "https://nepalitimes.com/multimedia/happy-to-just-potter-around-bhaktapur"
     },
     {
       "id": 2,
       "title": "Unveiling the Techniques",
       "subtitle": "Summer Art",
       "date": "18th January 2023",
-      "imageUrl": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?q=80&w=3336&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "imageUrl": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?q=80&w=3336&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "link" : "https://nepalitimes.com/banner/take-to-pottery-during-the-pandemic"
     },
     {
       "id": 3,
       "title": "Exploring Opportunities for Women in the Pottery Industry",
       "subtitle": "Craftsmanship and Creativity",
       "date": "5th January 2025",
-      "imageUrl": "https://images.unsplash.com/photo-1683755770454-3f1f12bcdc63?q=80&w=2800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "imageUrl": "https://images.unsplash.com/photo-1683755770454-3f1f12bcdc63?q=80&w=2800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "link" : "https://nepalitimes.com/banner/take-to-pottery-during-the-pandemic"
+    
     },
     {
         "id": 4,
         "title": "The World's Best Handicraft Fair 2025",
         "subtitle": "New York Times",
         "date": "25th May 2025",
-        "imageUrl": "https://plus.unsplash.com/premium_photo-1714060725310-0a4324bd5842?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        "imageUrl": "https://plus.unsplash.com/premium_photo-1714060725310-0a4324bd5842?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link" : "https://www.instagram.com/routineofnepalbanda/p/DEUdDbdCAbq/"
     }
   ]
   

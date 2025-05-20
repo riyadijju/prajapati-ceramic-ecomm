@@ -17,10 +17,13 @@ import UserPayments from "../pages/dashboard/user/UserPayments";
 import UserReviews from "../pages/dashboard/user/UserReviews";
 import UserProfile from "../pages/dashboard/user/UserProfile";
 import AdminDMain from "../pages/dashboard/admin/dashboard/AdminDMain";
-import AddProduct from "../pages/dashboard/admin/addProduct/addProduct";
+import AddProduct from "../pages/dashboard/admin/addProduct/AddProduct";
 import ManageProduct from "../pages/dashboard/admin/manageProduct/ManageProduct";
 import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
+import PublicOnlyRoute from "./PublicOnlyRoute";
+import UpdateProduct from "../pages/dashboard/admin/manageProduct/UpdateProduct";
+
 
 
 
@@ -46,12 +49,20 @@ const router = createBrowserRouter([
     ]
   },
   {
-        path: "/login",
-        element: <Login/>
+    path: "/login",
+    element: (
+      <PublicOnlyRoute>
+        <Login />
+      </PublicOnlyRoute>
+    )
   },
   {
     path: "/register",
-    element: <Register/>
+    element: (
+      <PublicOnlyRoute>
+        <Register />
+      </PublicOnlyRoute>
+    )
   },
   // Dashboard Routes Starts here
   {
@@ -83,7 +94,7 @@ const router = createBrowserRouter([
         },
         {
             path: "update-product/:id",
-            element: <PrivateRoute role="admin"><div>update</div></PrivateRoute>
+            element: <PrivateRoute role="admin"><UpdateProduct/></PrivateRoute>
         },
         { path: "users", element: <PrivateRoute role="admin"><ManageUser/></PrivateRoute> },
         { path: "manage-orders", 

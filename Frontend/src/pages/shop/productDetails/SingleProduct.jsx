@@ -6,6 +6,7 @@ import { addToCart } from '../../../redux/features/cart/cartSlice';
 import RatingStars from '../../../components/RatingStars';
 import ReviewsCard from '../reviews/ReviewsCard';
 import bgTransparent from '../../../assets/bgTransparent.png';
+import ReactMarkdown from 'react-markdown';
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -17,14 +18,11 @@ const SingleProduct = () => {
   const [zoomSize, setZoomSize] = useState(150);
   const imgRef = useRef(null);
 
-  console.log(data)
-  
-
-  const singleProduct = data?.product || {};
+  const product = data?.product || {};
   const productReviews = data?.reviews || [];
-  const variants = data?.product?.variants || [];
-
-  const media = [data?.product?.mainImage, ...variants.map(v => v.image)].filter(Boolean);
+  const variants = product.variants || [];
+  const variant = variants[selectedVariant] || {};
+  const media = [product.mainImage, ...variants.map(v => v.image)].filter(Boolean);
 
   useEffect(() => {
     if (imgRef.current) {
@@ -35,18 +33,6 @@ const SingleProduct = () => {
       }));
     }
   }, [selectedVariant]);
-
-  const handleAddToCart = (product) => {
-    const cartItem = {
-      ...product,
-      variant: variants[selectedVariant],
-      price: variants[selectedVariant]?.price || product.price,
-      mainImage: product.mainImage,
-      variantImage: variants[selectedVariant]?.image,
-      image: variants[selectedVariant]?.image || product.mainImage
-    };
-    dispatch(addToCart(cartItem));
-  };
 
   const handleMouseMove = (e) => {
     if (!imgRef.current) return;
@@ -65,200 +51,175 @@ const SingleProduct = () => {
     setZoomPosition(prev => ({ ...prev, show: false }));
   };
 
-  const variant  = data?.product?.variants[selectedVariant]
+  const handleAddToCart = () => {
+    const cartItem = {
+      ...product,
+      variant,
+      price: variant.price || product.price,
+      mainImage: product.mainImage,
+      variantImage: variant.image,
+      image: variant.image || product.mainImage
+    };
+    dispatch(addToCart(cartItem));
+  };
 
   if (isLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">Error loading product details.</div>;
+  if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">Error loading product.</div>;
 
-  return(
+  return (
     <>
-      <section className="relative py-8 border-b border-[#D1B28C] bg-[#F5F2E1] overflow-hidden">
-        <img
-          src={bgTransparent}
-          alt="Ceramic Background"
-          className="absolute right-0 bottom-0 w-56 opacity-80 pointer-events-none select-none z-0"
-          style={{ objectFit: "contain" }}
-        />
-
+      <section className="py-8 border-b border-[#E8E5DC] bg-[#E8E5DC] relative overflow-hidden">
+        <img src={bgTransparent} alt="" className="absolute bottom-0 right-0 w-56 opacity-80 pointer-events-none z-0" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <h2 className="text-3xl font-semibold text-[#5D4F3B] mb-2 tracking-wide">Product Details</h2>
+          <h2 className="text-3xl font-semibold text-[#5D4F3B] mb-2">Product Details</h2>
           <div className="flex items-center space-x-2 text-sm text-[#8B5E3C]">
-            <Link to="/" className="hover:underline hover:text-[#5D4F3B] transition-colors duration-200">
-              Home
-            </Link>
+            <Link to="/" className="hover:underline hover:text-[#5D4F3B]">Home</Link>
             <i className="ri-arrow-right-s-line text-[#D1B28C]" />
-            <Link to="/shop" className="hover:underline hover:text-[#5D4F3B] transition-colors duration-200">
-              Shop
-            </Link>
+            <Link to="/shop" className="hover:underline hover:text-[#5D4F3B]">Shop</Link>
             <i className="ri-arrow-right-s-line text-[#D1B28C]" />
-            <span className="font-medium">{data.product?.name}</span>
+            <span>{product.name}</span>
           </div>
         </div>
       </section>
+
       <section className="section__container mt-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Image and Zoom */}
-            <div className="lg:w-1/2 w-full">
-              <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
-                <div
-                  className="relative h-[500px] w-full cursor-crosshair"
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="aspect-square w-full h-[500px] overflow-hidden">
-                    <img
-                      ref={imgRef}
-                      src={variants[selectedVariant]?.image || data.product?.mainImage}
-                      alt={data.product?.name}
-                      className="w-full h-full object-cover"
-                      onLoad={(e) => {
-                        setZoomPosition(prev => ({
-                          ...prev,
-                          imgWidth: e.target.naturalWidth,
-                          imgHeight: e.target.naturalHeight
-                        }));
-                      }}
-                    />
-                  </div>
+        <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-8">
+          
+          {/* Zoom Image Section */}
+          <div className="lg:w-1/2 w-full">
+            <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
+              <div
+                className="relative h-[500px] w-full cursor-crosshair"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img
+                  ref={imgRef}
+                  src={variant.image || product.mainImage}
+                  alt={product.name}
+                  className="w-full h-[500px] object-cover"
+                  onLoad={(e) => {
+                    setZoomPosition(prev => ({
+                      ...prev,
+                      imgWidth: e.target.naturalWidth,
+                      imgHeight: e.target.naturalHeight
+                    }));
+                  }}
+                />
 
-                  {zoomPosition.show && (
-                    <>
-                      <div
-                        className="absolute border-2 border-white bg-white bg-opacity-20 pointer-events-none"
-                        style={{
-                          width: `${zoomSize}px`,
-                          height: `${zoomSize}px`,
-                          left: `calc(${zoomPosition.x}% - ${zoomSize / 2}px)`,
-                          top: `calc(${zoomPosition.y}% - ${zoomSize / 2}px)`,
-                        }}
-                      />
-                      <div
-                        className="absolute left-[calc(100%+16px)] top-0 w-[400px] h-[500px] bg-white border border-gray-200 shadow-xl overflow-hidden z-50"
-                        style={{
-                          backgroundImage: `url(${variants[selectedVariant]?.image})`,
-                          backgroundSize: `${zoomPosition.imgWidth}px ${zoomPosition.imgHeight}px`,
-                          backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
-                        }}
-                      />
-                    </>
-                  )}
-                </div>
+                {/* Zoom lens */}
+                {zoomPosition.show && (
+                  <div
+                    className="absolute border-2 border-white bg-white bg-opacity-20 pointer-events-none"
+                    style={{
+                      width: `${zoomSize}px`,
+                      height: `${zoomSize}px`,
+                      left: `calc(${zoomPosition.x}% - ${zoomSize / 2}px)`,
+                      top: `calc(${zoomPosition.y}% - ${zoomSize / 2}px)`,
+                    }}
+                  />
+                )}
 
-                {/* Thumbnails */}
-                {media.length > 1 && (
-                  <div className="flex gap-2 p-4 overflow-x-auto">
-                    {media.map((img, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setSelectedVariant(index)}
-                        className={`flex-shrink-0 w-16 h-16 border-2 rounded transition-all ${
-                          index === selectedVariant ? 'border-primary' : 'border-transparent hover:border-gray-300'
-                        }`}
-                      >
-                        <div className="aspect-square w-16 h-16 overflow-hidden rounded">
-                          <img
-                            src={img}
-                            alt={`Thumbnail ${index + 1}`}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                {/* Zoom preview */}
+                {zoomPosition.show && (
+                  <div
+                    className="fixed top-24 right-12 w-[400px] h-[500px] bg-white border border-gray-200 shadow-2xl z-50"
+                    style={{
+                      backgroundImage: `url(${variant.image || product.mainImage})`,
+                      backgroundSize: `${zoomPosition.imgWidth}px ${zoomPosition.imgHeight}px`,
+                      backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                      backgroundRepeat: "no-repeat"
+                    }}
+                  />
                 )}
               </div>
-            </div>
 
-            {/* Product Info */}
-            <div className="lg:w-1/2 w-full">
-              <div className="bg-white p-6 rounded-lg shadow-md h-full">
-                <h3 className="text-3xl font-bold mb-4 text-[#5D4F3B]">{variant.name}</h3>
-
-                <div className="flex items-center mb-6">
-                  <p className="text-2xl text-[#8B5E3C] font-bold">
-                    Rs. {variant.price}
-                  </p>
-                </div>
-
-                <div className="text-gray-600 mb-6 leading-relaxed space-y-3">
-                  {data.product?.description?.split('<br>').map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
+              {/* Thumbnails */}
+              {media.length > 1 && (
+                <div className="flex gap-2 p-4 overflow-x-auto">
+                  {media.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedVariant(index)}
+                      className={`w-16 h-16 border-2 rounded ${
+                        selectedVariant === index ? 'border-[#8B5E3C]' : 'border-transparent'
+                      }`}
+                    >
+                      <img src={img} alt="" className="w-full h-full object-cover rounded" />
+                    </button>
                   ))}
                 </div>
+              )}
+            </div>
+          </div>
 
-                <div className="space-y-3 mb-8">
-                  <div className="flex">
-                    <span className="w-32 font-medium text-[#5D4F3B]">Category:</span>
-                    <span className="text-gray-600">{data.product?.category}</span>
-                  </div>
+          {/* Product Info Section */}
+          <div className="lg:w-1/2 w-full">
+            <div className="bg-white p-6 rounded-lg shadow-md h-full">
+              <h3 className="text-3xl font-bold mb-4 text-[#5D4F3B]">{variant.name}</h3>
+              <p className="text-2xl text-[#8B5E3C] font-bold mb-6">Rs. {variant.price}</p>
 
-                  {variants.length > 0 && (
-                    <div className="flex items-start">
-                      <span className="w-32 font-medium pt-1 text-[#5D4F3B]">Colors:</span>
-                      <div className="flex flex-wrap gap-4">
-                        {variants.map((variant, index) => (
-                          <div key={index} className="flex items-center gap-2">
-                            <button
-                              onClick={() => setSelectedVariant(index)}
-                              className={`w-6 h-6 rounded-full border-2 transition-all ${
-                                selectedVariant === index ? 'border-[#8B5E3C] scale-110' : 'border-gray-300 hover:border-gray-400'
-                              }`}
-                              style={{ backgroundColor: variant.color }}
-                              title={variant.name}
-                              aria-label={`Select ${variant.name} color`}
-                            />
-                            <span className="text-gray-600 text-sm">{variant.name}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+              <div className="text-gray-600 mb-6 leading-relaxed prose max-w-none whitespace-pre-line">
+                <ReactMarkdown>{product.description}</ReactMarkdown>
+              </div>
 
-                  <div className="flex">
-                    <span className="w-32 font-medium text-[#5D4F3B]">Stock:</span>
-                    <span className="text-gray-600">{variant.stock}</span>
-                  </div>
+              <div className="mb-4">
+                <div className="font-medium text-[#5D4F3B]">Category: <span className="text-gray-600">{product.category}</span></div>
+              </div>
 
-                  <div className="flex items-center">
-                    <span className="w-32 font-medium text-[#5D4F3B]">Rating:</span>
-                    <RatingStars rating={data.product?.rating} />
-                    <span className="ml-2 text-gray-600">({data.product?.rating}/5)</span>
+              {variants.length > 0 && (
+                <div className="mb-4">
+                  <div className="font-medium text-[#5D4F3B] mb-1">Colors:</div>
+                  <div className="flex gap-4">
+                    {variants.map((v, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedVariant(i)}
+                        className={`w-6 h-6 rounded-full border-2 ${selectedVariant === i ? 'border-[#8B5E3C]' : 'border-gray-300'}`}
+                        style={{ backgroundColor: v.color }}
+                      />
+                    ))}
                   </div>
                 </div>
+              )}
 
-                {/* Add to Cart Button based on user role */}
-                {!user || user.role === 'user' ? (
-  <button
-    onClick={(e) => {
-      e.stopPropagation();
-      handleAddToCart(data.product);
-    }}
-    className="w-full py-3 bg-gradient-to-r from-[#8B5E3C] to-[#D1B28C] hover:bg-[#D1B28C] text-white rounded-md transition-colors duration-300 flex items-center justify-center gap-2"
-  >
-    <i className="ri-shopping-cart-2-line" />
-    Add to Cart
-  </button>
-) : (
-  <div className="text-center text- [#8B5E3C] font-medium py-3">
-    Admins are not allowed to add products to cart.
-  </div>
-)}
-
+              <div className="mb-4">
+                <div className="font-medium text-[#5D4F3B]">Stock: <span className="text-gray-600">{variant.stock}</span></div>
               </div>
+
+              <div className="flex items-center mb-6">
+                <span className="font-medium text-[#5D4F3B] mr-2">Rating:</span>
+                <RatingStars rating={product.rating} />
+                <span className="ml-2 text-gray-600">({product.rating}/5)</span>
+              </div>
+
+              {/* Add to Cart */}
+              {!user || user.role === 'user' ? (
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full py-3 bg-gradient-to-r from-[#8B5E3C] to-[#D1B28C] text-white rounded-md hover:opacity-90 transition-all"
+                >
+                  <i className="ri-shopping-cart-2-line mr-2" />
+                  Add to Cart
+                </button>
+              ) : (
+                <p className="text-center text-[#8B5E3C] font-medium py-3">
+                  {/* Admins are not allowed to add products to cart. */}
+                </p>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Reviews */}
+      {/* Reviews Section */}
       <section className="section__container mt-12">
         <div className="max-w-7xl mx-auto px-4">
           <ReviewsCard productReviews={productReviews} />
         </div>
       </section>
     </>
-  )  
+  );
 };
 
 export default SingleProduct;

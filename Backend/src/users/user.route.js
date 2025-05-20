@@ -1,150 +1,92 @@
 const express = require("express");
-const User = require("./user.model");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const User = require("../users/user.model");
+const PendingUser = require("../users/pendingUser.model");
 const generateToken = require("../middleware/generateToken");
-// const verifyToken = require("../middleware/verifyToken");
+const { sendVerificationEmail } = require("../utils/emailService");
+
 const router = express.Router();
-const { sendWelcomeEmail } = require("../utils/emailService"); 
 
 
-// Register endpoint
+// ✅ REGISTER — store user temporarily and send verification email
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password, confirm } = req.body;
+    if (!username || !email || !password || !confirm)
+      return res.status(400).json({ code: "EMPTY_FIELDS", message: "All fields required" });
 
-    // 1. Check for empty fields
-    if (!username?.trim() || !email?.trim() || !password || !confirm) {
-      return res.status(400).json({
-        success: false,
-        status: 400,
-        title: "Missing Required Fields",
-        description: "Please complete all required fields before submitting the form.",
-        code: "EMPTY_FIELDS"
-      });
-    }
-
-    // 2. Sanitize input
     const cleanEmail = email.trim().toLowerCase();
     const cleanUsername = username.trim();
+    const domain = cleanEmail.split("@")[1];
 
-    // 3. Validate email format (strict)
     const emailRegex = /^[a-zA-Z0-9](\.?[a-zA-Z0-9_-])*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(cleanEmail)) {
-      return res.status(400).json({
-        success: false,
-        status: 400,
-        title: "Invalid Email Format",
-        description: "Please enter a valid email like user@example.com (no invalid characters like !, #, etc).",
-        code: "INVALID_EMAIL"
-      });
-    }
+    if (!emailRegex.test(cleanEmail))
+      return res.status(400).json({ code: "INVALID_EMAIL", message: "Invalid email format" });
 
-    // 4. Restrict to allowed domains only
     const allowedDomains = ["gmail.com"];
-    const emailDomain = cleanEmail.split("@")[1]?.toLowerCase();
-    if (!emailDomain || !allowedDomains.includes(emailDomain)) {
-      return res.status(400).json({
-        success: false,
-        status: 400,
-        title: "Unsupported Email Domain",
-        description: `Only the following email domains are allowed: ${allowedDomains.join(", ")}`,
-        code: "EMAIL_DOMAIN_RESTRICTED"
-      });
-    }
+    if (!allowedDomains.includes(domain))
+      return res.status(400).json({ code: "EMAIL_DOMAIN_RESTRICTED", message: "Only gmail.com allowed" });
 
-    // 5. Validate username format
     const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
-    if (!usernameRegex.test(cleanUsername)) {
-      return res.status(400).json({
-        success: false,
-        status: 400,
-        title: "Invalid Username",
-        description: "Username must be 3–20 characters and can only include letters, numbers, or underscores.",
-        code: "INVALID_USERNAME"
-      });
-    }
+    if (!usernameRegex.test(cleanUsername))
+      return res.status(400).json({ code: "INVALID_USERNAME", message: "Invalid username" });
 
-    // 6. Password match check
-    if (password !== confirm) {
-      return res.status(400).json({
-        success: false,
-        status: 400,
-        title: "Password Mismatch",
-        description: "The passwords you entered do not match.",
-        code: "PASSWORD_MISMATCH"
-      });
-    }
+    if (password !== confirm)
+      return res.status(400).json({ code: "PASSWORD_MISMATCH", message: "Passwords do not match" });
 
-    // 7. Password strength
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
-      return res.status(400).json({
-        success: false,
-        status: 400,
-        title: "Weak Password",
-        description: "Password must be 8+ characters and include uppercase, lowercase, number, and special character.",
-        code: "WEAK_PASSWORD"
-      });
-    }
+    if (!passwordRegex.test(password))
+      return res.status(400).json({ code: "WEAK_PASSWORD", message: "Weak password" });
 
-    // 8. Check for existing email
     const existingEmailUser = await User.findOne({ email: cleanEmail });
-    if (existingEmailUser) {
-      return res.status(409).json({
-        success: false,
-        status: 409,
-        title: "Email Already Registered",
-        description: "This email is already linked to another account.",
-        code: "EMAIL_EXISTS"
-      });
-    }
+    const existingPending = await PendingUser.findOne({ email: cleanEmail });
+    if (existingEmailUser || existingPending)
+      return res.status(409).json({ code: "EMAIL_EXISTS", message: "Email already registered" });
 
-    // 9. Check for existing username
-    const existingUsernameUser = await User.findOne({ username: cleanUsername });
-    if (existingUsernameUser) {
-      return res.status(409).json({
-        success: false,
-        status: 409,
-        title: "Username Taken",
-        description: "This username is already taken. Please choose a different one.",
-        code: "USERNAME_EXISTS"
-      });
-    }
+    const existingUsername = await User.findOne({ username: cleanUsername });
+    if (existingUsername)
+      return res.status(409).json({ code: "USERNAME_EXISTS", message: "Username already taken" });
 
-    // 10. Create user
-    const user = new User({ email: cleanEmail, username: cleanUsername, password });
-    await user.save();
+    const token = jwt.sign({ email: cleanEmail }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 11. Send welcome email
-    try {
-      await sendWelcomeEmail(cleanEmail, cleanUsername);
-    } catch (err) {
-      console.warn("Email send failed (non-blocking):", err.message);
-    }
+    await PendingUser.create({ email: cleanEmail, username: cleanUsername, password: hashedPassword, token });
+    await sendVerificationEmail(cleanEmail, cleanUsername, token);
 
-    // 12. Success
-    return res.status(201).json({
-      success: true,
-      status: 201,
-      title: "Registration Successful",
-      description: "Your account has been created. Please check your email.",
-    });
-
+    return res.status(200).json({ message: "Verification email sent. Please check your inbox." });
   } catch (error) {
-    console.error("Unexpected error during registration:", error);
-    return res.status(500).json({
-      success: false,
-      status: 500,
-      title: "Server Error",
-      description: "An unexpected error occurred. Please try again later.",
-      error: error.message
-    });
+    console.error("Registration error:", error);
+    res.status(500).json({ code: "SERVER_ERROR", message: "Something went wrong" });
   }
 });
 
+// ✅ VERIFY EMAIL — move from PendingUser to User and mark as verified
+router.get("/verify-email/:token", async (req, res) => {
+  try {
+    const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET);
+    const token = req.params.token;
 
+    const pendingUser = await PendingUser.findOneAndDelete({ token });
+    if (!pendingUser)
+      return res.status(400).send("Invalid or expired verification link.");
 
+    const newUser = new User({
+      email: pendingUser.email,
+      username: pendingUser.username,
+      password: pendingUser.password,
+      verified: true
+    });
 
-// / login user endpoint
+    await newUser.save();
+    return res.redirect("http://localhost:5173/login?verified=true");
+  } catch (err) {
+    console.error("Verification failed:", err);
+    return res.status(400).send("Verification link is invalid or has expired.");
+  }
+});
+
+// ✅ LOGIN — block unverified users
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -152,10 +94,18 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
+
+    // ✅ BLOCK UNVERIFIED USERS
+    if (!user.verified) {
+      console.log(`Blocked login for unverified user: ${user.email}`);
+      return res.status(403).send({ message: "Please verify your email before logging in." });
+    }
+
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(401).send({ message: "Password not match" });
+      return res.status(401).send({ message: "Incorrect password" });
     }
+
     const token = await generateToken(user._id);
 
     res.cookie("token", token, {
@@ -163,7 +113,6 @@ router.post("/login", async (req, res) => {
       secure: true,
       sameSite: "None",
     });
-
 
     res.status(200).send({
       message: "Logged in successfully",
@@ -180,96 +129,78 @@ router.post("/login", async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Error logged in user", error);
-    res.status(500).send({ message: "Error logged in user" });
+    console.error("Login error:", error);
+    res.status(500).send({ message: "Error logging in user" });
   }
+});
 
-
-})
-
-// logout endpoint
+// LOGOUT
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.status(200).send({ message: "Logged out successfully" });
 });
 
-// delete a user
+// DELETE USER
 router.delete("/users/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await User.findByIdAndDelete(id);
-    if (!user) {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user)
       return res.status(404).send({ message: "User not found" });
-    }
+
     res.status(200).send({ message: "User deleted successfully" });
   } catch (error) {
-    console.error("Error deleting user", error);
+    console.error("Delete error:", error);
     res.status(500).send({ message: "Error deleting user" });
   }
 });
 
-// get all users
+// GET ALL USERS
 router.get("/users", async (req, res) => {
   try {
     const users = await User.find({}, "id email role").sort({ createdAt: -1 });
     res.status(200).send(users);
   } catch (error) {
-    console.error("Error fetching users", error);
-    res.status(500).send({ message: "Error fetching user" });
+    console.error("Fetch users error:", error);
+    res.status(500).send({ message: "Error fetching users" });
   }
 });
 
-// update user role
+// UPDATE ROLE
 router.put("/users/:id", async (req, res) => {
   try {
-    const { id } = req.params;
     const { role } = req.body;
-    const user = await User.findByIdAndUpdate(id, { role }, { new: true });
-    if (!user) {
+    const user = await User.findByIdAndUpdate(req.params.id, { role }, { new: true });
+    if (!user)
       return res.status(404).send({ message: "User not found" });
-    }
-    res.status(200).send({ message: "User role updated successfully", user });
+
+    res.status(200).send({ message: "User role updated", user });
   } catch (error) {
-    console.error("Error updating user role", error);
-    res.status(500).send({ message: "Error updating user role" });
+    console.error("Role update error:", error);
+    res.status(500).send({ message: "Error updating role" });
   }
 });
 
-// edit or update profile
+// UPDATE PROFILE
 router.patch("/edit-profile", async (req, res) => {
   try {
     const { userId, username, profileImage, bio, profession } = req.body;
-    if (!userId) {
+    if (!userId)
       return res.status(400).send({ message: "User ID is required" });
-    }
-    const user = await User.findById(userId);
-    console.log(user)
 
-    if (!user) {
+    const user = await User.findById(userId);
+    if (!user)
       return res.status(400).send({ message: "User not found" });
-    }
-    // update profile
+
     if (username !== undefined) user.username = username;
     if (profileImage !== undefined) user.profileImage = profileImage;
     if (bio !== undefined) user.bio = bio;
     if (profession !== undefined) user.profession = profession;
 
     await user.save();
-    res.status(200).send({
-      message: "Profile updated successfully",
-      user: {
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        profileImage: user.profileImage,
-        bio: user.bio,
-        profession: user.profession,
-        role: user.role,
-      },
-    });
+    res.status(200).send({ message: "Profile updated", user });
   } catch (error) {
-    console.error("Error updating user profile", error);
-    res.status(500).send({ message: "Error updating user profile" });
+    console.error("Profile update error:", error);
+    res.status(500).send({ message: "Error updating profile" });
   }
 });
 

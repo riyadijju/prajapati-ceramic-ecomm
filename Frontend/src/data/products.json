@@ -1,130 +1,336 @@
 [
+ { "_id": "682c87a6a5fe38b1289ce793",
+        "name": "Plant Pot",
+        "category": "tableware",
+        "description": "Artist: Roshan Prajapati\nHeight: 9.5 cm\nDiameter: 10 cm (top), 8 cm (base)\nUse: Ideal for pour-over coffee rituals\nFinish: Matte clay body with ridged interior for optimal flow",
+        "price": 1280,
+        "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747748633/tvf9gxxs870kawn7tche.png",
+        "variants": [
+            {
+                "name": "Plant Pot P45",
+                "color": "#292923",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747748599/xbtkklea1kpfrs8snvpw.png",
+                "price": 650,
+                "stock": 23,
+                "_id": "682c87a6a5fe38b1289ce794"
+            },
+            {
+                "name": "Plant Pot P47",
+                "color": "#DA5C02",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747748661/vddgen3y7a8y60fadwkl.jpg",
+                "price": 340,
+                "stock": 23,
+                "_id": "682c87a6a5fe38b1289ce795"
+            },
+            {
+                "name": "Plant Pot P67",
+                "color": "#BEAF9E",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747748706/tizky564xycbyeuejp7d.png",
+                "price": 780,
+                "stock": 44,
+                "_id": "682c87a6a5fe38b1289ce796"
+            },
+            {
+                "name": "Plant Pot 34",
+                "color": "#59462A",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747748742/k6n8ec8z4jwzlzdozbn2.png",
+                "price": 134,
+                "stock": 78,
+                "_id": "682c87a6a5fe38b1289ce797"
+            }
+        ],
+    "rating": 4.5,
+    "author": "admin"
+  },
+  {"_id": "682c77eda5fe38b1289ce347",
+            "name": "Carved Espresso Set",
+            "category": "tableware",
+            "description": "A timeless blend of function and form, this carved cup with saucer elevates your tea or coffee moments.\n**Artist:** Roshan Prajapati\n**Height:** 7 cm (cup), 2 cm (saucer)\n**Diameter:** 7.5 cm (cup), 12 cm (saucer)\n**Capacity:** ~200 ml\n**Use:** Ideal for serving tea, espresso, or desserts\n**Finish:** Hand-carved detailing, matte glaze with earthy undertone",
+            "price": 590,
+            "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747744495/nzrhxubfrx4wbokgnnzu.png",
+            "variants": [
+                {
+                    "name": "Carved Espresso E12",
+                    "color": "#524318",
+                    "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747744581/yhqmcp92gnle016brp7i.png",
+                    "price": 590,
+                    "stock": 19,
+                    "_id": "682c77eda5fe38b1289ce348"
+                },
+                {
+                    "name": "Carved Espresso E15",
+                    "color": "#9C6A4D",
+                    "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747744631/rziye6xmkz38iunygliu.png",
+                    "price": 490,
+                    "stock": 23,
+                    "_id": "682c77eda5fe38b1289ce349"
+                },
+                {
+                    "name": "Carved Espresso E18",
+                    "color": "#424B43",
+                    "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747744684/fqhqr69b3ymog30kpahr.png",
+                    "price": 480,
+                    "stock": 32,
+                    "_id": "682c77eda5fe38b1289ce34a"
+                },
+                {
+                    "name": "Carved Espresso E18",
+                    "color": "#532103",
+                    "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747744727/nogp3ao2hsshhk6fzhmp.png",
+                    "price": 660,
+                    "stock": 13,
+                    "_id": "682c77eda5fe38b1289ce34b"
+                }
+            ],
+  "rating": 5,
+  "author": "admin"
+  },
   {
-    "_id": "67f9e53de0b7235b6981dde6",
-    "name": "Deep Blue Floral Vase",
+    "_id": "682c4260a5fe38b1289cda29",
+        "name": "Tulanani H. Vase",
+        "category": "holiday",
+        "description": "**Artist:** Rajiv Prajapati\n**Height:** 28 cm\n**Width:** 16 cm\n**Mouth Diameter:** 6 cm\n**Weight:** ~1.2 kg\n**Use:** Perfect for dried florals or as a decorative centerpiece\n**Finish:** Natural earthy glaze, locally-sourced red clay",
+        "price": 1290,
+        "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747730698/dez75nvy3topvaap8jzd.png",
+        "variants": [
+            {
+                "name": "A12",
+                "color": "#936b4a",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747730855/wpxdvfmlxmx3rgt8ruv2.png",
+                "price": 1290,
+                "stock": 13,
+                "_id": "682c4260a5fe38b1289cda2a"
+            },
+            {
+                "name": "A13",
+                "color": "#62a16a",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747730884/niln65oyhy1ctg8rnh58.png",
+                "price": 1190,
+                "stock": 9,
+                "_id": "682c4260a5fe38b1289cda2b"
+            },
+            {
+                "name": "A14",
+                "color": "#ffffff",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747730923/je3yooplndfn1nuwkefd.png",
+                "price": 1290,
+                "stock": 27,
+                "_id": "682c4260a5fe38b1289cda2c"
+            },
+            {
+                "name": "A15",
+                "color": "#685bb5",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747730957/p7seqkkkzokymv7l7zrj.png",
+                "price": 1180,
+                "stock": 22,
+                "_id": "682c4260a5fe38b1289cda2d"
+            },
+            {
+                "name": "A16",
+                "color": "#685550",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747731030/ifog1wwjiz7t3c0q8dub.png",
+                "price": 2200,
+                "stock": 12,
+                "_id": "682c4260a5fe38b1289cda2e"
+            }
+          ],
+          "rating": 5,
+          "author": "admin"
+  },
+  {
+    "_id": "682c4eaea5fe38b1289cdc3a",
+        "name": "Karma S12 Mug",
+        "category": "holiday",
+        "description": "Sip in Karma Stype Mig.\n**Artist:** Sanjay Prajapati\n**Height:** 28 cm\n**Width:** 16 cm\n**Mouth Diameter:** 6 cm\n**Weight:** ~1.2 kg\n**Finish:** Natural earthy glaze, locally-sourced red clay",
+        "price": 320,
+        "image": "https://images.unsplash.com/photo-1617076678363-99dd6eb5150b?q=80&w=2805&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "variants": [
+            {
+                "name": "Karma S12 Mug",
+                "color": "#887046",
+                "image": "https://images.unsplash.com/photo-1617076678363-99dd6eb5150b?q=80&w=2805&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "price": 320,
+                "stock": 50,
+                "_id": "682c4eaea5fe38b1289cdc3b"
+            },
+            {
+                "name": "Karma S13 Mug",
+                "color": "#7CDFB2",
+                "image": "https://plus.unsplash.com/premium_photo-1666974543981-38c24049910d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "price": 450,
+                "stock": 19,
+                "_id": "682c4eaea5fe38b1289cdc3c"
+            },
+            {
+                "name": "Karma S14 Mug",
+                "color": "#93857c",
+                "image": "https://plus.unsplash.com/premium_photo-1668046490161-f08d1280f10c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "price": 400,
+                "stock": 23,
+                "_id": "682c4eaea5fe38b1289cdc3d"
+            }
+        ],
+        "rating": 5,
+          "author": "admin"
+  },
+  {
+    "_id": "682c724da5fe38b1289ce2b7",
+        "name": "Dhalcha Vase",
+        "category": "homedecor",
+        "description": "Bring warmth and tradition home with this handcrafted vase\n**Artist:** Suman Prajapati\n**Height:** 28 cm\n**Width:** 16 cm\n**Mouth Diameter:** 6 cm\n**Weight:** ~1.2 kg\n**Finish:** Natural earthy glaze, locally-sourced red clay",
+        "price": 3290,
+        "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747742703/jjhs0fxnxsekh25racim.png",
+        "variants": [
+            {
+                "name": "Dhalcha Vase D12",
+                "color": "#166668",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747742983/m9xhlih7gh2vkybt6qjf.png",
+                "price": 3290,
+                "stock": 34,
+                "_id": "682c724da5fe38b1289ce2b8"
+            },
+            {
+                "name": "Dhalcha Vase F12",
+                "color": "#EEA7A6",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747743050/x335jbobbo6fj6eo3rkl.png",
+                "price": 4590,
+                "stock": 34,
+                "_id": "682c724da5fe38b1289ce2b9"
+            },
+            {
+                "name": "Dhalcha Vase F15",
+                "color": "#E2E0DB",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747743097/hvxhvojigcybpdwqcql5.png",
+                "price": 2890,
+                "stock": 34,
+                "_id": "682c724da5fe38b1289ce2ba"
+            },
+            {
+                "name": "Dhalcha Vase G15",
+                "color": "#C9542C",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747743135/yq8m9udmufrjebihdxun.png",
+                "price": 2800,
+                "stock": 45,
+                "_id": "682c724da5fe38b1289ce2bb"
+            },
+            {
+                "name": "Dhalcha Vase H15",
+                "color": "#EA905A",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1747743283/knxlxpljmfmyel16hejk.png",
+                "price": 2300,
+                "stock": 42,
+                "_id": "682c724da5fe38b1289ce2bc"
+            }
+        ],
+        "rating": 5,
+          "author": "admin"
+  },
+  {
+    "_id": "682c4b2ba5fe38b1289cdc13",
+    "name": "Blue Pottery",
+    "category": "holiday",
+    "description": "Traditional handmade ceramic vase from Bhaktapur.",
+    "price": 1900,
+    "image": "https://plus.unsplash.com/premium_photo-1679809447923-b3250fb2a0ce?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "variants": [
+        {
+            "name": "Blue Pottery",
+            "color": "#032C55",
+            "image": "https://plus.unsplash.com/premium_photo-1679809447923-b3250fb2a0ce?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "price": 1800,
+            "stock": 10,
+            "_id": "682c4b2ba5fe38b1289cdc14"
+        },
+        {
+            "name": "Multicolor",
+            "color": "#7CDFB2",
+            "image": "https://plus.unsplash.com/premium_photo-1679811677031-ee1016a76944?q=80&w=3333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "price": 1900,
+            "stock": 5,
+            "_id": "682c4b2ba5fe38b1289cdc15"
+        },
+        {
+            "name": "Green Blue",
+            "color": "#322c36",
+            "image": "https://plus.unsplash.com/premium_photo-1679811671595-c90569d90108?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJsdWUlMjBwb3R0ZXJ5fGVufDB8fDB8fHww",
+            "price": 1900,
+            "stock": 5,
+            "_id": "682c4b2ba5fe38b1289cdc16"
+        }
+    ],
+    "rating": 5,
+          "author": "admin"
+  },
+  {
+    "_id": "682c4499a5fe38b1289cda95",
+    "name": "Chapacho C. Vase ",
     "category": "homedecor",
-    "description": "When several Nepali artists travelled to Costa Rica, they were struck by the beautiful drape and bright blue color of these blossoms, inspiring this hand-sculpted vessel. The skyflower is widely cultivated by Central and South American gardeners for its floral clusters that bloom to attract butterflies and hummingbirds year-round.",
-    "price": 1800,
-    "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "description": "Traditional handmade ceramic vase from Bhaktapur.",
+    "price": 1900,
+    "image": "https://plus.unsplash.com/premium_photo-1679811674700-5eda1f689852?q=80&w=3333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "variants": [
-      {
-        "name": "Terracotta Red",
-        "color": "#AB3E16",
-        "mainImage": "https://images.unsplash.com/photo-1660721671073-e139688fa3cf?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1800,
-        "stock": 10
-      },
-      {
-        "name": "Earthy Brown",
-        "color": "#8B5A2B",
-        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1900,
-        "stock": 5
-      },
-      {
-        "name": "Ash White",
-        "color": "#F3F3F3",
-        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "stock": 8
-      }
+        {
+            "name": "Royal Blue",
+            "color": "#4169E1",
+            "image": "https://plus.unsplash.com/premium_photo-1679811674700-5eda1f689852?q=80&w=3333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "price": 1800,
+            "stock": 10,
+            "_id": "682c4499a5fe38b1289cda96"
+        },
+        {
+            "name": "Multicolor",
+            "color": "#FF69B4",
+            "image": "https://plus.unsplash.com/premium_photo-1679811677744-c48e8d887fa5?q=80&w=3333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "price": 1900,
+            "stock": 5,
+            "_id": "682c4499a5fe38b1289cda97"
+        },
+        {
+            "name": "Green Blue",
+            "color": "#3CB371",
+            "image": "https://plus.unsplash.com/premium_photo-1679811674659-21be3cc25946?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "price": 1900,
+            "stock": 5,
+            "_id": "682c4499a5fe38b1289cda98"
+        },
+        {
+            "name": "Deep Blue",
+            "color": "#00008B",
+            "image": "https://plus.unsplash.com/premium_photo-1679811677474-55c03fcb41f4?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "price": 1900,
+            "stock": 5,
+            "_id": "682c4499a5fe38b1289cda99"
+        }
     ],
-    "rating": 4.5,
-    "author": "admin"
+     "rating": 5,
+          "author": "admin"
   },
   {
-    "_id": "67e41cc64135e251f6cb566b",
-    "name": "Tulanani H. Vase",
-    "category": "tableware",
-    "description": "Stylish ceramic vase that brings elegance to any table setting.",
-    "price": 1800,
-    "mainImage": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "variants": [
-      {
-        "name": "Terracotta Red",
-        "color": "#AB3E16",
-        "image": "https://plus.unsplash.com/premium_photo-1672406540104-cb97855a0f59?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1800,
-        "stock": 10
-      },
-      {
-        "name": "Earthy Brown",
-        "color": "#8B5A2B",
-        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1900,
-        "stock": 5
-      },
-      {
-        "name": "Ash White",
-        "color": "#F3F3F3",
-        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "stock": 8
-      }
-    ],
-    "rating": 4.5,
-    "author": "67e41cc64135e251f6cb566b"
-  },
-  {
-    "_id": "67f9e53de0b7235b6981dde7",
-    "name": "Floral Deep Blue",
-    "category": "tableware",
-    "description": "Elegant deep blue ceramic design that adds beauty to your table.",
-    "price": 1800,
-    "mainImage": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "variants": [
-      {
-        "name": "Terracotta Red",
-        "color": "#AB3E16",
-        "image": "https://images.unsplash.com/photo-1666470431497-1725bd960a05?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1800,
-        "stock": 10
-      },
-      {
-        "name": "Earthy Brown",
-        "color": "#8B5A2B",
-        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1900,
-        "stock": 5
-      },
-      {
-        "name": "Ash White",
-        "color": "#F3F3F3",
-        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "stock": 8
-      }
-    ],
-    "rating": 3.5,
-    "author": "67e41cc64135e251f6cb566b"
-  },
-  {
-    "_id": "67f9e53de0b7235b6981dde8",
-    "name": "Ceramic Plate",
-    "category": "tableware",
-    "description": "Handmade ceramic plate with unique patterns.",
-    "price": 1800,
-    "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "variants": [
-      {
-        "name": "Terracotta Red",
-        "color": "#AB3E16",
-        "mainImage": "https://images.unsplash.com/photo-1739985915827-7a5ab2f18118?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1800,
-        "stock": 10
-      },
-      {
-        "name": "Earthy Brown",
-        "color": "#8B5A2B",
-        "image": "https://plus.unsplash.com/premium_photo-1714943791104-11e348a730ee?q=80&w=2310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "price": 1900,
-        "stock": 5
-      },
-      {
-        "name": "Ash White",
-        "color": "#F3F3F3",
-        "image": "https://plus.unsplash.com/premium_photo-1714943972687-e7f26e3c663a?q=80&w=3461&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "stock": 8
-      }
-    ],
-    "rating": 4.5,
-    "author": "admin"
+    "_id": "681199865b3c03ceac23b87f",
+        "name": "1000",
+        "category": "dinnerware",
+        "description": "1000",
+        "price": 1000,
+        "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1745983776/zteyqtvinphnnayczqeg.png",
+        "variants": [
+            {
+                "name": "1000",
+                "color": "gold",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1745983810/vpjudwicsz8gpbebjxta.png",
+                "price": 1000,
+                "stock": 10,
+                "_id": "681199865b3c03ceac23b880"
+            },
+            {
+                "name": "900",
+                "color": "red",
+                "image": "https://res.cloudinary.com/dtkxlyyhq/image/upload/v1745983869/fkrnmz2fossxjbr8ryhb.png",
+                "price": 900,
+                "stock": 6,
+                "_id": "681199865b3c03ceac23b881"
+            }
+        ],
+         "rating": 5,
+          "author": "admin"
   }
 ]

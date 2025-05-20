@@ -17,9 +17,9 @@ const Search = () => {
 
   return (
     <>
-      <section className="section__container bg-[#fff8f2] py-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#5a3928] mb-2">Search Products</h2>
-        <p className="text-[#8c6650] text-lg">Cook and dine, in good company.</p>
+      <section className="section__container bg-[#E8E5DC] py-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#000000] mb-2">Search Products</h2>
+        <p className="text-[#434343] text-lg">Cook and dine, in good company.</p>
       </section>
 
       <section className="section__container py-8 px-4">
@@ -28,12 +28,12 @@ const Search = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full max-w-3xl px-4 py-3 border border-[#d6c2b5] rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#a1603e] focus:border-transparent text-[#5a3928] placeholder:text-[#b08a70]"
+            className="w-full max-w-3xl px-4 py-3 border border-[#E8E5DC] rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E8E5DC] focus:border-transparent text-[#ffffff] placeholder:text-[#2c2b2b]"
             placeholder="Search for products..."
           />
           <button
             onClick={handleSearch}
-            className="bg-[#a1603e] hover:bg-[#8e4e31] text-white font-semibold px-6 py-3 rounded-md transition-all shadow-md w-full md:w-auto"
+            className="bg-[#3C2E25] hover:bg-[#E8E5DC] text-white font-semibold px-6 py-3 rounded-md transition-all shadow-md w-full md:w-auto"
           >
             Search
           </button>

@@ -10,9 +10,10 @@ const Banner = () => {
         <h4>Handmade in Nepal</h4>
         <h1>Explore the Artistic 
             <br/>Legacy of Prajapati Community</h1>
-            <button className='btn'>
-                <Link to='/shop'>SHOP NOW</Link>  
-            </button>
+            <button className='btn hover:bg-[#A47551] transition-colors duration-300'>
+  <Link to='/shop'>SHOP NOW</Link>  
+</button>
+
       </div>
       <div className='header__image'>
          <img src={bannerImg} alt='cover page' />

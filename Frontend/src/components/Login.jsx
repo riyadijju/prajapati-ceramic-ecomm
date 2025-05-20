@@ -6,20 +6,33 @@ import { useLoginUserMutation } from '../redux/features/auth/authApi';
 import { setUser } from '../redux/features/auth/authSlice';
 import bgCeramic from '../assets/bgCeramic.png';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [checkedAuth, setCheckedAuth] = useState(false); // NEW
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || '/'; // Get the path to redirect to
+  const from = location.state?.from || '/';
 
   const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
   const { user } = useSelector(state => state.auth);
+
+  // 🔐 Redirect if already logged in
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (token || user) {
+      toast.info("You're already logged in.");
+      navigate('/');
+    } else {
+      setCheckedAuth(true); // allow rendering
+    }
+  }, [user]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -32,16 +45,17 @@ const Login = () => {
       dispatch(setUser({ user }));
       toast.success("Login successful!");
 
-      // Redirect back to where user came from
       if (from === 'cart') {
-        navigate(-1); // Go back to CartModal
+        navigate(-1);
       } else {
-        navigate(from); // Fallback to any specified route
+        navigate(from);
       }
     } catch (error) {
       setMessage("Please provide a valid email and password");
     }
   };
+
+  if (!checkedAuth) return null; // prevent render until auth checked
 
   return (
     <section

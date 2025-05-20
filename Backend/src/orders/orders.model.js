@@ -33,6 +33,7 @@
 
 // const Order = mongoose.model("Order", OrderSchema);
 // module.exports = Order;
+// Backend/src/orders/orders.model.js
 const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema(
@@ -40,19 +41,24 @@ const OrderSchema = new mongoose.Schema(
     orderId: String,
     products: [
       {
-        productId: { type: String, required: true },
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+        variantId: { type: mongoose.Schema.Types.ObjectId, required: true },
         quantity: { type: Number, required: true },
+        price: Number,
+        name: String,
+        image: String
       },
-          ],
+    ],
     amount: Number,
     email: { type: String, required: true },
     status: {
       type: String,
-      enum: ["pending", "processing", "shipped", "completed",],
+      enum: ["pending", "processing", "shipped", "completed"],
       default: "pending",
     },
   },
   { timestamps: true }
 );
+
 const Order = mongoose.model("Order", OrderSchema);
 module.exports = Order;

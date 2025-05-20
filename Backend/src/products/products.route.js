@@ -59,6 +59,33 @@ router.post("/create-product", async (req, res) => {
   }
 });
 
+// Update stock after order
+// router.put('/update-stock', async (req, res) => {
+//   try {
+//     const { items } = req.body;
+
+//     for (const item of items) {
+//       const product = await Product.findById(item.productId);
+//       if (!product) continue;
+
+//       const variant = product.variants.id(item.variantId);
+//       if (!variant) continue;
+
+//       if (variant.stock < item.quantity) {
+//         return res.status(400).json({ error: `Insufficient stock for ${variant.name}` });
+//       }
+
+//       variant.stock = Math.max(0, variant.stock - item.quantity);
+//       await product.save();
+//     }
+
+//     res.status(200).json({ message: 'Stock updated successfully' });
+//   } catch (error) {
+//     console.error('Stock update error:', error);
+//     res.status(500).json({ error: 'Error updating stock' });
+//   }
+// });
+
 // GET - All products with variant filtering
 router.get("/", async (req, res) => {
   try {

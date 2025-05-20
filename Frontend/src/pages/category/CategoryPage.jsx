@@ -20,8 +20,8 @@ const CategoryPage = () => {
 
   return (
     <> 
-    <section className='section__container bg-primary-light'>
-            <h2 className='section__header capitalize'>{categoryName}</h2>
+<section className='section__container bg-[#E8E5DC]'>
+<h2 className='section__header capitalize'>{categoryName}</h2>
             <p className='section__subheader'>Browse a diverse range of ceramics, from tableware to versatile home decors. Elevate your space today!</p>
     </section>
 
