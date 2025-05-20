@@ -130,28 +130,35 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
+      
         const data = { username, email, password, confirm };
-
+      
         try {
-            await registerUser(data).unwrap();
-            setShowModal(true);
+          await registerUser(data).unwrap();
+          setShowModal(true);
         } catch (error) {
-            if (error?.data?.errorType === "EMAIL_EXISTS") {
-                setMessage(
-                    <span>
-                        Email already exists. 
-                        <Link to="/login" className="text-[#d4a017] underline ml-1">
-                            Please login here
-                        </Link>
-                    </span>
-                );
-            } else if (error?.data?.errorType === "WEAK_PASSWORD") {
-                setMessage(error?.data?.message || "Password is not strong enough");
-            } else {
-                setMessage(error?.data?.message || "Registration failed. Please try again.");
-            }
+          const err = error?.data;
+          
+          if (err?.code === "EMAIL_EXISTS") {
+            setErrors(prev => ({ ...prev, email: "Email is already registered." }));
+          } else if (err?.code === "USERNAME_EXISTS") {
+            setErrors(prev => ({ ...prev, username: "Username is already taken." }));
+          } else if (err?.code === "INVALID_EMAIL") {
+            setErrors(prev => ({ ...prev, email: "Invalid email format (e.g. user@gmail.com)." }));
+          } else if (err?.code === "EMAIL_DOMAIN_RESTRICTED") {
+            setErrors(prev => ({ ...prev, email: "Only @gmail.com is allowed." }));
+          } else if (err?.code === "WEAK_PASSWORD") {
+            setErrors(prev => ({ ...prev, password: "Weak password. Include uppercase, lowercase, numbers, and symbols." }));
+          } else if (err?.code === "PASSWORD_MISMATCH") {
+            setErrors(prev => ({ ...prev, confirm: "Passwords do not match." }));
+          } else if (err?.code === "INVALID_USERNAME") {
+            setErrors(prev => ({ ...prev, username: "Invalid username. Use only letters, numbers, and underscores." }));
+          } else {
+            setMessage(err?.description || "Registration failed. Please try again.");
+          }
         }
-    };
+      };
+      
 
     const handleInputChange = (setter, field) => (e) => {
         setter(e.target.value);
@@ -312,23 +319,27 @@ const Register = () => {
 
             {/* Success Modal */}
             {showModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-[#f8f1e5] p-8 rounded-xl shadow-xl border-2 border-[#a78a7a]/30 w-80 text-center">
-                        <h2 className="text-2xl font-bold text-[#4e2929] mb-2">
-                            Registration Successful!
-                        </h2>
-                        <p className="text-[#4e2929] mb-6">
-                        Your account has been created. Please check your email.
-                        </p>
-                        <button 
-                            onClick={handleModalClose}
-                            className="bg-[#d4a017] hover:bg-[#b78a14] text-[#4e2929] font-semibold py-2 px-4 rounded-md"
-                        >
-                            OK
-                        </button>
-                    </div>
-                </div>
-            )}
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-[#f8f1e5] p-8 rounded-xl shadow-xl border-2 border-[#a78a7a]/30 w-80 text-center">
+      <h2 className="text-2xl font-bold text-[#4e2929] mb-2">
+        Almost There!
+      </h2>
+      <p className="text-[#4e2929] mb-4">
+        We've sent a confirmation link to your email.
+      </p>
+      <p className="text-sm text-[#4e2929] mb-6">
+        Please verify your email to activate your account. Your registration isn’t complete until then.
+      </p>
+      <button 
+        onClick={handleModalClose}
+        className="bg-[#d4a017] hover:bg-[#b78a14] text-[#4e2929] font-semibold py-2 px-4 rounded-md"
+      >
+        Got it
+      </button>
+    </div>
+  </div>
+)}
+
         </section>
     );
 };

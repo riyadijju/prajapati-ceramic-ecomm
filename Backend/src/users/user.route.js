@@ -5,6 +5,7 @@ const generateToken = require("../middleware/generateToken");
 const router = express.Router();
 const { sendWelcomeEmail } = require("../utils/emailService"); 
 
+
 // Register endpoint
 router.post("/register", async (req, res) => {
   try {
