@@ -3,69 +3,145 @@ const User = require("./user.model");
 const generateToken = require("../middleware/generateToken");
 // const verifyToken = require("../middleware/verifyToken");
 const router = express.Router();
+const { sendWelcomeEmail } = require("../utils/emailService"); 
 
 // Register endpoint
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password, confirm } = req.body;
 
-    // Check for empty fields
-    if (!username || !email || !password || !confirm) {
-      return res.status(400).send({ 
-        message: "All fields are required",
-        errorType: "EMPTY_FIELDS"
+    // 1. Check for empty fields
+    if (!username?.trim() || !email?.trim() || !password || !confirm) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        title: "Missing Required Fields",
+        description: "Please complete all required fields before submitting the form.",
+        code: "EMPTY_FIELDS"
       });
     }
 
-    // Check if passwords match
+    // 2. Sanitize input
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanUsername = username.trim();
+
+    // 3. Validate email format (strict)
+    const emailRegex = /^[a-zA-Z0-9](\.?[a-zA-Z0-9_-])*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        title: "Invalid Email Format",
+        description: "Please enter a valid email like user@example.com (no invalid characters like !, #, etc).",
+        code: "INVALID_EMAIL"
+      });
+    }
+
+    // 4. Restrict to allowed domains only
+    const allowedDomains = ["gmail.com"];
+    const emailDomain = cleanEmail.split("@")[1]?.toLowerCase();
+    if (!emailDomain || !allowedDomains.includes(emailDomain)) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        title: "Unsupported Email Domain",
+        description: `Only the following email domains are allowed: ${allowedDomains.join(", ")}`,
+        code: "EMAIL_DOMAIN_RESTRICTED"
+      });
+    }
+
+    // 5. Validate username format
+    const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+    if (!usernameRegex.test(cleanUsername)) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        title: "Invalid Username",
+        description: "Username must be 3–20 characters and can only include letters, numbers, or underscores.",
+        code: "INVALID_USERNAME"
+      });
+    }
+
+    // 6. Password match check
     if (password !== confirm) {
-      return res.status(400).send({ 
-        message: "Passwords do not match",
-        errorType: "PASSWORD_MISMATCH" 
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        title: "Password Mismatch",
+        description: "The passwords you entered do not match.",
+        code: "PASSWORD_MISMATCH"
       });
     }
 
-    // Password strength validation
+    // 7. Password strength
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(password)) {
-      return res.status(400).send({
-        message: "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-        errorType: "WEAK_PASSWORD"
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        title: "Weak Password",
+        description: "Password must be 8+ characters and include uppercase, lowercase, number, and special character.",
+        code: "WEAK_PASSWORD"
       });
     }
 
-    // Check if email already exists
-    const existingEmailUser = await User.findOne({ email });
+    // 8. Check for existing email
+    const existingEmailUser = await User.findOne({ email: cleanEmail });
     if (existingEmailUser) {
-      return res.status(409).send({ 
-        message: "Email already registered",
-        errorType: "EMAIL_EXISTS" 
+      return res.status(409).json({
+        success: false,
+        status: 409,
+        title: "Email Already Registered",
+        description: "This email is already linked to another account.",
+        code: "EMAIL_EXISTS"
       });
     }
 
-    // Check if username already exists
-    const existingUsernameUser = await User.findOne({ username });
+    // 9. Check for existing username
+    const existingUsernameUser = await User.findOne({ username: cleanUsername });
     if (existingUsernameUser) {
-      return res.status(409).send({ 
-        message: "Username already exists, please choose another one.",
-        errorType: "USERNAME_EXISTS"
+      return res.status(409).json({
+        success: false,
+        status: 409,
+        title: "Username Taken",
+        description: "This username is already taken. Please choose a different one.",
+        code: "USERNAME_EXISTS"
       });
     }
 
-    // Create new user
-    const user = new User({ email, username, password });
+    // 10. Create user
+    const user = new User({ email: cleanEmail, username: cleanUsername, password });
     await user.save();
-    
-    res.status(201).send({ message: "User registered successfully!" });
-    
+
+    // 11. Send welcome email
+    try {
+      await sendWelcomeEmail(cleanEmail, cleanUsername);
+    } catch (err) {
+      console.warn("Email send failed (non-blocking):", err.message);
+    }
+
+    // 12. Success
+    return res.status(201).json({
+      success: true,
+      status: 201,
+      title: "Registration Successful",
+      description: "Your account has been created. Please check your email.",
+    });
+
   } catch (error) {
-    console.error("Error registering user", error);
-    res.status(500).send({ 
-      message: "Error registering user",
-      error: error.message 
+    console.error("Unexpected error during registration:", error);
+    return res.status(500).json({
+      success: false,
+      status: 500,
+      title: "Server Error",
+      description: "An unexpected error occurred. Please try again later.",
+      error: error.message
     });
   }
 });
+
+
+
 
 // / login user endpoint
 router.post("/login", async (req, res) => {

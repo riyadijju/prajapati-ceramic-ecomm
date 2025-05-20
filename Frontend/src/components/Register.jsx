@@ -4,18 +4,24 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useRegisterUserMutation } from '../redux/features/auth/authApi';
 import bgCeramic from '../assets/bgCeramic.png';
 
+// ✅ Local email validation
+const isValidEmail = (value) => {
+    const emailRegex = /^[a-zA-Z0-9](\.?[a-zA-Z0-9_-])*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+    const allowedDomains = ["gmail.com"];
+    const domain = value.split("@")[1]?.toLowerCase();
+    return emailRegex.test(value) && allowedDomains.includes(domain);
+};
+
 // Password Strength Meter Component
 const PasswordStrengthMeter = ({ password }) => {
     const getStrength = (pass) => {
         if (!pass) return 0;
-        
         let strength = 0;
         if (pass.length >= 8) strength += 1;
         if (/[a-z]/.test(pass)) strength += 1;
         if (/[A-Z]/.test(pass)) strength += 1;
         if (/\d/.test(pass)) strength += 1;
         if (/[@$!%*?&]/.test(pass)) strength += 1;
-        
         return strength;
     };
 
@@ -24,7 +30,6 @@ const PasswordStrengthMeter = ({ password }) => {
 
     const getMessage = () => {
         if (password.length === 0) return '';
-        
         const messages = [
             "Very weak - try adding more characters",
             "Weak - try adding lowercase letters",
@@ -33,7 +38,6 @@ const PasswordStrengthMeter = ({ password }) => {
             "Strong - try adding special characters",
             "Very strong! Great password"
         ];
-        
         return messages[Math.min(strength, 5)];
     };
 
@@ -86,9 +90,19 @@ const Register = () => {
 
     const validateForm = () => {
         const newErrors = {};
-        
-        if (!username) newErrors.username = "Please fill this field";
-        if (!email) newErrors.email = "Please fill this field";
+
+        if (!username) {
+            newErrors.username = "Please fill this field";
+          } else if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
+            newErrors.username = "Username must be 3–20 characters, only letters, numbers, and underscores";
+          }
+          
+        if (!email) {
+            newErrors.email = "Please fill this field";
+        } else if (!isValidEmail(email)) {
+            newErrors.email = "Invalid email. Use only gmail.com (no !, * etc)";
+        }
+
         if (!password) {
             newErrors.password = "Please fill this field";
         } else if (password.length < 8) {
@@ -102,22 +116,20 @@ const Register = () => {
         } else if (!/(?=.*[@$!%*?&])/.test(password)) {
             newErrors.password = "Password needs a special character (@$!%*?&)";
         }
-        
+
         if (!confirm) {
             newErrors.confirm = "Please fill this field";
         } else if (password !== confirm) {
             newErrors.confirm = "Passwords do not match";
         }
-        
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        
         if (!validateForm()) return;
-
         const data = { username, email, password, confirm };
 
         try {
@@ -154,6 +166,7 @@ const Register = () => {
         navigate('/login');
     };
 
+
     return (
         <section
             className="min-h-screen w-full relative flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 bg-center bg-no-repeat"
@@ -185,14 +198,22 @@ const Register = () => {
                             Username
                         </label>
                         <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={handleInputChange(setUsername, 'username')}
-                            placeholder="Choose a username"
-                            required
-                            className={`w-full bg-white/90 text-[#4e2929] rounded-lg px-5 py-3 focus:outline-none border ${errors.username ? 'border-red-500' : 'border-[#a78a7a]/30'}`}
-                        />
+  type="text"
+  id="username"
+  value={username}
+  onChange={(e) => {
+    const cleaned = e.target.value.replace(/[^a-zA-Z0-9_]/g, '');
+    setUsername(cleaned);
+    if (errors.username) {
+      setErrors(prev => ({ ...prev, username: '' }));
+    }
+    if (message) setMessage('');
+  }}
+  placeholder="Choose a username"
+  required
+  className={`w-full bg-white/90 text-[#4e2929] rounded-lg px-5 py-3 focus:outline-none border ${errors.username ? 'border-red-500' : 'border-[#a78a7a]/30'}`}
+/>
+
                         {errors.username && <p className="mt-1 text-sm text-red-600">{errors.username}</p>}
                     </div>
 
@@ -297,7 +318,7 @@ const Register = () => {
                             Registration Successful!
                         </h2>
                         <p className="text-[#4e2929] mb-6">
-                            Great job! Your account has been created. Click OK to login.
+                        Your account has been created. Please check your email.
                         </p>
                         <button 
                             onClick={handleModalClose}
