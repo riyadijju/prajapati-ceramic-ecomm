@@ -66,7 +66,6 @@
 // const User = model('User', userSchema);
 // module.exports = User;
 
-
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -90,24 +89,13 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  verified: {
-    type: Boolean,
-    default: false // ✅ Only true after email verification
-  },
   role: {
     type: String,
     default: 'user'
   },
-  profileImage: {
-    type: String
-  },
-  bio: {
-    type: String,
-    maxlength: 200
-  },
-  profession: {
-    type: String
-  },
+  profileImage: String,
+  bio: { type: String, maxlength: 200 },
+  profession: String,
   createdAt: {
     type: Date,
     default: Date.now
@@ -126,10 +114,10 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-// 🔑 Add instance method to compare passwords
+// 🔑 Compare passwords
 userSchema.methods.comparePassword = function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-const User = model('User', userSchema);
-module.exports = User;
+module.exports = model('User', userSchema);
+
