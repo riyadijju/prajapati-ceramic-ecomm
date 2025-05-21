@@ -30,7 +30,7 @@ const ProductCards = ({ products }) => {
     setPopupProductName(product.name);
     setPopupVisible(true);
 
-    setTimeout(() => setPopupVisible(false), 2000);
+    setTimeout(() => setPopupVisible(false), 1000);
   };
 
   return (
@@ -84,13 +84,22 @@ const ProductCards = ({ products }) => {
 
       {/* Popup for Item Added to Cart */}
       {popupVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-xs opacity-100 transition-opacity duration-300">
-            <p className="text-lg font-semibold text-indigo-600 text-center">Item Added to Cart</p>
-            <p className="text-gray-500 text-center mt-2">{popupProductName}</p>
-          </div>
-        </div>
-      )}
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-xs opacity-100 transition-opacity duration-200 text-center">
+      <p className="text-lg font-semibold text-[#8b5e3c]">Item Added to Cart</p>
+      <p className="text-gray-500 mt-2">{popupProductName}</p>
+
+      <button
+        onClick={() => setPopupVisible(false)}
+        className="mt-4 px-5 py-2 bg-[#8b5e3c] hover:bg-[#a76d48] text-white rounded-full transition-colors duration-200"
+      >
+        Continue Browsing
+      </button>
+    </div>
+  </div>
+
+)}
+
     </div>
   );
 };

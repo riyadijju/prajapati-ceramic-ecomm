@@ -23,6 +23,8 @@ import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
 import PublicOnlyRoute from "./PublicOnlyRoute";
 import UpdateProduct from "../pages/dashboard/admin/manageProduct/UpdateProduct";
+import Contact from "../pages/contact/Contact"; 
+import Blogs from "../pages/blogs/Blogs";
 
 
 
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
       { path: "/search", element: <Search/> },
       { path: "/shop", element: <ShopPage/>},
       { path: "/shop/:id", element: <SingleProduct /> },
+      { path: "/about", element: <Blogs/> },
+      { path: "/contact", element: <Contact/> },
       {
         path: "/success",
         element: <PaymentSuccess/>

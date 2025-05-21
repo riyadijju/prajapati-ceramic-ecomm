@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../../redux/features/cart/cartSlice';
 import OrderSummary from './OrderSummary';
 
-const CartModal = ({ products, isOpen, onClose }) => {
+const CartModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.cart.products);
 
   // Handle the quantity update (increment or decrement)
   const handleQuantity = (type, id, variantId, stock) => {
