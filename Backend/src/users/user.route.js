@@ -3,12 +3,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../users/user.model");
 const generateToken = require("../middleware/generateToken");
-const { sendWelcomeEmail } = require("../utils/emailService");
-
+const sendWelcomeEmail = require("../utils/emailService");
 
 const router = express.Router();
 
-// ✅ REGISTER — store user and send welcome email
+// ✅ REGISTER 
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password, confirm } = req.body;
@@ -57,11 +56,15 @@ router.post("/register", async (req, res) => {
       password: hashedPassword,
     });
 
-    // 🎉 Send welcome email
-    await sendWelcomeEmail(cleanEmail, cleanUsername);
+    // ✅ Send welcome email
+    try {
+      await sendWelcomeEmail(newUser.email, newUser.username);
+    } catch (emailErr) {
+      console.error("Failed to send welcome email:", emailErr);
+    }
 
     return res.status(201).json({
-      message: "Registration successful",
+      message: "Registration successful. Welcome email sent!",
       user: {
         _id: newUser._id,
         username: newUser.username,
@@ -78,7 +81,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// ✅ LOGIN — no verification check
+// ✅ LOGIN 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -121,8 +124,6 @@ router.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ message: "Logged out successfully" });
 });
-
-
 
 // ✅ DELETE USER
 router.delete("/users/:id", async (req, res) => {

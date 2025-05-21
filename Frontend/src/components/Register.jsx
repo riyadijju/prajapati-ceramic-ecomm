@@ -328,7 +328,7 @@ const Register = () => {
         We've sent a confirmation link to your email.
       </p>
       <p className="text-sm text-[#4e2929] mb-6">
-        Please verify your email to activate your account. Your registration isn’t complete until then.
+        Thank you for registering with Prajapati Ceramic. Preserving the Artistic Legacy of Prajapati Community.
       </p>
       <button 
         onClick={handleModalClose}
