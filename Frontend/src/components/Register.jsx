@@ -328,7 +328,7 @@ const Register = () => {
         We've sent a confirmation link to your email.
       </p>
       <p className="text-sm text-[#4e2929] mb-6">
-        Thank you for registering with Prajapati Ceramic. Preserving the Artistic Legacy of Prajapati Community.
+        Thank you for registering with Prajapati Ceramic.
       </p>
       <button 
         onClick={handleModalClose}

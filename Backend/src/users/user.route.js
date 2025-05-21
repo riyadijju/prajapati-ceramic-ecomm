@@ -81,26 +81,29 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// ✅ LOGIN 
+
+// ✅ LOGIN
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log("Login attempt:", email, password);
+
   try {
     const user = await User.findOne({ email });
-    if (!user)
-      return res.status(404).json({ message: "User not found" });
+    if (!user) {
+      console.log("User not found");
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
 
     const isMatch = await user.comparePassword(password);
-    if (!isMatch)
-      return res.status(401).json({ message: "Incorrect password" });
+    if (!isMatch) {
+      console.log("Password does not match");
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
 
     const token = await generateToken(user._id);
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None"
-    });
 
-    res.status(200).json({
+    console.log("Login successful");
+    return res.status(200).json({
       message: "Logged in successfully",
       token,
       user: {
@@ -110,14 +113,16 @@ router.post("/login", async (req, res) => {
         role: user.role,
         profileImage: user.profileImage,
         bio: user.bio,
-        profession: user.profession
-      }
+        profession: user.profession,
+      },
     });
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
+
+
 
 // ✅ LOGOUT
 router.post("/logout", (req, res) => {
