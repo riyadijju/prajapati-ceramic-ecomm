@@ -154,12 +154,11 @@ const Register = () => {
           } else if (err?.code === "INVALID_USERNAME") {
             setErrors(prev => ({ ...prev, username: "Invalid username. Use only letters, numbers, and underscores." }));
           } else {
-            setMessage(err?.description || "Registration failed. Please try again.");
+            setMessage(err?.message || "Registration failed. Please try again.");
           }
         }
       };
       
-
     const handleInputChange = (setter, field) => (e) => {
         setter(e.target.value);
         if (errors[field]) {

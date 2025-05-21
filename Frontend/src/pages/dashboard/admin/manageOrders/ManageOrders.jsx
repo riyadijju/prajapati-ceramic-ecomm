@@ -11,6 +11,8 @@ const ManageOrders = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deleteOrder] = useDeleteOrderMutation();
 
+    console.log(orders)
+
     const handleEditOrder = (order) => {
         setSelectedOrder(order);
         setIsModalOpen(true);
@@ -44,6 +46,8 @@ const ManageOrders = () => {
                         <th className='py-3 px-4 border-b'>Order Id</th>
                         <th className='py-3 px-4 border-b'>Customer</th>
                         <th className='py-3 px-4 border-b'>Status</th>
+                        <th className='py-3 px-4 border-b'>Address</th>
+                        <th className='py-3 px-4 border-b'>Phone Number</th>
                         <th className='py-3 px-4 border-b'>Date</th>
                         <th className='py-3 px-4 border-b'>Actions</th>
                     </tr>
@@ -58,9 +62,10 @@ const ManageOrders = () => {
                                 <td className='py-3 px-4 border-b'>
                                     <span className={`inline-block px-3 py-1 text-xs text-white rounded-full ${getStatusColor(order?.status)}`}>{order?.status}</span>
                                 </td>
+                                <td className='py-3 px-4 border-b'>{order?.address}</td>
+                                <td className='py-3 px-4 border-b'>{order?.phone}</td>
                                 <td className='py-3 px-4 border-b'>{formatDate(order?.updatedAt)}</td>
                                 <td className='py-3 px-4 border-b flex items-center space-x-4'>
-                                    <Link to='#' className="text-blue-500 hover:underline">View</Link>
                                     <button className="text-green-500 hover:underline" onClick={() => handleEditOrder(order)}>Edit</button>
                                     <button className="text-red-500 hover:underline" onClick={() => handleDeleteOder(order?._id)}>Delete</button>
                                 </td>

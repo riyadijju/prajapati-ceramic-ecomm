@@ -48,12 +48,12 @@ router.post("/register", async (req, res) => {
       return res.status(409).json({ message: "Username already taken" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+
 
     const newUser = await User.create({
       username: cleanUsername,
       email: cleanEmail,
-      password: hashedPassword,
+      password: password,
     });
 
     // ✅ Send welcome email
@@ -90,13 +90,11 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      console.log("User not found");
       return res.status(401).json({ message: "Invalid email or password" });
     }
-
+    
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      console.log("Password does not match");
       return res.status(401).json({ message: "Invalid email or password" });
     }
 

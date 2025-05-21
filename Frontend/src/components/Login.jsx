@@ -90,7 +90,7 @@ const Login = () => {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder="riya@gmail.com"
               required
               className="w-full bg-white/90 text-[#4e2929] placeholder-[#a78a7a]/70 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#d4a017]/50 border border-[#a78a7a]/30 transition-all duration-200 font-sans"
             />

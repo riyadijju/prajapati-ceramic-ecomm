@@ -42,12 +42,15 @@ const UserOrders = () => {
                                     <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Status
                                     </th>
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Address</th>
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Phone Number</th>
                                     <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                        Total
                                     </th>
                                     <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                        View Order
                                     </th>
+                                    
                                 </tr>
                             </thead>
 
@@ -70,6 +73,8 @@ const UserOrders = () => {
                                            <span className={`p-1 rounded 
                                             ${order?.status === 'completed' ? 'bg-green-100 text-green-700' : order?.status === 'pending' ? 'bg-red-100 text-red-700' : order?.status === 'processing' ? 'bg-blue-100 text-blue-600' : 'bg-indigo-100 text-indigo-600'}`}>{order?.status}</span>
                                         </td>
+                                        <td className='py-3 px-4 border-b'>{order?.address}</td>
+                                <td className='py-3 px-4 border-b'>{order?.phone}</td>
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                            {order?.amount}
                                         </td>

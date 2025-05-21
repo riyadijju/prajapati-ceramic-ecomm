@@ -47,8 +47,12 @@ userSchema.pre('save', async function (next) {
 });
 
 // 🔑 Compare passwords
-userSchema.methods.comparePassword = function (candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password);
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  const match = await bcrypt.compare(candidatePassword, this.password);
+  console.log("Candidate:", candidatePassword);
+  console.log("Stored (hashed):", this.password);
+  console.log("Match:", match);
+  return match;
 };
 
 module.exports = model('User', userSchema);

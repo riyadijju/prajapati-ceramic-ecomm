@@ -6,13 +6,18 @@ const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // create checkout session
+// ✅ Create checkout session
 router.post("/create-checkout-session", async (req, res) => {
-  const { products } = req.body;
+  const { products, userId, address, phone } = req.body;
+
+  if (!products || !Array.isArray(products) || products.length === 0) {
+    return res.status(400).json({ error: "Missing or invalid products" });
+  }
 
   try {
     const lineItems = products.map((product) => ({
       price_data: {
-        currency: "usd",
+        currency: "npr",
         product_data: {
           name: product.name,
           images: [product.image],
@@ -24,65 +29,98 @@ router.post("/create-checkout-session", async (req, res) => {
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: lineItems,
       mode: "payment",
+      line_items: lineItems,
       success_url: "http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "http://localhost:5173/cancel",
+
+      // ✅ Store custom data in metadata
+      metadata: {
+        userId: userId || "anonymous",
+        custom_address: address || "Not provided",
+        custom_phone: phone || "Not provided",
+      },
     });
 
-    res.json({ id: session.id });
+    console.log("✅ Stripe session created:", session.id);
+
+    res.status(200).json({ id: session.id });
   } catch (error) {
-    console.error("Error creating checkout session:", error);
+    console.error("🔥 Stripe session creation failed:", error);
     res.status(500).json({ error: "Failed to create checkout session" });
   }
 });
 
-//  confirm payment
-
+// ✅ /api/orders/confirm-payment
 router.post("/confirm-payment", async (req, res) => {
   const { session_id } = req.body;
-  // console.log(session_id);
+
+  if (!session_id) {
+    return res.status(400).json({ error: "Missing session_id" });
+  }
 
   try {
+    // Fetch session from Stripe
     const session = await stripe.checkout.sessions.retrieve(session_id, {
       expand: ["line_items", "payment_intent"],
     });
 
-    const paymentIntentId = session.payment_intent.id;
+    console.log("✅ Stripe session retrieved:", session?.id);
 
+    if (!session || !session.payment_intent) {
+      return res.status(400).json({ error: "Missing payment_intent in session" });
+    }
+
+    // Handle both object and string cases
+    const paymentIntentId =
+      typeof session.payment_intent === "object"
+        ? session.payment_intent.id
+        : session.payment_intent;
+
+    // Check for existing order
     let order = await Order.findOne({ orderId: paymentIntentId });
 
+    const lineItems = session.line_items.data.map((item) => ({
+      productId: item.price.product,
+      quantity: item.quantity,
+    }));
+
+    const amount = session.amount_total / 100;
+
+    // Extract custom metadata
+    const address = session.metadata?.custom_address || "Not provided";
+    const phone = session.metadata?.custom_phone || "Not provided";
+    const email = session.customer_details?.email || "unknown@example.com";
+
     if (!order) {
-      const lineItems = session.line_items.data.map((item) => ({
-        productId: item.price.product,
-        quantity: item.quantity,
-      }));
-
-      const amount = session.amount_total / 100;
-
+      // Create new order
       order = new Order({
         orderId: paymentIntentId,
         products: lineItems,
-        amount: amount,
-        email: session.customer_details.email,
-        status:
-          session.payment_intent.status === "succeeded" ? "pending" : "failed",
+        amount,
+        email,
+        address, // ✅ save address
+        phone,   // ✅ save phone
+        status: session.payment_intent?.status === "succeeded" ? "pending" : "failed",
       });
     } else {
-      order.status =
-        session.payment_intent.status === "succeeded" ? "pending" : "failed";
+      // Update existing order
+      order.status = session.payment_intent?.status === "succeeded" ? "pending" : "failed";
+      order.address = address;
+      order.phone = phone;
     }
 
-    // Save the order to MongoDB
     await order.save();
-    //   console.log('Order saved to MongoDB', order);
 
-    res.json({ order });
+    console.log("✅ Order saved:", order._id);
+
+    res.status(200).json({ order });
   } catch (error) {
-    console.error("Error confirming payment:", error);
+    console.error("🔥 Error confirming payment:", error);
     res.status(500).json({ error: "Failed to confirm payment" });
   }
 });
+
 
 // get order by email address
 router.get("/:email", async (req, res) => {

@@ -50,7 +50,7 @@ const Navbar = () => {
       dispatch(logout());
       dispatch(clearCart());
       toast.success('Logout successful');
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.error('Logout error:', error);
 

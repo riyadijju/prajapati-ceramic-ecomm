@@ -12,18 +12,17 @@ const Categories = () => {
         {name: 'HOLIDAY', path: 'holiday', image: category3},
         {name: 'DINNERWARE', path: 'dinnerware', image: category4}
     ]
-  return <div className='size-[400px] w-[80%] bottom-[-20px] left-1/2 -translate-x-1/2 absolute bg-white z-20 flex  justify-between p-[4.5rem] rounded-tl-[40px] rounded-tr-[40px]'>
-    
+  return <div className='size-[400px] w-[80%] bottom-[-20px] left-1/2 -translate-x-1/2 absolute bg-white z-20 grid  grid-cols-2 lg:grid-cols-4 p-[4.5rem] gap-8 lg:gap-4 rounded-tl-[40px] rounded-tr-[40px]'>
         {
             categories.map((category) => (
-                <Link key={category.name} to={`/categories/${category.path}`} className=' z-50 flex flex-col items-center gap-2'>
-                    <img className='size-full object-cover object-center' src={category.image} alt={category.name} />
+                <Link key={category.name} to={`/categories/${category.path}`} className=' z-50 flex flex-col items-center gap-2  h-[130px] sm:min-h-[100px] lg:size-full '>
+                    <img className='size-full object-contain object-center' src={category.image} alt={category.name} />
                     <h4>{category.name}</h4>
                 </Link>
             ))
         }
-    
   </div>
+
 }
 
 export default Categories

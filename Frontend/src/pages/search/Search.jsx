@@ -28,7 +28,7 @@ const Search = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full max-w-3xl px-4 py-3 border border-[#E8E5DC] rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E8E5DC] focus:border-transparent text-[#ffffff] placeholder:text-[#2c2b2b]"
+            className="w-full max-w-3xl px-4 py-3 border border-[#E8E5DC] rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E8E5DC] focus:border-transparent text-[#525151] placeholder:text-[#2c2b2b]"
             placeholder="Search for products..."
           />
           <button

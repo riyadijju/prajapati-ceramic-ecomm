@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart } from '../../redux/features/cart/cartSlice';
 import { loadStripe } from '@stripe/stripe-js';
@@ -13,13 +13,15 @@ const OrderSummary = () => {
   const products = useSelector((store) => store.cart.products);
   const { selectedItems, totalPrice, tax, taxRate, grandTotal } = useSelector((store) => store.cart);
 
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
 
   const makePayment = async () => {
     if (!user) {
-      // Send state for redirect
       navigate('/login', { state: { from: 'cart' } });
       return;
     }
@@ -27,8 +29,10 @@ const OrderSummary = () => {
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
 
     const body = {
-      products: products,
+      products,
       userId: user._id,
+      address, // ✅ include address
+      phone,   // ✅ include phone
     };
 
     const headers = {
@@ -60,6 +64,30 @@ const OrderSummary = () => {
     <div className="bg-white border border-gray-200 mt-8 rounded-md shadow-md max-w-md mx-auto text-sm">
       <div className="p-6 text-gray-700">
         <h2 className="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">Order Summary</h2>
+
+        <div className="mb-4">
+          <label className="block mb-1 text-sm font-medium text-gray-700">Delivery Address</label>
+          <textarea
+            rows="3"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className="w-full border rounded-md px-3 py-2 text-sm"
+            placeholder="Enter your delivery address"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block mb-1 text-sm font-medium text-gray-700">Phone Number</label>
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="w-full border rounded-md px-3 py-2 text-sm"
+            placeholder="Enter your phone number"
+            required
+          />
+        </div>
 
         <table className="w-full text-left border-separate border-spacing-y-2">
           <tbody>
