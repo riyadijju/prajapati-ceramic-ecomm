@@ -45,7 +45,7 @@ async function sendWelcomeEmail(to, username) {
       </p>
 
       <div style="text-align: center;">
-        <a href="http://localhost:5173/login" style="background-color: #d4a017; color: #4e2929; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: 600; font-size: 15px; display: inline-block;">
+        <a href="https://prajapati-ceramic-frontend-4tbs.vercel.app/login" style="background-color: #d4a017; color: #4e2929; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: 600; font-size: 15px; display: inline-block;">
           Go to Login
         </a>
       </div>

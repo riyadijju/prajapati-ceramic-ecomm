@@ -83,9 +83,9 @@ const Footer = () => {
               >
                 Track your order
               </button>
-              <a href="http://localhost:5173/categories/holiday" className="hover:text-[#8B5E3C] transition-colors">Holiday</a>
-              <a href="http://localhost:5173/categories/tableware" className="hover:text-[#8B5E3C] transition-colors">Tableware</a>
-              <a href="http://localhost:5173/categories/dinnerware" className="hover:text-[#8B5E3C] transition-colors">Dinnerware</a>
+              <a href="https://prajapati-ceramic-frontend-4tbs.vercel.app/categories/holiday" className="hover:text-[#8B5E3C] transition-colors">Holiday</a>
+              <a href="https://prajapati-ceramic-frontend-4tbs.vercel.app/categories/tableware" className="hover:text-[#8B5E3C] transition-colors">Tableware</a>
+              <a href="https://prajapati-ceramic-frontend-4tbs.vercel.app/categories/dinnerware" className="hover:text-[#8B5E3C] transition-colors">Dinnerware</a>
             </div>
           </div>
 

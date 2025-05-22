@@ -319,24 +319,25 @@ const Register = () => {
             {/* Success Modal */}
             {showModal && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div className="bg-[#f8f1e5] p-8 rounded-xl shadow-xl border-2 border-[#a78a7a]/30 w-80 text-center">
-      <h2 className="text-2xl font-bold text-[#4e2929] mb-2">
-        Almost There!
-      </h2>
-      <p className="text-[#4e2929] mb-4">
-        We've sent a confirmation link to your email.
-      </p>
-      <p className="text-sm text-[#4e2929] mb-6">
-        Thank you for registering with Prajapati Ceramic.
-      </p>
-      <button 
-        onClick={handleModalClose}
-        className="bg-[#d4a017] hover:bg-[#b78a14] text-[#4e2929] font-semibold py-2 px-4 rounded-md"
-      >
-        Got it
-      </button>
-    </div>
+  <div className="bg-[#f8f1e5] p-8 rounded-xl shadow-xl border-2 border-[#a78a7a]/30 w-80 text-center">
+    <h2 className="text-2xl font-bold text-[#4e2929] mb-2">
+      You're In!
+    </h2>
+    <p className="text-[#4e2929] mb-4">
+      We've successfully connected with your Gmail.
+    </p>
+    <p className="text-sm text-[#4e2929] mb-6">
+      Thank you for registering with Prajapati Ceramic. We're excited to have you!
+    </p>
+    <button 
+      onClick={handleModalClose}
+      className="bg-[#d4a017] hover:bg-[#b78a14] text-[#4e2929] font-semibold py-2 px-4 rounded-md"
+    >
+      Got it
+    </button>
   </div>
+</div>
+
 )}
 
         </section>
